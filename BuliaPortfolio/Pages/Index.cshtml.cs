@@ -12,9 +12,26 @@ namespace BuliaPortfolio.Pages
             _logger = logger;
         }
 
+		[BindProperty]
+		public string ClientName { get; set; } = "";
+
+		[BindProperty]
+		public string ClientContact { get; set; } = "";
+
+		[BindProperty]
+		public string ClientMessage { get; set; } = "";
+
+		public bool IsRequestSent { get; set; }
+
+		public void OnPost()
+		{
+			IsRequestSent = true;
+		}
+
         public void OnGet()
         {
 
         }
-    }
+
+	}
 }

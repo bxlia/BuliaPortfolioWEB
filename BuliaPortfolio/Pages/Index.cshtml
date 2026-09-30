@@ -114,26 +114,31 @@
         напишите мне.
     </p>
 
-    <form class="request-form">
-        <label for="client-name">Ваше имя</label>
-        <input id="client-name"
-               type="text"
+    @if (Model.IsRequestSent)
+    {
+        <p class="success-message">
+            Спасибо! Заявка отправлена. Я свяжусь с вами.
+        </p>
+    }
+
+    <form method="post" class="request-form">
+        <label asp-for="ClientName">Ваше имя</label>
+        <input asp-for="ClientName"
                placeholder="Например: Иван"
                required />
 
-        <label for="client-contact">Как с вами связаться</label>
-        <input id="client-contact"
-               type="text"
+        <label asp-for="ClientContact">Как с вами связаться</label>
+        <input asp-for="ClientContact"
                placeholder="Telegram, телефон или email"
                required />
 
-        <label for="client-message">Что нужно сделать</label>
-        <textarea id="client-message"
+        <label asp-for="ClientMessage">Что нужно сделать</label>
+        <textarea asp-for="ClientMessage"
                   rows="5"
                   placeholder="Коротко опишите задачу"
                   required></textarea>
 
-        <button class="main-button" type="button">
+        <button class="main-button" type="submit">
             Отправить заявку
         </button>
     </form>
