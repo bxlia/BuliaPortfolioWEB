@@ -114,6 +114,30 @@
         напишите мне.
     </p>
 
+    <form class="request-form">
+        <label for="client-name">Ваше имя</label>
+        <input id="client-name"
+               type="text"
+               placeholder="Например: Иван"
+               required />
+
+        <label for="client-contact">Как с вами связаться</label>
+        <input id="client-contact"
+               type="text"
+               placeholder="Telegram, телефон или email"
+               required />
+
+        <label for="client-message">Что нужно сделать</label>
+        <textarea id="client-message"
+                  rows="5"
+                  placeholder="Коротко опишите задачу"
+                  required></textarea>
+
+        <button class="main-button" type="button">
+            Отправить заявку
+        </button>
+    </form>
+
     <div class="contact-buttons">
         <a class="main-button" href="https://github.com/bxlia" target="_blank">
             GitHub

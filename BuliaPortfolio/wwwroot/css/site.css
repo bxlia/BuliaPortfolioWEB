@@ -226,3 +226,43 @@ h3 {
         background: var(--accent);
         color: #082f49;
     }
+.request-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+    margin: 32px auto;
+    text-align: left;
+}
+
+    .request-form label {
+        margin: 16px 0 8px;
+        color: var(--text);
+        font-weight: bold;
+    }
+
+    .request-form input,
+    .request-form textarea {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        outline: none;
+        background: var(--card);
+        color: var(--text);
+        font: inherit;
+    }
+
+        .request-form input:focus,
+        .request-form textarea:focus {
+            border-color: var(--accent);
+        }
+
+    .request-form textarea {
+        resize: vertical;
+    }
+
+    .request-form button {
+        border: none;
+        cursor: pointer;
+    }
