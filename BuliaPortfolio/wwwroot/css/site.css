@@ -209,3 +209,20 @@ h3 {
         grid-template-columns: 1fr;
     }
 }
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.secondary-button {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+    .secondary-button:hover {
+        background: var(--accent);
+        color: #082f49;
+    }
