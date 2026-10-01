@@ -5,6 +5,7 @@
     ViewData["Title"] = "Портфолио bulia";
 }
 
+@* ==================== ГЛАВНЫЙ ЭКРАН ==================== *@
 <section id="home" class="hero">
     <p class="hero-label">C# / C++ / Web-разработка</p>
 
@@ -20,12 +21,13 @@
     </a>
 </section>
 
+@* ==================== ОБО МНЕ ==================== *@
 <section id="about" class="about">
     <h2>Обо мне</h2>
 
     <p>
         Я программист и ученик 11 класса. Работаю в Visual Studio 2022.
-        Изучаю и разрабатываю в сфере программирования более 3 лет.
+        Разрабатываю в сфере программирования более 3 лет.
         Изучаю C#, C++, HTML, CSS, JavaScript и SQL.
     </p>
 
@@ -34,6 +36,7 @@
     </p>
 </section>
 
+@* ==================== МОИ ПРОЕКТЫ ==================== *@
 <section id="projects" class="projects">
     <h2>Мои проекты</h2>
 
@@ -76,6 +79,7 @@
     </div>
 </section>
 
+@* ==================== УСЛУГИ ==================== *@
 <section id="services" class="services">
     <h2>Чем я могу помочь</h2>
 
@@ -106,6 +110,7 @@
     </div>
 </section>
 
+@* ==================== КОНТАКТЫ И ФОРМА ЗАЯВКИ ==================== *@
 <section id="contact" class="contact">
     <h2>Связаться со мной</h2>
 
@@ -114,6 +119,7 @@
         напишите мне.
     </p>
 
+    @* ==================== СООБЩЕНИЕ ОБ УСПЕХЕ ==================== *@
     @if (Model.IsRequestSent)
     {
         <p class="success-message">
@@ -121,6 +127,7 @@
         </p>
     }
 
+    @* ==================== ФОРМА ЗАЯВКИ ==================== *@
     <form method="post" class="request-form">
         <label asp-for="ClientName">Ваше имя</label>
         <input asp-for="ClientName"
@@ -143,6 +150,7 @@
         </button>
     </form>
 
+    @* ==================== ВНЕШНИЕ ССЫЛКИ ==================== *@
     <div class="contact-buttons">
         <a class="main-button" href="https://github.com/bxlia" target="_blank">
             GitHub

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BuliaPortfolio.Pages
 {
-    public class IndexModel : PageModel
+	// ==================== ÃŒƒ≈À‹ √À¿¬ÕŒ… —“–¿Õ»÷€ ====================
+	public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
@@ -12,6 +13,7 @@ namespace BuliaPortfolio.Pages
             _logger = logger;
         }
 
+		// ==================== ƒ¿ÕÕ€≈ »« ‘Œ–Ã€ ====================
 		[BindProperty]
 		public string ClientName { get; set; } = "";
 
@@ -21,8 +23,10 @@ namespace BuliaPortfolio.Pages
 		[BindProperty]
 		public string ClientMessage { get; set; } = "";
 
+		// ==================== —Œ—“ŒﬂÕ»≈ —“–¿Õ»÷€ ====================
 		public bool IsRequestSent { get; set; }
 
+		// ==================== Œ¡–¿¡Œ“ ¿ Œ“œ–¿¬ » ‘Œ–Ã€ ====================
 		public void OnPost()
 		{
 			IsRequestSent = true;
