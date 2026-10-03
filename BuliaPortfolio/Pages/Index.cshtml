@@ -37,21 +37,33 @@
 </section>
 
 @* ==================== НАВЫКИ ==================== *@
-<section id="skills" class="projects">
+<section id="skills" class="skills">
     <h2>Навыки</h2>
 
-    <div class="project-list">
+    <div class="skill-list">
         @foreach (var skill in Model.Skills)
         {
-            <article class="project-card">
-                <h3>@skill.Name</h3>
+            <article class="skill-card">
+                <div class="skill-header">
+                    <h3>@skill.Name</h3>
+                    <span>@skill.LevelPercent%</span>
+                </div>
 
                 @if (!string.IsNullOrWhiteSpace(skill.Category))
                 {
                     <p>@skill.Category</p>
                 }
 
-                <span>Уровень: @skill.LevelPercent%</span>
+                <div class="skill-progress"
+                     role="progressbar"
+                     aria-label="@skill.Name"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     aria-valuenow="@skill.LevelPercent">
+                    <div class="skill-progress-bar"
+                         style="width: @skill.LevelPercent%">
+                    </div>
+                </div>
             </article>
         }
     </div>
