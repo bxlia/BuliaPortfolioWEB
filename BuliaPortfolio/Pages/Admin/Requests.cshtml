@@ -1,0 +1,85 @@
+﻿@page
+@model BuliaPortfolio.Pages.Admin.RequestsModel
+
+@{
+    ViewData["Title"] = "Заявки";
+}
+
+@* ==================== ЗАЯВКИ КЛИЕНТОВ ==================== *@
+<section class="requests-admin">
+    <h1>Заявки клиентов</h1>
+
+    <p class="requests-admin-text">
+        Здесь отображаются обращения, отправленные через форму обратной связи.
+    </p>
+
+    @if (Model.Requests.Count == 0)
+    {
+        <div class="empty-requests">
+            Пока нет ни одной заявки.
+        </div>
+    }
+    else
+    {
+        <div class="requests-table-wrapper">
+            <table class="requests-table">
+                <thead>
+                    <tr>
+                        <th>Клиент</th>
+                        <th>Контакты</th>
+                        <th>Сообщение</th>
+                        <th>Дата</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var request in Model.Requests)
+                    {
+                        <tr>
+                            <td>@request.ClientName</td>
+
+                            <td>
+                                <a href="mailto:@request.Email">
+                                    @request.Email
+                                </a>
+
+                                @if (!string.IsNullOrWhiteSpace(request.Phone))
+                                {
+                                    <br />
+                                    <a href="tel:@request.Phone">
+                                        @request.Phone
+                                    </a>
+                                }
+                            </td>
+
+                            <td class="request-message">
+                                @request.Message
+                            </td>
+
+                            <td>
+                                @request.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                            </td>
+
+                            <td>
+                                @* Статус определяется полем IsProcessed из SQL Server. *@
+                                @if (request.IsProcessed)
+                                {
+                                    <span class="request-status processed">
+                                        Обработана
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="request-status new">
+                                        Новая
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

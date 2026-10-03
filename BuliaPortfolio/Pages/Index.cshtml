@@ -77,27 +77,48 @@
         @foreach (var project in Model.Projects)
         {
             <article class="project-card">
+                @if (!string.IsNullOrWhiteSpace(project.ImageUrl))
+                {
+                    <img class="project-image"
+                         src="@project.ImageUrl"
+                         alt="Скриншот проекта @project.Title"
+                         loading="lazy" />
+                }
                 <h3>@project.Title</h3>
 
                 <p>@project.ShortDescription</p>
 
                 @if (!string.IsNullOrWhiteSpace(project.Technologies))
                 {
-                    <span>@project.Technologies</span>
+                    <span class="project-technologies">
+                        @project.Technologies
+                    </span>
                 }
 
-                @if (!string.IsNullOrWhiteSpace(project.ProjectUrl))
+                @if (!string.IsNullOrWhiteSpace(project.ProjectUrl) ||
+                            !string.IsNullOrWhiteSpace(project.GitHubUrl))
                 {
-                    <a class="main-button" href="@project.ProjectUrl" target="_blank">
-                        Открыть проект
-                    </a>
-                }
+                    <div class="project-buttons">
+                        @if (!string.IsNullOrWhiteSpace(project.ProjectUrl))
+                        {
+                            <a class="main-button"
+                               href="@project.ProjectUrl"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                Открыть проект
+                            </a>
+                        }
 
-                @if (!string.IsNullOrWhiteSpace(project.GitHubUrl))
-                {
-                    <a class="main-button secondary-button" href="@project.GitHubUrl" target="_blank">
-                        GitHub проекта
-                    </a>
+                        @if (!string.IsNullOrWhiteSpace(project.GitHubUrl))
+                        {
+                            <a class="main-button secondary-button"
+                               href="@project.GitHubUrl"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                GitHub проекта
+                            </a>
+                        }
+                    </div>
                 }
             </article>
         }
