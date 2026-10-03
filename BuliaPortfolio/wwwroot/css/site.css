@@ -507,3 +507,25 @@ h3 {
         padding: 56px 18px;
     }
 }
+
+/* ==================== Œ¡–¿¡Œ“ ¿ «¿ﬂ¬Œ  ==================== */
+.process-request-form {
+    margin-top: 12px;
+}
+
+.process-request-button {
+    padding: 8px 10px;
+    border: 1px solid #22c55e;
+    border-radius: 8px;
+    background: transparent;
+    color: #86efac;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+    .process-request-button:hover {
+        background: #22c55e;
+        color: #052e16;
+    }

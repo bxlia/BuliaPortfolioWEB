@@ -74,6 +74,16 @@
                                     <span class="request-status new">
                                         Новая
                                     </span>
+
+                                    <form method="post"
+                                          asp-page-handler="MarkProcessed"
+                                          class="process-request-form">
+                                        <input type="hidden" name="id" value="@request.Id" />
+
+                                        <button type="submit" class="process-request-button">
+                                            Отметить обработанной
+                                        </button>
+                                    </form>
                                 }
                             </td>
                         </tr>

@@ -1,10 +1,11 @@
 ﻿using BuliaPortfolio.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BuliaPortfolio.Data;
 
-// Центральный класс EF Core: связывает C#-модели с таблицами SQL Server.
-public class PortfolioDbContext : DbContext
+// Центральный EF Core-контекст: таблицы сайта и таблицы ASP.NET Core Identity.
+public class PortfolioDbContext : IdentityDbContext
 {
 	public PortfolioDbContext(DbContextOptions<PortfolioDbContext> options)
 		: base(options)
