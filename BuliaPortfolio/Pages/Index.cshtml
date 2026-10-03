@@ -41,41 +41,33 @@
     <h2>Мои проекты</h2>
 
     <div class="project-list">
-        <article class="project-card">
-            <h3>StorageServer</h3>
-            <p>
-                Windows-приложение на C# для работы с файловым хранилищем,
-                авторизацией и сервером.
-            </p>
-            <span>C# · Windows Forms · работа с файлами</span>
-        </article>
+        @foreach (var project in Model.Projects)
+        {
+            <article class="project-card">
+                <h3>@project.Title</h3>
 
-        <article class="project-card">
-            <h3>Clock</h3>
-            <p>
-                Настраиваемые часы для Windows с выбором шрифта,
-                цветовой темой, трей-режимом и автозапуском.
-            </p>
-            <span>C# · Windows Forms · Windows API</span>
-        </article>
+                <p>@project.ShortDescription</p>
 
-        <article class="project-card">
-            <h3>NetworkProgramming</h3>
-            <p>
-                Многопользовательский TCP-чат с сервером, клиентами,
-                потоками и синхронизацией.
-            </p>
-            <span>C++ · WinSock2 · TCP · Win32 API</span>
-        </article>
+                @if (!string.IsNullOrWhiteSpace(project.Technologies))
+                {
+                    <span>@project.Technologies</span>
+                }
 
-        <article class="project-card">
-            <h3>SQL</h3>
-            <p>
-                База данных учебной академии с расписанием,
-                оценками, функциями и хранимыми процедурами.
-            </p>
-            <span>MS SQL Server · T-SQL</span>
-        </article>
+                @if (!string.IsNullOrWhiteSpace(project.ProjectUrl))
+                {
+                    <a class="main-button" href="@project.ProjectUrl" target="_blank">
+                        Открыть проект
+                    </a>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(project.GitHubUrl))
+                {
+                    <a class="main-button secondary-button" href="@project.GitHubUrl" target="_blank">
+                        GitHub проекта
+                    </a>
+                }
+            </article>
+        }
     </div>
 </section>
 
