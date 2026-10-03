@@ -36,6 +36,27 @@
     </p>
 </section>
 
+@* ==================== НАВЫКИ ==================== *@
+<section id="skills" class="projects">
+    <h2>Навыки</h2>
+
+    <div class="project-list">
+        @foreach (var skill in Model.Skills)
+        {
+            <article class="project-card">
+                <h3>@skill.Name</h3>
+
+                @if (!string.IsNullOrWhiteSpace(skill.Category))
+                {
+                    <p>@skill.Category</p>
+                }
+
+                <span>Уровень: @skill.LevelPercent%</span>
+            </article>
+        }
+    </div>
+</section>
+
 @* ==================== МОИ ПРОЕКТЫ ==================== *@
 <section id="projects" class="projects">
     <h2>Мои проекты</h2>
@@ -126,9 +147,10 @@
                placeholder="Например: Иван"
                required />
 
-        <label asp-for="ClientContact">Как с вами связаться</label>
-        <input asp-for="ClientContact"
-               placeholder="Telegram, телефон или email"
+        <label asp-for="ClientEmail">Ваш email</label>
+        <input asp-for="ClientEmail"
+               type="email"
+               placeholder="Например: ivan@example.com"
                required />
 
         <label asp-for="ClientMessage">Что нужно сделать</label>
