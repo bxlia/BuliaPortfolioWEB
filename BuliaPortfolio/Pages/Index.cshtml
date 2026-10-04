@@ -173,29 +173,58 @@
         </p>
     }
 
-    @* ==================== ФОРМА ЗАЯВКИ ==================== *@
-    <form method="post" class="request-form">
-        <label asp-for="ClientName">Ваше имя</label>
-        <input asp-for="ClientName"
-               placeholder="Например: Иван"
-               required />
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div asp-validation-summary="ModelOnly" class="error-summary">
+            Проверьте заполнение формы.
+        </div>
+    }
 
-        <label asp-for="ClientEmail">Ваш email</label>
-        <input asp-for="ClientEmail"
+    @* ==================== ФОРМА ЗАЯВКИ ==================== *@
+    <form method="post" class="request-form" novalidate>
+        <label asp-for="ClientForm.ClientName">Ваше имя</label>
+        <input asp-for="ClientForm.ClientName"
+               placeholder="Например: Иван"
+               maxlength="300" />
+        <span asp-validation-for="ClientForm.ClientName" class="field-error"></span>
+
+        <label asp-for="ClientForm.ClientEmail">Ваш email</label>
+        <input asp-for="ClientForm.ClientEmail"
                type="email"
                placeholder="Например: ivan@example.com"
-               required />
+               maxlength="510" />
+        <span asp-validation-for="ClientForm.ClientEmail" class="field-error"></span>
 
-        <label asp-for="ClientMessage">Что нужно сделать</label>
-        <textarea asp-for="ClientMessage"
+        <label asp-for="ClientForm.ClientPhone">Телефон <span class="optional">(необязательно)</span></label>
+        <input asp-for="ClientForm.ClientPhone"
+               type="tel"
+               placeholder="Например: +7 900 000-00-00"
+               maxlength="100" />
+        <span asp-validation-for="ClientForm.ClientPhone" class="field-error"></span>
+
+        <label asp-for="ClientForm.ClientMessage">Что нужно сделать</label>
+        <textarea asp-for="ClientForm.ClientMessage"
                   rows="5"
                   placeholder="Коротко опишите задачу"
-                  required></textarea>
+                  maxlength="4000"></textarea>
+        <span asp-validation-for="ClientForm.ClientMessage" class="field-error"></span>
+
+        @* Honeypot: скрыт от людей, но заполняется ботами. *@
+        <div class="hp" aria-hidden="true">
+            <label>Не заполняйте это поле</label>
+            <input asp-for="ClientForm.Website"
+                   tabindex="-1"
+                   autocomplete="off" />
+        </div>
 
         <button class="main-button" type="submit">
             Отправить заявку
         </button>
     </form>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
 
     @* ==================== ВНЕШНИЕ ССЫЛКИ ==================== *@
     <div class="contact-buttons">

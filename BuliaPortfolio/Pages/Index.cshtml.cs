@@ -1,4 +1,4 @@
-using BuliaPortfolio.Data;
+﻿using BuliaPortfolio.Data;
 using BuliaPortfolio.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BuliaPortfolio.Pages;
 
-// ������ ������� ��������: ��������� ������� � ������, ��������� ������ � SQL Server.
+// Главная страница: показывает проекты и навыки, принимает заявку в SQL Server.
 public class IndexModel : PageModel
 {
 	private readonly PortfolioDbContext _context;
@@ -21,13 +21,7 @@ public class IndexModel : PageModel
 	public List<Skill> Skills { get; private set; } = [];
 
 	[BindProperty]
-	public string ClientName { get; set; } = "";
-
-	[BindProperty]
-	public string ClientEmail { get; set; } = "";
-
-	[BindProperty]
-	public string ClientMessage { get; set; } = "";
+	public ContactRequestInput ClientForm { get; set; } = new();
 
 	[BindProperty(SupportsGet = true, Name = "sent")]
 	public bool IsRequestSent { get; set; }
@@ -39,25 +33,21 @@ public class IndexModel : PageModel
 
 	public async Task<IActionResult> OnPostAsync()
 	{
-		if (string.IsNullOrWhiteSpace(ClientName) ||
-			string.IsNullOrWhiteSpace(ClientEmail) ||
-			string.IsNullOrWhiteSpace(ClientMessage))
-		{
-			await LoadPageDataAsync();
+		await LoadPageDataAsync();
 
+		// Honeypot: скрытое поле заполнил бот — показываем успех, но не пишем в базу.
+		if (!string.IsNullOrWhiteSpace(ClientForm.Website))
+		{
+			return RedirectToPage(new { sent = true });
+		}
+
+		if (!ModelState.IsValid)
+		{
 			return Page();
 		}
 
-		var request = new ContactRequest
-		{
-			ClientName = ClientName,
-			Email = ClientEmail,
-			Message = ClientMessage,
-			IsProcessed = false,
-			CreatedAt = DateTime.UtcNow
-		};
+		_context.ContactRequests.Add(ClientForm.ToEntity());
 
-		_context.ContactRequests.Add(request);
 		await _context.SaveChangesAsync();
 
 		return RedirectToPage(new { sent = true });
@@ -65,13 +55,17 @@ public class IndexModel : PageModel
 
 	private async Task LoadPageDataAsync()
 	{
+		// Сортировка по DisplayOrder, а при равенстве — по Id,
+		// иначе порядок карточек может «прыгать» между запросами.
 		Projects = await _context.Projects
 			.Where(project => project.IsPublished)
 			.OrderBy(project => project.DisplayOrder)
+			.ThenBy(project => project.Id)
 			.ToListAsync();
 
 		Skills = await _context.Skills
 			.OrderBy(skill => skill.DisplayOrder)
+			.ThenBy(skill => skill.Name)
 			.ToListAsync();
 	}
 }
