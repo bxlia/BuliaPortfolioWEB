@@ -16,18 +16,19 @@
 ## Запуск на своей машине
 
 1. Открыть решение `BuliaPortfolio.sln` в Visual Studio 2022.
-2. Восстановить пакеты и убедиться, что есть база `BuliaPortfolioDb`.
+2. Восстановить пакеты и создать базу (см. «Миграции базы»).
 3. Задать строку подключения и учётные данные администратора.
-   Всё это хранится в **user secrets** и в репозиторий не попадает:
+   Всё это хранится в **user secrets** и в репозиторий не попадает.
+   Подставь свои значения — примеры ниже намеренно обобщены:
 
    ```powershell
-   dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=.\SQLEXPRESS;Database=BuliaPortfolioDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
-   dotnet user-secrets set "Admin:Email" "ваш@email.ru"
-   dotnet user-secrets set "Admin:Password" "пароль-минимум-10-символов"
+   dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=<экземпляр>;Database=<имя базы>;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
+   dotnet user-secrets set "Admin:Email" "<ваш email>"
+   dotnet user-secrets set "Admin:Password" "<пароль минимум 10 символов>"
    ```
 
    Если используется SQL-аутентификация вместо Windows, замените
-   `Trusted_Connection=True` на `User Id=...;Password=...`.
+   `Trusted_Connection=True` на `User Id=<логин>;Password=<пароль>`.
 
 4. Запустить проект (`F5`) и открыть `https://localhost:7013`.
 5. Войти как администратор и проверить `/Admin/Requests`.
@@ -38,9 +39,9 @@
 окружения — не записывайте их в `appsettings.json`:
 
 ```
-ConnectionStrings__DefaultConnection=Server=...;Database=BuliaPortfolioDb;...
-Admin__Email=admin@site.ru
-Admin__Password=НадёжныйПароль
+ConnectionStrings__DefaultConnection=Server=<экземпляр>;Database=<имя базы>;...
+Admin__Email=<email администратора>
+Admin__Password=<пароль>
 ASPNETCORE_ENVIRONMENT=Production
 ```
 
