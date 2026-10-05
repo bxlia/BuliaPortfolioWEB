@@ -4,11 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Подключение к SQL Server. Строка берётся из user secrets (локально)
-// или из переменной окружения ConnectionStrings__DefaultConnection (сервер).
+// appsettings.Development.json читаем в любом режиме, иначе строка
+// подключения не находится при запуске не из Development.
+builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true);
+
+// Если строки подключения нет — падаем с понятным текстом,
+// а не с ошибкой про ConnectionString.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+	throw new InvalidOperationException(
+		"Не найдена строка подключения. Проверь файл appsettings.Development.json в папке проекта.");
+}
+
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
-	options.UseSqlServer(
-		builder.Configuration.GetConnectionString("DefaultConnection")));
+	options.UseSqlServer(connectionString));
 
 // Identity: пользователи, роли и встроенные страницы входа/регистрации.
 // AddDefaultUI() включает страницы /Identity/Account/Login и т.д.

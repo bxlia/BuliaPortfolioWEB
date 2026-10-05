@@ -1,125 +1,196 @@
 ﻿@page
 @model IndexModel
+@using BuliaPortfolio.Models
 
 @{
     ViewData["Title"] = "Портфолио bulia";
+
+    // Технологии приходят одной строкой через запятую — разбиваем на список.
+    var techTags = new Func<Project, List<string>>(project =>
+        string.IsNullOrWhiteSpace(project.Technologies)
+            ? []
+            : project.Technologies
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .ToList());
+
+    // Навыки группируем по категориям: Backend, Frontend, Database.
+    var skillGroups = Model.Skills
+        .GroupBy(skill => string.IsNullOrWhiteSpace(skill.Category) ? "Другое" : skill.Category)
+        .ToList();
+
+    var techCount = Model.Skills.Select(skill => skill.Name).Distinct().Count();
 }
 
 @* ==================== ГЛАВНЫЙ ЭКРАН ==================== *@
 <section id="home" class="hero">
-    <p class="hero-label">C# / C++ / Web-разработка</p>
+    <div class="hero-inner">
+        <p class="hero-label">C# / C++ / Web-разработка</p>
 
-    <h1>Привет, я bulia</h1>
+        <h1>Привет, я bulia</h1>
 
-    <p class="hero-text">
-        Разрабатываю сайты, программы для Windows и приложения
-        с базами данных.
-    </p>
+        <p class="hero-text">
+            Разрабатываю сайты, программы для Windows и приложения
+            с базами данных.
+        </p>
 
-    <a class="main-button" href="#projects">
-        Посмотреть проекты
-    </a>
+        <div class="hero-actions">
+            <a class="main-button" href="#projects">Посмотреть проекты</a>
+            <a class="main-button secondary-button" href="#contact">Написать мне</a>
+        </div>
+
+        <dl class="hero-stats">
+            <div class="hero-stat">
+                <dt>Проектов</dt>
+                <dd>@Model.Projects.Count</dd>
+            </div>
+            <div class="hero-stat">
+                <dt>Технологий</dt>
+                <dd>@techCount</dd>
+            </div>
+            <div class="hero-stat">
+                <dt>Лет в программировании</dt>
+                <dd>3+</dd>
+            </div>
+        </dl>
+    </div>
 </section>
 
-@* ==================== ОБО МНЕ ==================== *@
+@* ==================== О МНЕ ==================== *@
 <section id="about" class="about">
-    <h2>Обо мне</h2>
+    <h2 class="section-title">Обо мне</h2>
 
-    <p>
-        Я программист и ученик 11 класса. Работаю в Visual Studio 2022.
-        Разрабатываю в сфере программирования более 3 лет.
-        Изучаю C#, C++, HTML, CSS, JavaScript и SQL.
-    </p>
+    <div class="about-grid">
+        <div class="about-text">
+            <p>
+                Я программист и ученик 11 класса. Работаю в Visual Studio 2022.
+                Разрабатываю в сфере программирования более 3 лет.
+                Изучаю C#, C++, HTML, CSS, JavaScript и SQL.
+            </p>
+            <p>
+                Создаю понятные и полезные программы для бизнеса и частных клиентов:
+                сайты, базы данных и небольшие программы для Windows.
+            </p>
+        </div>
 
-    <p>
-        Создаю понятные и полезные программы для бизнеса и частных клиентов.
-    </p>
+        <ul class="about-facts">
+            <li><span>Инструмент</span><strong>Visual Studio 2022</strong></li>
+            <li><span>Основной язык</span><strong>C#</strong></li>
+            <li><span>База данных</span><strong>SQL Server</strong></li>
+            <li><span>Связь</span><strong>GitHub, FL.ru</strong></li>
+        </ul>
+    </div>
 </section>
 
 @* ==================== НАВЫКИ ==================== *@
 <section id="skills" class="skills">
-    <h2>Навыки</h2>
+    <h2 class="section-title">Навыки</h2>
 
-    <div class="skill-list">
-        @foreach (var skill in Model.Skills)
-        {
-            <article class="skill-card">
-                <div class="skill-header">
-                    <h3>@skill.Name</h3>
-                    <span>@skill.LevelPercent%</span>
-                </div>
+    @foreach (var group in skillGroups)
+    {
+        <div class="skill-group">
+            <h3 class="skill-group-title">@group.Key</h3>
 
-                @if (!string.IsNullOrWhiteSpace(skill.Category))
+            <div class="skill-list">
+                @foreach (var skill in group)
                 {
-                    <p>@skill.Category</p>
-                }
+                    <article class="skill-card">
+                        <div class="skill-header">
+                            <h4>@skill.Name</h4>
+                            <span class="skill-percent">@skill.LevelPercent%</span>
+                        </div>
 
-                <div class="skill-progress"
-                     role="progressbar"
-                     aria-label="@skill.Name"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     aria-valuenow="@skill.LevelPercent">
-                    <div class="skill-progress-bar"
-                         style="width: @skill.LevelPercent%">
-                    </div>
-                </div>
-            </article>
-        }
-    </div>
+                        <div class="skill-progress"
+                             role="progressbar"
+                             aria-label="@skill.Name"
+                             aria-valuemin="0"
+                             aria-valuemax="100"
+                             aria-valuenow="@skill.LevelPercent">
+                            <div class="skill-progress-bar"
+                                 style="width: @skill.LevelPercent%"></div>
+                        </div>
+                    </article>
+                }
+            </div>
+        </div>
+    }
 </section>
 
 @* ==================== МОИ ПРОЕКТЫ ==================== *@
 <section id="projects" class="projects">
-    <h2>Мои проекты</h2>
+    <h2 class="section-title">Мои проекты</h2>
 
     <div class="project-list">
         @foreach (var project in Model.Projects)
         {
+            var tags = techTags(project);
+            var firstLetter = string.IsNullOrWhiteSpace(project.Title)
+                ? "?"
+                : project.Title.Trim().Substring(0, 1);
+
             <article class="project-card">
-                @if (!string.IsNullOrWhiteSpace(project.ImageUrl))
-                {
-                    <img class="project-image"
-                         src="@project.ImageUrl"
-                         alt="Скриншот проекта @project.Title"
-                         loading="lazy" />
-                }
-                <h3>@project.Title</h3>
+                <div class="project-media">
+                    @if (!string.IsNullOrWhiteSpace(project.ImageUrl))
+                    {
+                        <img class="project-image"
+                             src="@project.ImageUrl"
+                             alt="Скриншот проекта @project.Title"
+                             loading="lazy"
+                             decoding="async" />
+                    }
+                    else
+                    {
+                        @* Картинки нет — показываем заглушку с первой буквой названия. *@
+                        <div class="project-placeholder" aria-hidden="true">@firstLetter</div>
+                    }
+                </div>
 
-                <p>@project.ShortDescription</p>
+                <div class="project-body">
+                    <h3 class="project-title">@project.Title</h3>
 
-                @if (!string.IsNullOrWhiteSpace(project.Technologies))
-                {
-                    <span class="project-technologies">
-                        @project.Technologies
-                    </span>
-                }
+                    <p class="project-short">@project.ShortDescription</p>
 
-                @if (!string.IsNullOrWhiteSpace(project.ProjectUrl) ||
-                            !string.IsNullOrWhiteSpace(project.GitHubUrl))
-                {
-                    <div class="project-buttons">
-                        @if (!string.IsNullOrWhiteSpace(project.ProjectUrl))
-                        {
-                            <a class="main-button"
-                               href="@project.ProjectUrl"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                Открыть проект
-                            </a>
-                        }
+                    @if (!string.IsNullOrWhiteSpace(project.FullDescription))
+                    {
+                        <p class="project-full">@project.FullDescription</p>
+                    }
 
-                        @if (!string.IsNullOrWhiteSpace(project.GitHubUrl))
-                        {
-                            <a class="main-button secondary-button"
-                               href="@project.GitHubUrl"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                GitHub проекта
-                            </a>
-                        }
-                    </div>
-                }
+                    @if (tags.Count > 0)
+                    {
+                        <ul class="tag-list">
+                            @foreach (var tag in tags)
+                            {
+                                <li class="tag">@tag</li>
+                            }
+                        </ul>
+                    }
+
+                    @* Кнопки показываем только если есть хотя бы одна ссылка. *@
+                    @if (!string.IsNullOrWhiteSpace(project.ProjectUrl) ||
+                                !string.IsNullOrWhiteSpace(project.GitHubUrl))
+                    {
+                        <div class="project-buttons">
+                            @if (!string.IsNullOrWhiteSpace(project.ProjectUrl))
+                            {
+                                <a class="main-button"
+                                   href="@project.ProjectUrl"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Открыть сайт
+                                </a>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(project.GitHubUrl))
+                            {
+                                <a class="main-button secondary-button"
+                                   href="@project.GitHubUrl"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Код на GitHub
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
             </article>
         }
     </div>
@@ -127,7 +198,7 @@
 
 @* ==================== УСЛУГИ ==================== *@
 <section id="services" class="services">
-    <h2>Чем я могу помочь</h2>
+    <h2 class="section-title">Чем я могу помочь</h2>
 
     <div class="service-list">
         <article class="service-card">
@@ -153,24 +224,29 @@
                 работа с файлами, таблицами и настройками.
             </p>
         </article>
+
+        <article class="service-card">
+            <h3>База данных</h3>
+            <p>
+                Спроектирую таблицы в SQL Server
+                и напишу запросы для отчётов и выборок.
+            </p>
+        </article>
     </div>
 </section>
 
 @* ==================== КОНТАКТЫ И ФОРМА ЗАЯВКИ ==================== *@
 <section id="contact" class="contact">
-    <h2>Связаться со мной</h2>
+    <h2 class="section-title">Связаться со мной</h2>
 
-    <p>
+    <p class="contact-lead">
         Если вам нужна небольшая программа, сайт или база данных,
-        напишите мне.
+        напишите мне — отвечаю в течение дня.
     </p>
 
-    @* ==================== СООБЩЕНИЕ ОБ УСПЕХЕ ==================== *@
     @if (Model.IsRequestSent)
     {
-        <p class="success-message">
-            Спасибо! Заявка отправлена. Я свяжусь с вами.
-        </p>
+        <p class="success-message">Спасибо! Заявка отправлена. Я свяжусь с вами.</p>
     }
 
     @if (!ViewData.ModelState.IsValid)
@@ -180,62 +256,69 @@
         </div>
     }
 
-    @* ==================== ФОРМА ЗАЯВКИ ==================== *@
-    <form method="post" class="request-form" novalidate>
-        <label asp-for="ClientForm.ClientName">Ваше имя</label>
-        <input asp-for="ClientForm.ClientName"
-               placeholder="Например: Иван"
-               maxlength="300" />
-        <span asp-validation-for="ClientForm.ClientName" class="field-error"></span>
+    <div class="contact-grid">
+        <form method="post" class="request-form" novalidate>
+            <div class="form-field">
+                <label asp-for="ClientForm.ClientName">Ваше имя</label>
+                <input asp-for="ClientForm.ClientName"
+                       placeholder="Например: Иван"
+                       maxlength="300" />
+                <span asp-validation-for="ClientForm.ClientName" class="field-error"></span>
+            </div>
 
-        <label asp-for="ClientForm.ClientEmail">Ваш email</label>
-        <input asp-for="ClientForm.ClientEmail"
-               type="email"
-               placeholder="Например: ivan@example.com"
-               maxlength="510" />
-        <span asp-validation-for="ClientForm.ClientEmail" class="field-error"></span>
+            <div class="form-field">
+                <label asp-for="ClientForm.ClientEmail">Ваш email</label>
+                <input asp-for="ClientForm.ClientEmail"
+                       type="email"
+                       placeholder="Например: ivan@example.com"
+                       maxlength="510" />
+                <span asp-validation-for="ClientForm.ClientEmail" class="field-error"></span>
+            </div>
 
-        <label asp-for="ClientForm.ClientPhone">Телефон <span class="optional">(необязательно)</span></label>
-        <input asp-for="ClientForm.ClientPhone"
-               type="tel"
-               placeholder="Например: +7 900 000-00-00"
-               maxlength="100" />
-        <span asp-validation-for="ClientForm.ClientPhone" class="field-error"></span>
+            <div class="form-field">
+                <label asp-for="ClientForm.ClientPhone">
+                    Телефон <span class="optional">(необязательно)</span>
+                </label>
+                <input asp-for="ClientForm.ClientPhone"
+                       type="tel"
+                       placeholder="Например: +7 900 000-00-00"
+                       maxlength="100" />
+                <span asp-validation-for="ClientForm.ClientPhone" class="field-error"></span>
+            </div>
 
-        <label asp-for="ClientForm.ClientMessage">Что нужно сделать</label>
-        <textarea asp-for="ClientForm.ClientMessage"
-                  rows="5"
-                  placeholder="Коротко опишите задачу"
-                  maxlength="4000"></textarea>
-        <span asp-validation-for="ClientForm.ClientMessage" class="field-error"></span>
+            <div class="form-field">
+                <label asp-for="ClientForm.ClientMessage">Что нужно сделать</label>
+                <textarea asp-for="ClientForm.ClientMessage"
+                          rows="5"
+                          placeholder="Коротко опишите задачу"
+                          maxlength="4000"></textarea>
+                <span asp-validation-for="ClientForm.ClientMessage" class="field-error"></span>
+            </div>
 
-        @* Honeypot: скрыт от людей, но заполняется ботами. *@
-        <div class="hp" aria-hidden="true">
-            <label>Не заполняйте это поле</label>
-            <input asp-for="ClientForm.Website"
-                   tabindex="-1"
-                   autocomplete="off" />
-        </div>
+            @* Honeypot: скрыто от людей, но заполняется ботами. Не удалять. *@
+            <div class="hp" aria-hidden="true">
+                <label>Не заполняйте это поле</label>
+                <input asp-for="ClientForm.Website"
+                       tabindex="-1"
+                       autocomplete="off" />
+            </div>
 
-        <button class="main-button" type="submit">
-            Отправить заявку
-        </button>
-    </form>
+            <button class="main-button" type="submit">Отправить заявку</button>
+        </form>
 
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }
+        <aside class="contact-side">
+            <p class="contact-side-title">Или напишите сразу</p>
 
-    @* ==================== ВНЕШНИЕ ССЫЛКИ ==================== *@
-    <div class="contact-buttons">
-        <a class="main-button" href="https://github.com/bxlia" target="_blank">
-            GitHub
-        </a>
-
-        <a class="main-button secondary-button"
-           href="https://www.fl.ru/users/bxlia82/portfolio/"
-           target="_blank">
-            Написать мне на FL.ru
-        </a>
+            <a class="contact-link" href="https://github.com/bxlia" target="_blank" rel="noopener noreferrer">
+                GitHub — bxlia
+            </a>
+            <a class="contact-link" href="https://www.fl.ru/users/bxlia82/portfolio/" target="_blank" rel="noopener noreferrer">
+                Профиль на FL.ru
+            </a>
+        </aside>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

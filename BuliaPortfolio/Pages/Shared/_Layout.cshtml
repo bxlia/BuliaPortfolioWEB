@@ -4,60 +4,56 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Портфолио bulia: разработка сайтов, программ на C# и баз данных SQL Server." />
+    <meta name="theme-color" content="#0b1220" />
     <title>@ViewData["Title"] - BuliaPortfolio</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BuliaPortfolio.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">BuliaPortfolio</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md">
+            <div class="container site-header-inner">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">bulia<span class="brand-dot">.</span></a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#siteNav"
+                        aria-controls="siteNav"
+                        aria-expanded="false"
+                        aria-label="Меню">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/#home">Главная</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/#about">Обо мне</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/#skills">Навыки</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/#projects">Проекты</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/#services">Услуги</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/#contact">Контакты</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="siteNav">
+                    <ul class="navbar-nav site-nav">
+                        <li class="nav-item"><a class="nav-link" href="/#about">Обо мне</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#skills">Навыки</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#projects">Проекты</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#services">Услуги</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#contact">Контакты</a></li>
                     </ul>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+
+    <main id="main" role="main">
+        @RenderBody()
+    </main>
 
     <footer class="site-footer">
-        <div>
-            © 2026 bulia. C# / C++ / Web-разработка.
+        <div class="container site-footer-inner">
+            <p class="site-footer-text">© 2026 bulia. C# / C++ / Web-разработка.</p>
+            <p class="site-footer-links">
+                <a href="https://github.com/bxlia" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.fl.ru/users/bxlia82/portfolio/" target="_blank" rel="noopener noreferrer">FL.ru</a>
+            </p>
         </div>
     </footer>
 
