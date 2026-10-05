@@ -1,4 +1,4 @@
-@page "/Landing"
+﻿@page "/Landing"
 @model LandingModel
 
 @{
@@ -29,7 +29,7 @@
 
         <ul class="lp-numbers">
             <li><strong>3</strong><span>дней на лендинг</span></li>
-            <li><strong>24 900 ₽</strong><span>стоимость сайта</span></li>
+            <li><strong>19 900 ₽</strong><span>стоимость сайта</span></li>
             <li><strong>100 %</strong><span>ваши файлы и доступы</span></li>
         </ul>
     </div>
@@ -210,7 +210,7 @@
                 <label asp-for="ClientName">Как к вам обращаться</label>
                 <input asp-for="ClientName" placeholder="Например: Иван" />
 
-                <label asp-for="ClientPhone">Телефон или Telegram</label>
+                <label asp-for="ClientPhone">Телефон или MAX</label>
                 <input asp-for="ClientPhone" placeholder="+7 900 000-00-00" />
 
                 <label asp-for="ChosenService">Что нужно сделать</label>
@@ -219,7 +219,7 @@
                 <label asp-for="ClientComment">Комментарий</label>
                 <textarea asp-for="ClientComment" rows="4" placeholder="Коротко о задаче"></textarea>
 
-                <button type="submit" class="lp-btn">Отправить заявку</button>
+                <button type="submit" class="lp-btn">Отправить заявка</button>
             </form>
         }
     </div>
