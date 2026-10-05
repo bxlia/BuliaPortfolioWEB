@@ -11,7 +11,7 @@
 | Что | Версия |
 |---|---|
 | .NET SDK | 9.0 |
-| SQL Server | 2019+ / LocalDB / SQLEXPRESS |
+| SQL Server | 2019 и новее, либо LocalDB |
 
 ## Запуск на своей машине
 
