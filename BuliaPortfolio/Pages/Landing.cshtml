@@ -1,0 +1,236 @@
+@page "/Landing"
+@model LandingModel
+
+@{
+    ViewData["Title"] = "Пример лендинга для бизнеса";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+}
+
+@* ==================== ПЕРВЫЙ ЭКРАН ==================== *@
+<section class="lp-hero">
+    <div class="lp-hero-inner">
+        <p class="lp-badge">Пример лендинга для любого бизнеса</p>
+
+        <h1>Сайт, который приводит заявки,<br />а не просто красиво выглядит</h1>
+
+        <p class="lp-lead">
+            Лендинг для услуг, товаров или мастерской. Показывает, как
+            выглядит страница, которая решает главную задачу бизнеса —
+            превращает посетителя в заявку.
+        </p>
+
+        <div class="lp-hero-actions">
+            <a class="lp-btn" href="#lp-request">Заказать лендинг</a>
+            <a class="lp-btn lp-btn-ghost" href="#lp-work">Посмотреть этапы</a>
+        </div>
+
+        <ul class="lp-numbers">
+            <li><strong>3</strong><span>дней на лендинг</span></li>
+            <li><strong>24 900 ₽</strong><span>стоимость сайта</span></li>
+            <li><strong>100 %</strong><span>ваши файлы и доступы</span></li>
+        </ul>
+    </div>
+</section>
+
+@* ==================== ПРОБЛЕМА И РЕШЕНИЕ ==================== *@
+<section class="lp-section">
+    <h2 class="lp-title">Что не так с обычным сайтом</h2>
+
+    <div class="lp-split">
+        <div class="lp-card lp-card-bad">
+            <h3>Так бывает без нормального сайта</h3>
+            <ul>
+                <li>Посетитель не понимает, чем вы занимаетесь, и уходит</li>
+                <li>Заявки приходят в личные сообщения и теряются</li>
+                <li>Невозможно посмотреть цены и примеры работ</li>
+                <li>На телефоне всё разъезжается</li>
+            </ul>
+        </div>
+
+        <div class="lp-card lp-card-good">
+            <h3>Так становится, когда сайт сделан для продаж</h3>
+            <ul>
+                <li>С первого экрана ясно, что вы предлагаете</li>
+                <li>Заявка уходит в форму и сразу попадает к вам</li>
+                <li>Цены и гарантии видны без переписки</li>
+                <li>Одинаково работает на телефоне и компьютере</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+@* ==================== УСЛУГИ ==================== *@
+<section class="lp-section lp-section-soft">
+    <h2 class="lp-title">Что можно заказать</h2>
+    <p class="lp-subtitle">Набор блоков подходит бизнесу в любой сфере — просто меняются тексты, цены и фотографии.</p>
+
+    <div class="lp-grid">
+        @foreach (var service in Model.Services)
+        {
+            <article class="lp-tile">
+                <h3>@service.Title</h3>
+                <p>@service.Text</p>
+                <span class="lp-tile-price">@service.Price</span>
+            </article>
+        }
+    </div>
+</section>
+
+@* ==================== ЭТАПЫ РАБОТЫ ==================== *@
+<section class="lp-section" id="lp-work">
+    <h2 class="lp-title">Как проходит работа</h2>
+    <p class="lp-subtitle">Понятный порядок, без сюрпризов и «сюрприз, это ещё пять тысяч».</p>
+
+    <ol class="lp-steps">
+        <li>
+            <span class="lp-step-num">1</span>
+            <h3>Обсуждаем задачу</h3>
+            <p>Вы рассказываете, чем занимаетесь и кто ваш клиент. Я задаю вопросы и предлагаю структуру.</p>
+        </li>
+        <li>
+            <span class="lp-step-num">2</span>
+            <h3>Согласуем тексты и цену</h3>
+            <p>Фиксируем объём, срок и стоимость. Перед началом вы точно понимаете, что получите.</p>
+        </li>
+        <li>
+            <span class="lp-step-num">3</span>
+            <h3>Рисую и собираю страницу</h3>
+            <p>Показываю, как будет выглядеть сайт, до того как он полностью готов. Вы вносите правки на каждом шаге.</p>
+        </li>
+        <li>
+            <span class="lp-step-num">4</span>
+            <h3>Запускаю и передаю</h3>
+            <p>Публикую сайт, проверяю на телефоне, отдаю файлы и доступы. Две недели правок бесплатно.</p>
+        </li>
+    </ol>
+</section>
+
+@* ==================== ЦЕНЫ ==================== *@
+<section class="lp-section lp-section-soft">
+    <h2 class="lp-title">Сколько стоит</h2>
+    <p class="lp-subtitle">Три варианта. Цена окончательная — не растёт в процессе.</p>
+
+    <div class="lp-prices">
+        @foreach (var price in Model.Prices)
+        {
+            var isMiddle = price.Name == "Оптимальный";
+
+            <article class="lp-price @(isMiddle ? "lp-price-best" : "")">
+                @if (isMiddle)
+                {
+                    <span class="lp-price-flag">Чаще всего выбирают</span>
+                }
+
+                <h3>@price.Name</h3>
+                <p class="lp-price-cost">@price.Cost</p>
+                <p class="lp-price-desc">@price.Description</p>
+
+                <ul class="lp-price-list">
+                    @foreach (var item in price.Included)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+
+                <a class="lp-btn @(isMiddle ? "" : "lp-btn-ghost")" href="#lp-request">
+                    Выбрать
+                </a>
+            </article>
+        }
+    </div>
+</section>
+
+@* ==================== ОТЗЫВЫ ==================== *@
+<section class="lp-section">
+    <h2 class="lp-title">Отзывы</h2>
+    <p class="lp-subtitle lp-note">На этой демонстрационной странице отзывы вымышленные. На рабочем сайте сюда ставят настоящие.</p>
+
+    <div class="lp-reviews">
+        <article class="lp-review">
+            <p class="lp-review-text">
+                Сделал лендинг за три дня. Заявки пошли уже на второй день,
+                до этого мы их теряли в переписке.
+            </p>
+            <p class="lp-review-author">Ирина, студия маникюра</p>
+        </article>
+        <article class="lp-review">
+            <p class="lp-review-text">
+                Понравилось, что показал страницу до того, как всё закончил.
+                Правки вносил без споров, срок не сдвинулся.
+            </p>
+            <p class="lp-review-author">Дмитрий, ремонт квартир</p>
+        </article>
+        <article class="lp-review">
+            <p class="lp-review-text">
+                Нужна была простая программа для заявок. Получил ровно то, что
+                просил, плюс база и отчёт.
+            </p>
+            <p class="lp-review-author">Алексей, автосервис</p>
+        </article>
+    </div>
+</section>
+
+@* ==================== ВОПРОСЫ ==================== *@
+<section class="lp-section lp-section-soft">
+    <h2 class="lp-title">Частые вопросы</h2>
+
+    <div class="lp-faq">
+        @foreach (var item in Model.Questions)
+        {
+            <details class="lp-faq-item">
+                <summary>@item.Question</summary>
+                <p>@item.Answer</p>
+            </details>
+        }
+    </div>
+</section>
+
+@* ==================== ФОРМА ЗАЯВКИ ==================== *@
+<section class="lp-section lp-request" id="lp-request">
+    <div class="lp-request-card">
+        <div class="lp-request-text">
+            <h2 class="lp-title">Расскажите о вашей задаче</h2>
+            <p class="lp-subtitle">
+                Отвечу в течение дня и подскажу, что можно сделать
+                быстрее и дешевле.
+            </p>
+            <p class="lp-note">Это демонстрационная форма: заявки с неё не сохраняются.</p>
+        </div>
+
+        @if (Model.IsSent)
+        {
+            <p class="lp-success">Спасибо! Форма отработала правильно — на рабочем сайте здесь появилась бы заявка.</p>
+        }
+        else
+        {
+            <form method="post" class="lp-form">
+                <label asp-for="ClientName">Как к вам обращаться</label>
+                <input asp-for="ClientName" placeholder="Например: Иван" />
+
+                <label asp-for="ClientPhone">Телефон или Telegram</label>
+                <input asp-for="ClientPhone" placeholder="+7 900 000-00-00" />
+
+                <label asp-for="ChosenService">Что нужно сделать</label>
+                <select asp-for="ChosenService" asp-items="Model.ServiceKinds"></select>
+
+                <label asp-for="ClientComment">Комментарий</label>
+                <textarea asp-for="ClientComment" rows="4" placeholder="Коротко о задаче"></textarea>
+
+                <button type="submit" class="lp-btn">Отправить заявку</button>
+            </form>
+        }
+    </div>
+</section>
+
+@* ==================== КОНТАКТЫ ==================== *@
+<footer class="lp-footer">
+    <div class="lp-footer-inner">
+        <p>Пример лендинга. Сделан как демонстрация навыков вёрстки и сборки страниц.</p>
+        <p class="lp-footer-links">
+            <a asp-page="/Index">← Вернуться в портфолио</a>
+        </p>
+    </div>
+</footer>
