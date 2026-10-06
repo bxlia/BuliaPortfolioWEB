@@ -23,67 +23,73 @@
 
 @* ==================== ГЛАВНЫЙ ЭКРАН ==================== *@
 <section id="home" class="hero">
-    <div class="hero-inner">
-        <p class="hero-label">C# / C++ / Web-разработка</p>
+    <p class="hero-label reveal">доступен для заказов</p>
 
-        <h1>Привет, я bulia</h1>
-
-        <p class="hero-text">
-            Разрабатываю сайты, программы для Windows и приложения
-            с базами данных.
-        </p>
-
-        <div class="hero-actions">
-            <a class="main-button" href="#projects">Посмотреть проекты</a>
-            <a class="main-button secondary-button" asp-page="/Landing">Пример лендинга</a>
-            <a class="main-button secondary-button" href="#contact">Написать мне</a>
-        </div>
-
-        <dl class="hero-stats">
-            <div class="hero-stat">
-                <dt>Проектов</dt>
-                <dd>@Model.Projects.Count</dd>
-            </div>
-            <div class="hero-stat">
-                <dt>Технологий</dt>
-                <dd>@techCount</dd>
-            </div>
-            <div class="hero-stat">
-                <dt>Лет в программировании</dt>
-                <dd>3+</dd>
-            </div>
-        </dl>
+    <div class="hero-terminal reveal">
+        <span class="prompt">$</span> whoami
+        <div>bulia — C# / .NET / Web<span class="cursor" aria-hidden="true"></span></div>
     </div>
+
+    <h1 class="reveal reveal-d1">Делаю сайты и программы, которые работают</h1>
+
+    <p class="hero-text reveal reveal-d2">
+        Сайты с формой заявок и панелью администратора, программы для Windows
+        и базы данных SQL Server. Показываю страницу до того, как она готова,
+        чтобы правки вносились на каждом шаге.
+    </p>
+
+    <div class="hero-actions reveal reveal-d3">
+        <a class="main-button" href="#projects">Смотреть проекты</a>
+        <a class="main-button secondary-button" asp-page="/Landing">Пример лендинга</a>
+        <a class="main-button secondary-button" href="#contact">Написать</a>
+    </div>
+
+    <dl class="hero-stats">
+        <div class="hero-stat reveal">
+            <dt>проектов</dt>
+            <dd>@Model.Projects.Count</dd>
+        </div>
+        <div class="hero-stat reveal reveal-d1">
+            <dt>технологий</dt>
+            <dd>@techCount</dd>
+        </div>
+        <div class="hero-stat reveal reveal-d2">
+            <dt>лет в коде</dt>
+            <dd>3+</dd>
+        </div>
+    </dl>
 </section>
 
 @* ==================== О МНЕ ==================== *@
 <section id="about" class="about">
+    <span class="section-kicker">01 / about</span>
     <h2 class="section-title">Обо мне</h2>
 
     <div class="about-grid">
-        <div class="about-text">
+        <div class="about-text reveal">
             <p>
-                Я программист и ученик 11 класса. Работаю в Visual Studio 2022.
-                Разрабатываю в сфере программирования более 3 лет.
-                Изучаю C#, C++, HTML, CSS, JavaScript и SQL.
+                Программирую четвёртый год. С eight класса — академия, Visual Studio 2022,
+                C# и C++. Основная работа сейчас — веб на ASP.NET Core и базы данных.
             </p>
             <p>
-                Создаю понятные и полезные программы для бизнеса и частных клиентов:
-                сайты, базы данных и небольшие программы для Windows.
+                Делаю то, что можно показать и потрогать: сайт, программу, отчёт.
+                Не исчезаю после сдачи — остаюсь на связи и правлю, пока клиент не доволен.
             </p>
         </div>
 
-        <ul class="about-facts">
+        <ul class="about-facts reveal reveal-d1">
             <li><span>Инструмент</span><strong>Visual Studio 2022</strong></li>
             <li><span>Основной язык</span><strong>C#</strong></li>
+            <li><span>Платформа</span><strong>.NET 9</strong></li>
             <li><span>База данных</span><strong>SQL Server</strong></li>
-            <li><span>Связь</span><strong>GitHub, FL.ru</strong></li>
+            <li><span>Связь</span><strong>GitHub · FL.ru</strong></li>
         </ul>
     </div>
 </section>
 
 @* ==================== НАВЫКИ ==================== *@
 <section id="skills" class="skills">
+    <span class="section-kicker">02 / skills</span>
     <h2 class="section-title">Навыки</h2>
 
     @foreach (var group in skillGroups)
@@ -94,7 +100,7 @@
             <div class="skill-list">
                 @foreach (var skill in group)
                 {
-                    <article class="skill-card">
+                    <article class="skill-card reveal">
                         <div class="skill-header">
                             <h4>@skill.Name</h4>
                             <span class="skill-percent">@skill.LevelPercent%</span>
@@ -106,8 +112,8 @@
                              aria-valuemin="0"
                              aria-valuemax="100"
                              aria-valuenow="@skill.LevelPercent">
-                            <div class="skill-progress-bar"
-                                 style="width: @skill.LevelPercent%"></div>
+                            @* --p нужна, чтобы полоска плавно доезжала до нужной ширины *@
+                            <div class="skill-progress-bar" style="--p: @(skill.LevelPercent)%"></div>
                         </div>
                     </article>
                 }
@@ -118,7 +124,8 @@
 
 @* ==================== МОИ ПРОЕКТЫ ==================== *@
 <section id="projects" class="projects">
-    <h2 class="section-title">Мои проекты</h2>
+    <span class="section-kicker">03 / projects</span>
+    <h2 class="section-title">Проекты</h2>
 
     <div class="project-list">
         @foreach (var project in Model.Projects)
@@ -128,7 +135,7 @@
                 ? "?"
                 : project.Title.Trim().Substring(0, 1);
 
-            <article class="project-card">
+            <article class="project-card reveal">
                 <div class="project-media">
                     @if (!string.IsNullOrWhiteSpace(project.ImageUrl))
                     {
@@ -199,55 +206,45 @@
 
 @* ==================== УСЛУГИ ==================== *@
 <section id="services" class="services">
-    <h2 class="section-title">Чем я могу помочь</h2>
+    <span class="section-kicker">04 / services</span>
+    <h2 class="section-title">Чем могу помочь</h2>
 
     <div class="service-list">
-        <article class="service-card">
-            <h3>Сайт или лендинг</h3>
-            <p>
-                Создам простую современную страницу для услуг,
-                портфолио или небольшого бизнеса.
-            </p>
+        <article class="service-card reveal">
+            <h3>Лендинг под услугу</h3>
+            <p>Один экран, который объясняет предложение и собирает заявки в форму. Готово за 3 дня.</p>
         </article>
 
-        <article class="service-card">
+        <article class="service-card reveal reveal-d1">
+            <h3>Сайт под ключ</h3>
+            <p>Несколько страниц, форма заявок, база данных и панель, где заявки видны сразу.</p>
+        </article>
+
+        <article class="service-card reveal reveal-d2">
             <h3>Доработка сайта</h3>
-            <p>
-                Помогу исправить HTML, CSS и JavaScript,
-                добавить блоки, форму или адаптацию под телефон.
-            </p>
+            <p>Исправлю ошибки, добавлю блок или форму, сделаю адаптацию под телефон.</p>
         </article>
 
-        <article class="service-card">
-            <h3>Программа на C#</h3>
-            <p>
-                Создам небольшую программу для Windows:
-                работа с файлами, таблицами и настройками.
-            </p>
-        </article>
-
-        <article class="service-card">
-            <h3>База данных</h3>
-            <p>
-                Спроектирую таблицы в SQL Server
-                и напишу запросы для отчётов и выборок.
-            </p>
+        <article class="service-card reveal reveal-d3">
+            <h3>Программа для Windows</h3>
+            <p>Учёт заявок, клиентов или товаров под вашу задачу. С входом пользователей и базой.</p>
         </article>
     </div>
 </section>
 
 @* ==================== КОНТАКТЫ И ФОРМА ЗАЯВКИ ==================== *@
 <section id="contact" class="contact">
-    <h2 class="section-title">Связаться со мной</h2>
+    <span class="section-kicker">05 / contact</span>
+    <h2 class="section-title">Написать мне</h2>
 
     <p class="contact-lead">
-        Если вам нужна небольшая программа, сайт или база данных,
-        напишите мне — отвечаю в течение дня.
+        Расскажите задачу — отвечу в течение дня и скажу честно,
+        сколько это будет стоить и сколько займёт.
     </p>
 
     @if (Model.IsRequestSent)
     {
-        <p class="success-message">Спасибо! Заявка отправлена. Я свяжусь с вами.</p>
+        <p class="success-message">Заявка отправлена. Я свяжусь с вами.</p>
     }
 
     @if (!ViewData.ModelState.IsValid)
@@ -258,63 +255,48 @@
     }
 
     <div class="contact-grid">
-        <form method="post" class="request-form" novalidate>
+        <form method="post" class="request-form reveal" novalidate>
             <div class="form-field">
                 <label asp-for="ClientForm.ClientName">Ваше имя</label>
-                <input asp-for="ClientForm.ClientName"
-                       placeholder="Например: Иван"
-                       maxlength="300" />
+                <input asp-for="ClientForm.ClientName" placeholder="Иван" maxlength="300" />
                 <span asp-validation-for="ClientForm.ClientName" class="field-error"></span>
             </div>
 
             <div class="form-field">
-                <label asp-for="ClientForm.ClientEmail">Ваш email</label>
-                <input asp-for="ClientForm.ClientEmail"
-                       type="email"
-                       placeholder="Например: ivan@example.com"
-                       maxlength="510" />
+                <label asp-for="ClientForm.ClientEmail">Email</label>
+                <input asp-for="ClientForm.ClientEmail" type="email" placeholder="ivan@example.com" maxlength="510" />
                 <span asp-validation-for="ClientForm.ClientEmail" class="field-error"></span>
             </div>
 
             <div class="form-field">
-                <label asp-for="ClientForm.ClientPhone">
-                    Телефон <span class="optional">(необязательно)</span>
-                </label>
-                <input asp-for="ClientForm.ClientPhone"
-                       type="tel"
-                       placeholder="Например: +7 900 000-00-00"
-                       maxlength="100" />
+                <label asp-for="ClientForm.ClientPhone">Телефон <span class="optional">(необязательно)</span></label>
+                <input asp-for="ClientForm.ClientPhone" type="tel" placeholder="+7 900 000-00-00" maxlength="100" />
                 <span asp-validation-for="ClientForm.ClientPhone" class="field-error"></span>
             </div>
 
             <div class="form-field">
                 <label asp-for="ClientForm.ClientMessage">Что нужно сделать</label>
-                <textarea asp-for="ClientForm.ClientMessage"
-                          rows="5"
-                          placeholder="Коротко опишите задачу"
-                          maxlength="4000"></textarea>
+                <textarea asp-for="ClientForm.ClientMessage" rows="5" placeholder="Коротко о задаче" maxlength="4000"></textarea>
                 <span asp-validation-for="ClientForm.ClientMessage" class="field-error"></span>
             </div>
 
             @* Honeypot: скрыто от людей, но заполняется ботами. Не удалять. *@
             <div class="hp" aria-hidden="true">
                 <label>Не заполняйте это поле</label>
-                <input asp-for="ClientForm.Website"
-                       tabindex="-1"
-                       autocomplete="off" />
+                <input asp-for="ClientForm.Website" tabindex="-1" autocomplete="off" />
             </div>
 
             <button class="main-button" type="submit">Отправить заявку</button>
         </form>
 
-        <aside class="contact-side">
-            <p class="contact-side-title">Или напишите сразу</p>
+        <aside class="contact-side reveal reveal-d1">
+            <p class="contact-side-title">связаться</p>
 
             <a class="contact-link" href="https://github.com/bxlia" target="_blank" rel="noopener noreferrer">
-                GitHub — bxlia
+                github.com/bxlia
             </a>
             <a class="contact-link" href="https://www.fl.ru/users/bxlia82/portfolio/" target="_blank" rel="noopener noreferrer">
-                Профиль на FL.ru
+                профиль на fl.ru
             </a>
         </aside>
     </div>
