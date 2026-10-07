@@ -53,6 +53,16 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Регистрация закрыта: посторонним заводить аккаунты не нужно.
+// Вход и админка с заявками остаются доступными по прямой ссылке.
+app.UseWhen(
+	context => context.Request.Path.Equals("/Identity/Account/Register", StringComparison.OrdinalIgnoreCase),
+	branch => branch.Run(context =>
+	{
+		context.Response.StatusCode = StatusCodes.Status404NotFound;
+		return Task.CompletedTask;
+	}));
+
 app.UseRouting();
 
 app.UseAuthentication();
