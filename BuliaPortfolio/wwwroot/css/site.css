@@ -781,6 +781,142 @@ code,
 }
 
 /* ==========================================================
+   КАК Я РАБОТАЮ
+   ========================================================== */
+.process-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+@media (max-width: 1000px) {
+    .process-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 620px) {
+    .process-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.process-card {
+    position: relative;
+    padding: 22px 20px 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.process-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--cyan);
+}
+
+.process-num {
+    display: block;
+    margin-bottom: 10px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+}
+
+.process-card h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.process-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.process-terms {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin-top: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--line);
+    overflow: hidden;
+}
+
+@media (max-width: 1000px) {
+    .process-terms {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 620px) {
+    .process-terms {
+        grid-template-columns: 1fr;
+    }
+}
+
+.process-term {
+    padding: 18px;
+    background: var(--bg-soft);
+}
+
+.process-term-title {
+    margin: 0 0 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--blue);
+}
+
+.process-term p:last-child {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* ---------- Способы оплаты рядом с формой ---------- */
+.pay-box {
+    margin-top: 22px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg-soft);
+}
+
+.pay-box-title {
+    margin: 0 0 12px;
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+}
+
+.pay-box-item {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.pay-box-item:last-child {
+    margin-bottom: 0;
+}
+
+.pay-box-item strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--text);
+}
+
+.pay-box-item a {
+    color: var(--cyan);
+}
+
+/* ==========================================================
    КОНТАКТЫ И ФОРМА
    ========================================================== */
 .contact-lead {
