@@ -175,22 +175,24 @@ code,
 
 .navbar-brand::before {
     content: "";
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     flex: 0 0 auto;
     border: 1px solid var(--line);
-    border-radius: 8px;
-    background-image: url("/images/bulia-logo.png");
-    background-size: cover;
+    border-radius: 9px;
+    /* Векторная картинка: не мылится на любом размере экрана. */
+    background-image: url("/images/brand.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
 .brand-logo {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
     border: 1px solid var(--line);
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .brand-dot {
