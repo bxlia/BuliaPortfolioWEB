@@ -280,6 +280,9 @@
                 <span asp-validation-for="ClientForm.ClientMessage" class="field-error"></span>
             </div>
 
+            @* Метка времени: по ней видно, что форму не отправили сразу. *@
+            <input type="hidden" asp-for="ClientForm.FormStamp" />
+
             @* Honeypot: скрыто от людей, но заполняется ботами. Не удалять. *@
             <div class="hp" aria-hidden="true">
                 <label>Не заполняйте это поле</label>

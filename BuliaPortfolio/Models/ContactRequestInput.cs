@@ -24,6 +24,10 @@ public class ContactRequestInput
 	[StringLength(4000, ErrorMessage = "Описание не должно быть длиннее 4000 символов.")]
 	public string ClientMessage { get; set; } = string.Empty;
 
+	// Метка времени, когда страницу с формой открыли.
+	// Если форму отправили быстрее трёх секунд — считаем бота.
+	public long FormStamp { get; set; }
+
 	// Honeypot: скрытое поле для ботов. Должно остаться пустым.
 	// Если его заполнили — заявка silently игнорируется.
 	public string? Website { get; set; }

@@ -1,5 +1,6 @@
 ﻿using BuliaPortfolio.Data;
 using BuliaPortfolio.Models;
+using BuliaPortfolio.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,10 @@ public class IndexModel : PageModel
 
 	public async Task OnGetAsync()
 	{
+		// Метка времени нужна форме, чтобы потом понять,
+		// сколько секунд её заполняли.
+		ClientForm.FormStamp = DateTime.UtcNow.Ticks;
+
 		await LoadPageDataAsync();
 	}
 
@@ -37,6 +42,18 @@ public class IndexModel : PageModel
 
 		// Honeypot: скрытое поле заполнил бот — показываем успех, но не пишем в базу.
 		if (!string.IsNullOrWhiteSpace(ClientForm.Website))
+		{
+			return RedirectToPage(new { sent = true });
+		}
+
+		// Форму отправили сразу после загрузки страницы — так работают боты.
+		if (SpamGuard.FilledTooFast(ClientForm.FormStamp))
+		{
+			return RedirectToPage(new { sent = true });
+		}
+
+		// С одного адреса слишком много отправок.
+		if (SpamGuard.TooManyFrom(SpamGuard.GetClientKey(HttpContext)))
 		{
 			return RedirectToPage(new { sent = true });
 		}
