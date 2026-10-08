@@ -124,45 +124,81 @@ public class MaxBot
         }
     }
 
-    // В списке событий чат лежит в message.chat.id.
-    // Разбираем осторожно: структуру событий MAX меняет.
+    // В списке событий номер чата лежит глубоко внутри: у сообщения
+    // это recipient.chat_id, у события bot_started — другой путь.
+    // Структуру MAX меняет, поэтому ищем рекурсивно первое же chat_id.
     private static string? FindChatId(string json, ILogger log)
     {
         try
         {
             using var document = JsonDocument.Parse(json);
 
-            if (!document.RootElement.TryGetProperty("updates", out var updates)
-                || updates.ValueKind != JsonValueKind.Array)
+            var chatId = FindFirstChatId(document.RootElement);
+
+            if (chatId is not null)
             {
-                log.LogWarning("MAX: в ответе нет списка событий.");
-                return null;
+                log.LogWarning("MAX: найден ID чата {0}.", chatId);
+                return chatId;
             }
 
-            foreach (var update in updates.EnumerateArray())
-            {
-                if (!update.TryGetProperty("message", out var message))
-                {
-                    continue;
-                }
-
-                if (message.TryGetProperty("chat", out var chat)
-                    && chat.TryGetProperty("id", out var id)
-                    && id.ValueKind == JsonValueKind.Number)
-                {
-                    var chatId = id.GetInt64();
-                    log.LogWarning("MAX: найден ID чата {0}. Запишите его в Max:ChatId.", chatId);
-                    return chatId.ToString();
-                }
-            }
-
-            log.LogWarning("MAX: событий с чатом нет. Напишите боту любое сообщение в MAX и запустите сайт ещё раз.");
+            log.LogWarning(
+                "MAX: событий с чатом нет. Напишите боту любое сообщение в MAX и запустите сайт ещё раз.");
             return null;
         }
         catch (Exception ex)
         {
             log.LogError(ex, "MAX: не удалось разобрать ответ.");
             return null;
+        }
+    }
+
+    private static string? FindFirstChatId(JsonElement element)
+    {
+        switch (element.ValueKind)
+        {
+            case JsonValueKind.Object:
+                foreach (var property in element.EnumerateObject())
+                {
+                    // Самый частый вариант: recipient: { chat_id: 123 }
+                    if (property.NameEquals("chat_id")
+                        && property.Value.ValueKind == JsonValueKind.Number)
+                    {
+                        return property.Value.GetInt64().ToString();
+                    }
+
+                    // Вариант с объектом чата: chat: { id: 123 }
+                    if (property.NameEquals("id")
+                        && element.TryGetProperty("type", out _)
+                        && property.Value.ValueKind == JsonValueKind.Number)
+                    {
+                        return property.Value.GetInt64().ToString();
+                    }
+
+                    var nested = FindFirstChatId(property.Value);
+
+                    if (nested is not null)
+                    {
+                        return nested;
+                    }
+                }
+
+                return null;
+
+            case JsonValueKind.Array:
+                foreach (var item in element.EnumerateArray())
+                {
+                    var nested = FindFirstChatId(item);
+
+                    if (nested is not null)
+                    {
+                        return nested;
+                    }
+                }
+
+                return null;
+
+            default:
+                return null;
         }
     }
 }
