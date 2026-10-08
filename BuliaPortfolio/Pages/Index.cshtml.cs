@@ -11,10 +11,12 @@ namespace BuliaPortfolio.Pages;
 public class IndexModel : PageModel
 {
 	private readonly PortfolioDbContext _context;
+	private readonly MaxBot _maxBot;
 
-	public IndexModel(PortfolioDbContext context)
+	public IndexModel(PortfolioDbContext context, MaxBot maxBot)
 	{
 		_context = context;
+		_maxBot = maxBot;
 	}
 
 	public List<Project> Projects { get; private set; } = [];
@@ -63,11 +65,33 @@ public class IndexModel : PageModel
 			return Page();
 		}
 
-		_context.ContactRequests.Add(ClientForm.ToEntity());
+		var request = ClientForm.ToEntity();
+
+		_context.ContactRequests.Add(request);
 
 		await _context.SaveChangesAsync();
 
+		// Уведомление в MAX. Если отправка не вышла, заявка всё равно
+		// сохранена — письмо не должно мешать клиенту получить ответ.
+		await _maxBot.SendAsync(BuildMessage(request));
+
 		return RedirectToPage(new { sent = true });
+	}
+
+	// Текст уведомления для мессенджера. Держим коротким,
+	// в MAX не больше 4000 символов, но и засорять чат не стоит.
+	private static string BuildMessage(ContactRequest request)
+	{
+		var text = $"Новая заявка с сайта\n\nИмя: {request.ClientName}\nПочта: {request.Email}";
+
+		if (!string.IsNullOrWhiteSpace(request.Phone))
+		{
+			text += $"\nТелефон: {request.Phone}";
+		}
+
+		text += $"\n\nЗадача: {request.Message}";
+
+		return text.Length > 3500 ? text[..3500] + "…" : text;
 	}
 
 	private async Task LoadPageDataAsync()

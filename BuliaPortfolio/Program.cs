@@ -1,4 +1,5 @@
 ﻿using BuliaPortfolio.Data;
+using BuliaPortfolio.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 builder.Services.AddRazorPages();
 
+// Уведомления о заявках в мессенджер MAX.
+builder.Services.AddHttpClient("max", client =>
+{
+	client.Timeout = TimeSpan.FromSeconds(20);
+});
+
+builder.Services.AddScoped<MaxBot>();
+
 var app = builder.Build();
 
 // Страница ошибки и 404 работают одинаково и при разработке, и на сервере.
@@ -77,5 +86,9 @@ app.MapRazorPages()
 // заданы Admin:Email и Admin:Password. Это единственный способ завести
 // админа на сервере, где нет режима Development.
 await SeedData.EnsureAdminAsync(app.Services);
+
+// Если токен MAX задан, а ID чата ещё нет — ищем его по непрочитанным
+// событиям. Нужно один раз написать боту любое сообщение в MAX.
+await MaxBot.DiscoverChatIdAsync(app.Services);
 
 app.Run();
