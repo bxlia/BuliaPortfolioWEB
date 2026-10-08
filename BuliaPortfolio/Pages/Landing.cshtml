@@ -197,31 +197,13 @@
                 Отвечу в течение дня и подскажу, что можно сделать
                 быстрее и дешевле.
             </p>
-            <p class="lp-note">Это демонстрационная форма: заявки с неё не сохраняются.</p>
+            <p class="lp-note">Заявка откроется в рабочей форме на главной странице.</p>
         </div>
 
-        @if (Model.IsSent)
-        {
-            <p class="lp-success">Спасибо! Форма отработала правильно — на рабочем сайте здесь появилась бы заявка.</p>
-        }
-        else
-        {
-            <form method="post" class="lp-form">
-                <label asp-for="ClientName">Как к вам обращаться</label>
-                <input asp-for="ClientName" placeholder="Например: Иван" />
-
-                <label asp-for="ClientPhone">Телефон или MAX</label>
-                <input asp-for="ClientPhone" placeholder="+7 900 000-00-00" />
-
-                <label asp-for="ChosenService">Что нужно сделать</label>
-                <select asp-for="ChosenService" asp-items="Model.ServiceKinds"></select>
-
-                <label asp-for="ClientComment">Комментарий</label>
-                <textarea asp-for="ClientComment" rows="4" placeholder="Коротко о задаче"></textarea>
-
-                <button type="submit" class="lp-btn">Отправить заявка</button>
-            </form>
-        }
+        <div class="lp-cta">
+            <a class="lp-btn" asp-page="/Index" asp-fragment="contact">Оставить заявку</a>
+            <p class="lp-cta-note">Напишу, что можно сделать быстрее и дешевле, и назову точную цену.</p>
+        </div>
     </div>
 </section>
 

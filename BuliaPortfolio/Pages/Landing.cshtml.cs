@@ -1,29 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BuliaPortfolio.Pages;
 
 // Демонстрационная страница: показывает, как выглядит лендинг для любого
-// бизнеса — услуги, шаги, цены, отзывы, вопросы и форма заявки.
-// Форма здесь не сохраняет заявки в базу: это пример, а не рабочий приём заявок.
+// бизнеса — услуги, шаги, цены, отзывы, вопросы.
+// Заявок здесь нет: клиента отправляется в рабочую форму на главной странице.
 public class LandingModel : PageModel
 {
-    [BindProperty]
-    public string ClientName { get; set; } = string.Empty;
-
-    [BindProperty]
-    public string ClientPhone { get; set; } = string.Empty;
-
-    [BindProperty]
-    public string ChosenService { get; set; } = string.Empty;
-
-    [BindProperty]
-    public string ClientComment { get; set; } = string.Empty;
-
-    [BindProperty(SupportsGet = true, Name = "sent")]
-    public bool IsSent { get; set; }
-
     public List<ServiceItem> Services { get; } =
     [
         new("Сайт под ключ", "Страницы, форма заявки, панель администратора", "от 18 000 ₽"),
@@ -52,33 +35,6 @@ public class LandingModel : PageModel
         new("Что с правками?", "В течение двух недель после сдачи правлю бесплатно. Дальше — за отдельную плату."),
         new("Останется ли мне сайт?", "Да, все файлы и доступы передаю вам. Никакой привязки ко мне, сайт ваш.")
     ];
-
-    public List<SelectListItem> ServiceKinds { get; } =
-    [
-        new() { Text = "Выберите услугу", Value = "" },
-        new() { Text = "Лендинг под одну услугу", Value = "Лендинг под одну услугу" },
-        new() { Text = "Сайт под ключ", Value = "Сайт под ключ" },
-        new() { Text = "Доработка существующего сайта", Value = "Доработка существующего сайта" },
-        new() { Text = "Программа для Windows", Value = "Программа для Windows" },
-        new() { Text = "База данных и отчёты", Value = "База данных и отчёты" },
-        new() { Text = "Бот для мессенджера", Value = "Бот для мессенджера" },
-        new() { Text = "Пока не знаю, нужна консультация", Value = "Пока не знаю, нужна консультация" }
-    ];
-
-    public void OnGet()
-    {
-    }
-
-    public IActionResult OnPost()
-    {
-        // Примерная форма: проверяем только то, что пришло, и показываем успех.
-        if (string.IsNullOrWhiteSpace(ClientName) || string.IsNullOrWhiteSpace(ClientPhone))
-        {
-            return Page();
-        }
-
-        return RedirectToPage(new { sent = true });
-    }
 
     public record ServiceItem(string Title, string Text, string Price);
 

@@ -534,6 +534,28 @@ body {
     color: var(--lp-good);
 }
 
+/* ---------- БЛОК ЗАЯВКИ: ведёт на рабочую форму ---------- */
+.lp-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 26px;
+    border: 1px solid var(--lp-border);
+    border-radius: var(--lp-radius);
+    background: #fff;
+}
+
+.lp-cta .lp-btn {
+    text-decoration: none;
+}
+
+.lp-cta-note {
+    margin: 0;
+    font-size: 15px;
+    color: var(--lp-muted);
+}
+
 /* ---------- ПОДВАЛ СТРАНИЦЫ ---------- */
 .lp-footer {
     border-top: 1px solid var(--lp-border);
