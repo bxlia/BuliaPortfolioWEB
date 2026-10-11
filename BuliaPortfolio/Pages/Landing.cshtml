@@ -143,6 +143,99 @@
     </div>
 </section>
 
+@* ==================== КАЛЬКУЛЯТОР ЦЕНЫ ==================== *@
+<section class="lp-section" id="lp-calc">
+    <h2 class="lp-title">Калькулятор цены</h2>
+    <p class="lp-subtitle">
+        Отметьте, что нужно, — покажу предварительную цену. Это не квитанция:
+        точную назову после обсуждения задачи.
+    </p>
+
+    <div class="calc">
+        <div class="calc-main">
+            <fieldset class="calc-block">
+                <legend>Что нужно сделать</legend>
+
+                @foreach (var service in Model.CalculatorServices)
+                {
+                    <label class="calc-choice">
+                        <input type="radio" name="calc-service" value="@service.Key" checked="@(service.Key == "site")" />
+                        <span class="calc-choice-text">
+                            <span class="calc-choice-title">@service.Title</span>
+                            <span class="calc-choice-price">от @service.Price.ToString("N0") ₽</span>
+                        </span>
+                    </label>
+                }
+            </fieldset>
+
+            <fieldset class="calc-block" data-only="site fix">
+                <legend>Объём страниц</legend>
+
+                @foreach (var volume in Model.CalculatorVolumes)
+                {
+                    <label class="calc-choice">
+                        <input type="radio" name="calc-volume" value="@volume.Key" checked="@(volume.Key == "few")" data-price="@volume.Price" />
+                        <span class="calc-choice-text">
+                            <span class="calc-choice-title">@volume.Title</span>
+                            @if (volume.Price > 0)
+                            {
+                                <span class="calc-choice-price">+@volume.Price.ToString("N0") ₽</span>
+                            }
+                        </span>
+                    </label>
+                }
+            </fieldset>
+
+            <fieldset class="calc-block">
+                <legend>Что ещё нужно</legend>
+
+                <label class="calc-choice">
+                    <input type="checkbox" name="calc-db" data-price="@Model.DatabasePrice" />
+                    <span class="calc-choice-text">
+                        <span class="calc-choice-title">База данных и отчёты</span>
+                        <span class="calc-choice-price">+@Model.DatabasePrice.ToString("N0") ₽</span>
+                    </span>
+                </label>
+
+                <label class="calc-choice">
+                    <input type="checkbox" name="calc-admin" data-price="@Model.AdminPrice" />
+                    <span class="calc-choice-text">
+                        <span class="calc-choice-title">Панель, где видны заявки</span>
+                        <span class="calc-choice-price">+@Model.AdminPrice.ToString("N0") ₽</span>
+                    </span>
+                </label>
+
+                <label class="calc-choice">
+                    <input type="checkbox" name="calc-urgent" data-percent="@Model.UrgentPercent" />
+                    <span class="calc-choice-text">
+                        <span class="calc-choice-title">Нужно срочно</span>
+                        <span class="calc-choice-price">+@Model.UrgentPercent%</span>
+                    </span>
+                </label>
+            </fieldset>
+        </div>
+
+        <aside class="calc-result">
+            <p class="calc-result-label">Предварительно выходит</p>
+            <p class="calc-result-price" data-calc-price>18 000 ₽</p>
+
+            <p class="calc-result-note">
+                Цена может измениться, если задача окажется сложнее.
+                Назову точную после короткого разговора.
+            </p>
+
+            <a class="lp-btn calc-result-btn" asp-page="/Index" asp-fragment="contact">
+                Оставить заявку
+            </a>
+
+            <p class="calc-result-hint">
+                Работаю по предоплате 50%, две недели правок бесплатно.
+                Не нравится риск — оформляем через фриланс-биржу.
+            </p>
+        </aside>
+    </div>
+</section>
+
 @* ==================== ОТЗЫВЫ ==================== *@
 <section class="lp-section">
     <h2 class="lp-title">Отзывы</h2>
@@ -216,3 +309,104 @@
         </p>
     </div>
 </footer>
+
+@section Scripts {
+    <script>
+        (function () {
+            "use strict";
+
+            var calculator = document.querySelector(".calc");
+
+            if (!calculator) {
+                return;
+            }
+
+            var priceNode = calculator.querySelector("[data-calc-price]");
+
+            // Цена базовой услуи спрятана в data-price у первого переключателя.
+            var serviceInputs = calculator.querySelectorAll("input[name='calc-service']");
+            var volumeInputs = calculator.querySelectorAll("input[name='calc-volume']");
+            var extraInputs = calculator.querySelectorAll("input[name='calc-db'], input[name='calc-admin']");
+            var urgentInput = calculator.querySelector("input[name='calc-urgent']");
+
+            var volumes = calculator.querySelectorAll("[data-only]");
+            var serviceMap = {
+                landing: @Model.CalculatorServices.First(x => x.Key == "landing").Price,
+                site: @Model.CalculatorServices.First(x => x.Key == "site").Price,
+                fix: @Model.CalculatorServices.First(x => x.Key == "fix").Price,
+                program: @Model.CalculatorServices.First(x => x.Key == "program").Price,
+                database: @Model.CalculatorServices.First(x => x.Key == "database").Price,
+                bot: @Model.CalculatorServices.First(x => x.Key == "bot").Price
+            };
+            var minPrice = @Model.CalculatorMinPrice;
+            var round = @Model.CalculatorRound;
+
+            function formatMoney(value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽";
+            }
+
+            function chosen(list) {
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].checked) {
+                        return list[i];
+                    }
+                }
+                return null;
+            }
+
+            // Показываем блок объёма только там, где он имеет смысл.
+            function syncVisibility() {
+                var current = chosen(serviceInputs);
+                var key = current ? current.value : "";
+
+                for (var i = 0; i < volumes.length; i++) {
+                    var allowed = (volumes[i].getAttribute("data-only") || "").split(" ");
+
+                    volumes[i].hidden = allowed.indexOf(key) === -1;
+                }
+            }
+
+            function recalc() {
+                syncVisibility();
+
+                var current = chosen(serviceInputs);
+                var total = current ? serviceMap[current.value] : 0;
+
+                var visibleVolume = null;
+
+                for (var i = 0; i < volumes.length; i++) {
+                    if (!volumes[i].hidden) {
+                        visibleVolume = chosen(volumes[i].querySelectorAll("input[name='calc-volume']"));
+                    }
+                }
+
+                if (visibleVolume) {
+                    total += parseInt(visibleVolume.getAttribute("data-price") || "0", 10);
+                }
+
+                for (var j = 0; j < extraInputs.length; j++) {
+                    if (extraInputs[j].checked) {
+                        total += parseInt(extraInputs[j].getAttribute("data-price") || "0", 10);
+                    }
+                }
+
+                if (urgentInput && urgentInput.checked) {
+                    total += Math.round(total * (parseInt(urgentInput.getAttribute("data-percent") || "0", 10) / 100));
+                }
+
+                if (total < minPrice) {
+                    total = minPrice;
+                }
+
+                // округляем до сотен, чтобы цифра выглядела опрятно
+                total = Math.round(total / round) * round;
+
+                priceNode.textContent = formatMoney(total);
+            }
+
+            calculator.addEventListener("change", recalc);
+
+            recalc();
+        })();
+    </script>
+}

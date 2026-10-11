@@ -36,9 +36,42 @@ public class LandingModel : PageModel
         new("Останется ли мне сайт?", "Да, все файлы и доступы передаю вам. Никакой привязки ко мне, сайт ваш.")
     ];
 
+    // ---------- КАЛЬКУЛЯТОР ЦЕНЫ ----------
+    // Все цены собраны здесь, чтобы менять их можно было в одном месте.
+    public List<CalcOption> CalculatorServices { get; } =
+    [
+        new("landing", "Лендинг под одну услугу", 5_000),
+        new("site", "Сайт под ключ", 18_000),
+        new("fix", "Доработка сайта", 2_000),
+        new("program", "Программа для Windows", 9_000),
+        new("database", "База данных и отчёты", 5_000),
+        new("bot", "Бот для мессенджера", 7_000)
+    ];
+
+    // Объём работы: доплата к базовой цене.
+    public List<CalcOption> CalculatorVolumes { get; } =
+    [
+        new("one", "Один экран", 0),
+        new("few", "2–3 страницы", 0),
+        new("many", "4–5 страниц", 6_000),
+        new("large", "Больше 5 страниц", 12_000)
+    ];
+
+    public int DatabasePrice { get; } = 5_000;
+
+    public int AdminPrice { get; } = 4_000;
+
+    public int UrgentPercent { get; } = 30;
+
+    public int CalculatorMinPrice { get; } = 1_000;
+
+    public int CalculatorRound { get; } = 100;
+
     public record ServiceItem(string Title, string Text, string Price);
 
     public record PriceItem(string Name, string Cost, string Description, List<string> Included);
 
     public record FaqItem(string Question, string Answer);
+
+    public record CalcOption(string Key, string Title, int Price);
 }

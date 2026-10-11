@@ -621,3 +621,159 @@ body {
         transition: none;
     }
 }
+
+/* ==========================================================
+   КАЛЬКУЛЯТОР ЦЕНЫ
+   ========================================================== */
+.calc {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 24px;
+    align-items: start;
+}
+
+.calc-main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.calc-block {
+    margin: 0;
+    padding: 18px;
+    border: 1px solid var(--lp-border);
+    border-radius: var(--lp-radius);
+    background: #fff;
+}
+
+.calc-block[hidden] {
+    display: none;
+}
+
+.calc-block legend {
+    padding: 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--lp-muted);
+}
+
+.calc-choice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1px solid var(--lp-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.calc-choice + .calc-choice {
+    margin-top: 8px;
+}
+
+.calc-block .calc-choice:first-of-type {
+    margin-top: 10px;
+}
+
+.calc-choice:hover {
+    border-color: var(--lp-accent);
+    background: #f7fbff;
+}
+
+.calc-choice input {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--lp-accent);
+}
+
+.calc-choice:has(input:checked) {
+    border-color: var(--lp-accent);
+    background: #f2f9ff;
+}
+
+.calc-choice-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.calc-choice-title {
+    font-size: 16px;
+    color: var(--lp-text);
+}
+
+.calc-choice-price {
+    flex: 0 0 auto;
+    font-size: 14px;
+    color: var(--lp-muted);
+    white-space: nowrap;
+}
+
+/* ---------- результат ---------- */
+.calc-result {
+    position: sticky;
+    top: 24px;
+    padding: 24px;
+    border: 1px solid var(--lp-border);
+    border-radius: var(--lp-radius);
+    background: #101a2b;
+    color: #fff;
+}
+
+.calc-result-label {
+    margin: 0 0 6px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #9aa8bd;
+}
+
+.calc-result-price {
+    margin: 0 0 12px;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--lp-good);
+}
+
+.calc-result-note {
+    margin: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #b9c6d8;
+}
+
+.calc-result-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.calc-result-hint {
+    margin: 16px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #8c9bb0;
+}
+
+@media (max-width: 900px) {
+    .calc {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-result {
+        position: static;
+    }
+
+    .calc-choice-text {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+}
