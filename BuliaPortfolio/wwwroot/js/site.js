@@ -8,6 +8,41 @@
 
 	document.documentElement.classList.add("js");
 
+	// ---------- Выбор стиля: бумага или терминал ----------
+	var themeRoot = document.documentElement;
+	var themeButtons = document.querySelectorAll("[data-theme-set]");
+
+	var applyTheme = function (name) {
+		themeRoot.setAttribute("data-theme", name);
+
+		try {
+			localStorage.setItem("bulia-theme", name);
+		} catch (e) {
+			// Приватный режим: просто не запоминаем выбор.
+		}
+
+		themeButtons.forEach(function (button) {
+			button.setAttribute(
+				"aria-pressed",
+				button.getAttribute("data-theme-set") === name ? "true" : "false"
+			);
+		});
+
+		var themeColor = document.querySelector('meta[name="theme-color"]');
+
+		if (themeColor) {
+			themeColor.setAttribute("content", name === "paper" ? "#f6f4f1" : "#0b1220");
+		}
+	};
+
+	themeButtons.forEach(function (button) {
+		button.addEventListener("click", function () {
+			applyTheme(button.getAttribute("data-theme-set"));
+		});
+	});
+
+	applyTheme(themeRoot.getAttribute("data-theme") || "paper");
+
 	// ---------- Появление блоков при прокрутке ----------
 	var revealItems = document.querySelectorAll(".reveal");
 

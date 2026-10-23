@@ -1,17 +1,29 @@
 ﻿<!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="paper">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Портфолио bulia: разработка сайтов, программ на C# и баз данных SQL Server." />
-    <meta name="theme-color" content="#0b1220" />
+    <meta name="theme-color" content="#f6f4f1" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="bulia — разработка сайтов и программ на C#" />
     <meta property="og:description" content="Портфолио: сайты, программы на C# и C++, базы данных SQL Server." />
     <meta property="og:image" content="/images/bulia-logo.png" />
-    <link rel="icon" href="~/images/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="~/images/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="~/images/bulia-logo.png" />
-    <script>document.documentElement.classList.add("js");</script>
+    <script>
+        // Стиль запоминается и ставится до загрузки CSS — без мигания.
+        (function () {
+            var theme = "paper";
+
+            try {
+                theme = localStorage.getItem("bulia-theme") || "paper";
+            } catch (e) { }
+
+            document.documentElement.setAttribute("data-theme", theme);
+            document.documentElement.classList.add("js");
+        })();
+    </script>
     <title>@ViewData["Title"] - BuliaPortfolio</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -47,6 +59,14 @@
                         <li class="nav-item"><a class="nav-link" href="/#process">Как я работаю</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#contact">Контакты</a></li>
                     </ul>
+
+                    @if (ViewData["ThemeSwitch"] as string != "off")
+                    {
+                        <div class="theme-switch" role="group" aria-label="Стиль оформления">
+                            <button type="button" class="theme-option" data-theme-set="paper" aria-pressed="true">Бумага</button>
+                            <button type="button" class="theme-option" data-theme-set="ink" aria-pressed="false">Терминал</button>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
