@@ -5,18 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// appsettings.Development.json читаем в любом режиме, иначе строка
-// подключения не находится при запуске не из Development.
-builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true);
-
-// Если строки подключения нет — падаем с понятным текстом,
-// а не с ошибкой про ConnectionString.
+// Локальная строка подключения лежит в appsettings.Development.json.
+// Этот файл читается только в режиме Development и на сервер не публикуется.
+// На хостинге строка подключения приходит из переменной
+// ConnectionStrings__DefaultConnection.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 if (string.IsNullOrWhiteSpace(connectionString))
 {
 	throw new InvalidOperationException(
-		"Не найдена строка подключения. Проверь файл appsettings.Development.json в папке проекта.");
+		"Не найдена строка подключения. Локально проверь appsettings.Development.json, на сервере — переменную ConnectionStrings__DefaultConnection.");
 }
 
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
