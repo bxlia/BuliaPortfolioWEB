@@ -1,5 +1,6 @@
 ﻿using BuliaPortfolio.Data;
 using BuliaPortfolio.Services;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,16 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 .AddDefaultUI();
 
 builder.Services.AddRazorPages();
+
+// Ключи шифрования (куки входа и защита форм) храним в файлах.
+// Без этого после каждого перезапуска сайта они создаются заново:
+// старые формы перестают отправляться, а вход в админку слетает.
+var keysPath = Path.Combine(builder.Environment.ContentRootPath, "App_Data", "keys");
+Directory.CreateDirectory(keysPath);
+
+builder.Services.AddDataProtection()
+	.PersistKeysToFileSystem(new DirectoryInfo(keysPath))
+	.SetApplicationName("BuliaPortfolio");
 
 // Уведомления о заявках в мессенджер MAX.
 builder.Services.AddHttpClient("max", client =>

@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ключи шифрования Data Protection (создаются при запуске)
+App_Data/
