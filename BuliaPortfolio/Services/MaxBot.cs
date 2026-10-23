@@ -22,9 +22,11 @@ public class MaxBot
         _log = log;
     }
 
-    public string? Token => _config["Max:Token"];
+    // Trim: в переменных хостинга часто остаётся пробел или перевод строки,
+    // из-за этого MAX отвечает 401.
+    public string? Token => _config["Max:Token"]?.Trim();
 
-    public string? ChatId => _config["Max:ChatId"];
+    public string? ChatId => _config["Max:ChatId"]?.Trim();
 
     public bool IsConfigured =>
         !string.IsNullOrWhiteSpace(Token) && !string.IsNullOrWhiteSpace(ChatId);
@@ -47,6 +49,7 @@ public class MaxBot
 
             // Токен передаём в заголовке, не в адресе.
             request.Headers.TryAddWithoutValidation("Authorization", Token);
+            request.Headers.TryAddWithoutValidation("User-Agent", "BuliaPortfolio/1.0");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.Content = new StringContent(
                 JsonSerializer.Serialize(new { text }),
@@ -83,7 +86,7 @@ public class MaxBot
         var factory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
         var log = scope.ServiceProvider.GetRequiredService<ILogger<MaxBot>>();
 
-        var token = config["Max:Token"];
+        var token = config["Max:Token"]?.Trim();
 
         if (string.IsNullOrWhiteSpace(token))
         {
