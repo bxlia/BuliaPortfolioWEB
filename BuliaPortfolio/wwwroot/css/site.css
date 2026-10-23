@@ -281,7 +281,7 @@ html[data-theme="ink"] .navbar-brand::before {
     color: var(--switch-fg, var(--bg));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .navbar-collapse {
         align-items: center;
     }
@@ -295,7 +295,7 @@ html[data-theme="ink"] .navbar-brand::before {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .theme-switch {
         margin: 6px 0 14px;
     }
