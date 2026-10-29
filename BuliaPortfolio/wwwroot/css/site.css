@@ -1227,6 +1227,45 @@ textarea.field-error {
     color: #052e16;
 }
 
+/* Проверка связи с MAX в админке */
+.max-check {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+}
+
+.max-check-result {
+    margin: 14px 0 0;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-soft);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Политика конфиденциальности */
+.privacy-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 62px 24px;
+}
+
+.privacy-page h1 {
+    margin-bottom: 24px;
+}
+
+.privacy-page p {
+    margin-bottom: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
 .empty-requests {
     margin-top: 22px;
     padding: 26px;

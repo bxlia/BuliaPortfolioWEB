@@ -35,10 +35,37 @@ public class MaxBot
     // это не должно ломать форму, заявка всё равно сохранена в базе.
     public async Task<bool> SendAsync(string text, CancellationToken cancellationToken = default)
     {
+        var (ok, details) = await SendCoreAsync(text, cancellationToken);
+
+        if (ok)
+        {
+            _log.LogInformation("MAX: уведомление отправлено.");
+        }
+        else
+        {
+            _log.LogError("MAX: {Details}", details);
+        }
+
+        return ok;
+    }
+
+    // Проверка связи из админки. Возвращает текст, который видно на странице,
+    // поэтому для диагностики не нужно искать строки в логах.
+    public async Task<string> TestAsync(CancellationToken cancellationToken = default)
+    {
+        var (ok, details) = await SendCoreAsync(
+            "Тест с сайта: проверка связи с MAX.", cancellationToken);
+
+        return ok ? "Успешно. " + details : details;
+    }
+
+    private async Task<(bool Ok, string Details)> SendCoreAsync(
+        string text,
+        CancellationToken cancellationToken)
+    {
         if (string.IsNullOrWhiteSpace(Token) || string.IsNullOrWhiteSpace(ChatId))
         {
-            _log.LogWarning("MAX: токен или ID чата не заданы, уведомление не отправлено.");
-            return false;
+            return (false, "Токен или ID чата не заданы.");
         }
 
         try
@@ -61,18 +88,15 @@ public class MaxBot
 
             if (response.IsSuccessStatusCode)
             {
-                _log.LogInformation("MAX: уведомление отправлено.");
-                return true;
+                return (true, "Сообщение отправлено.");
             }
 
             var body = await response.Content.ReadAsStringAsync(cancellationToken);
-            _log.LogError("MAX: сервер вернул {0}. {1}", (int)response.StatusCode, body);
-            return false;
+            return (false, $"Сервер вернул {(int)response.StatusCode}. {body}");
         }
         catch (Exception ex)
         {
-            _log.LogError(ex, "MAX: не удалось отправить уведомление.");
-            return false;
+            return (false, $"Не удалось отправить: {ex.GetType().Name}: {ex.Message}");
         }
     }
 

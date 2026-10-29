@@ -13,6 +13,19 @@
         Здесь отображаются обращения, отправленные через форму обратной связи.
     </p>
 
+    <div class="max-check">
+        <form method="post" asp-page-handler="TestMax">
+            <button type="submit" class="process-request-button">
+                Проверить MAX
+            </button>
+        </form>
+
+        @if (Model.MaxTestResult is not null)
+        {
+            <pre class="max-check-result">@Model.MaxTestResult</pre>
+        }
+    </div>
+
     @if (Model.Requests.Count == 0)
     {
         <div class="empty-requests">

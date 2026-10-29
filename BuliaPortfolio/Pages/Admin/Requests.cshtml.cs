@@ -1,5 +1,6 @@
 ﻿using BuliaPortfolio.Data;
 using BuliaPortfolio.Models;
+using BuliaPortfolio.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,15 +13,34 @@ namespace BuliaPortfolio.Pages.Admin;
 public class RequestsModel : PageModel
 {
 	private readonly PortfolioDbContext _context;
+	private readonly MaxBot _maxBot;
 
 	public List<ContactRequest> Requests { get; private set; } = new();
 
-	public RequestsModel(PortfolioDbContext context)
+	// Результат проверки связи с MAX показываем прямо на странице.
+	public string? MaxTestResult { get; private set; }
+
+	public RequestsModel(PortfolioDbContext context, MaxBot maxBot)
 	{
 		_context = context;
+		_maxBot = maxBot;
 	}
 
 	public async Task OnGetAsync()
+	{
+		await LoadRequestsAsync();
+	}
+
+	public async Task<IActionResult> OnPostTestMaxAsync()
+	{
+		MaxTestResult = await _maxBot.TestAsync();
+
+		await LoadRequestsAsync();
+
+		return Page();
+	}
+
+	private async Task LoadRequestsAsync()
 	{
 		Requests = await _context.ContactRequests
 			.AsNoTracking()
