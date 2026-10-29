@@ -9,7 +9,16 @@ namespace BuliaPortfolio.Services;
 // Оба значения хранятся в секретах пользователя, а не в коде.
 public class MaxBot
 {
-    private const string BaseUrl = "https://platform-api2.max.ru";
+    // Официальный адрес API и запасной.
+    // platform-api2.max.ru подписан сертификатом Минцифры, а его корневой
+    // сертификат есть не на каждом хостинге: тогда рукопожатие падает с
+    // "The SSL connection could not be established". botapi.max.ru —
+    // тот же самый API, но с обычным сертификатом HARICA, который доверяют все.
+    private static readonly string[] BaseUrls =
+    {
+        "https://platform-api2.max.ru",
+        "https://botapi.max.ru"
+    };
 
     private readonly IConfiguration _config;
     private readonly IHttpClientFactory _factory;
@@ -68,36 +77,74 @@ public class MaxBot
             return (false, "Токен или ID чата не заданы.");
         }
 
-        try
+        // Пробуем адреса по очереди. Отдельный try на каждый: если упало
+        // рукопожатие на первом, второй адрес всё равно даст отправить.
+        var errors = new List<string>();
+
+        foreach (var baseUrl in BaseUrls)
         {
-            using var request = new HttpRequestMessage(
-                HttpMethod.Post,
-                $"{BaseUrl}/messages?chat_id={ChatId}");
-
-            // Токен передаём в заголовке, не в адресе.
-            request.Headers.TryAddWithoutValidation("Authorization", Token);
-            request.Headers.TryAddWithoutValidation("User-Agent", "BuliaPortfolio/1.0");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Content = new StringContent(
-                JsonSerializer.Serialize(new { text }),
-                Encoding.UTF8,
-                "application/json");
-
-            var client = _factory.CreateClient("max");
-            using var response = await client.SendAsync(request, cancellationToken);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return (true, "Сообщение отправлено.");
-            }
+                var (ok, details) = await SendToAsync(baseUrl, text, cancellationToken);
 
-            var body = await response.Content.ReadAsStringAsync(cancellationToken);
-            return (false, $"Сервер вернул {(int)response.StatusCode}. {body}");
+                if (ok)
+                {
+                    return (true, details);
+                }
+
+                errors.Add($"{baseUrl}: {details}");
+            }
+            catch (Exception ex)
+            {
+                errors.Add($"{baseUrl}: {Describe(ex)}");
+            }
         }
-        catch (Exception ex)
+
+        return (false, "Не удалось отправить. " + string.Join(" | ", errors));
+    }
+
+    private async Task<(bool Ok, string Details)> SendToAsync(
+        string baseUrl,
+        string text,
+        CancellationToken cancellationToken)
+    {
+        using var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            $"{baseUrl}/messages?chat_id={ChatId}");
+
+        // Токен передаём в заголовке, не в адресе.
+        request.Headers.TryAddWithoutValidation("Authorization", Token);
+        request.Headers.TryAddWithoutValidation("User-Agent", "BuliaPortfolio/1.0");
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        request.Content = new StringContent(
+            JsonSerializer.Serialize(new { text }),
+            Encoding.UTF8,
+            "application/json");
+
+        var client = _factory.CreateClient("max");
+        using var response = await client.SendAsync(request, cancellationToken);
+
+        if (response.IsSuccessStatusCode)
         {
-            return (false, $"Не удалось отправить: {ex.GetType().Name}: {ex.Message}");
+            return (true, $"Сообщение отправлено ({new Uri(baseUrl).Host}).");
         }
+
+        var body = await response.Content.ReadAsStringAsync(cancellationToken);
+        return (false, $"сервер вернул {(int)response.StatusCode}. {body}");
+    }
+
+    // Внутренняя ошибка объясняет причину: именно там лежит текст про
+    // сертификат, таймаут или DNS. Без неё видно только общую фразу.
+    private static string Describe(Exception ex)
+    {
+        var text = $"{ex.GetType().Name}: {ex.Message}";
+
+        for (var inner = ex.InnerException; inner is not null; inner = inner.InnerException)
+        {
+            text += $" ← {inner.GetType().Name}: {inner.Message}";
+        }
+
+        return text;
     }
 
     // Одноразовый поиск ID чата. Способ один: написать боту любое сообщение,
@@ -127,7 +174,7 @@ public class MaxBot
         {
             using var request = new HttpRequestMessage(
                 HttpMethod.Get,
-                $"{BaseUrl}/updates?timeout=0&limit=100");
+                $"{BaseUrls[0]}/updates?timeout=0&limit=100");
 
             request.Headers.TryAddWithoutValidation("Authorization", token);
 
