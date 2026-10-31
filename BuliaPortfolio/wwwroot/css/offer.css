@@ -182,26 +182,47 @@
 }
 
 .demo-preview {
-    height: 150px;
+    position: relative;
+    height: 160px;
     display: grid;
     place-items: center;
     font-family: var(--mono);
     font-size: 13px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(8, 12, 22, 0.75);
+    color: #ffffff;
+    background-size: cover;
+    background-position: center;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+    transition: background-size 0.5s ease;
+}
+
+.demo-card:hover .demo-preview {
+    background-size: 112%;
+}
+
+.demo-preview::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 12, 22, 0.08), rgba(8, 12, 22, 0.62));
+}
+
+.demo-preview span {
+    position: relative;
+    z-index: 1;
 }
 
 .demo-preview.auto {
-    background: linear-gradient(135deg, #ff8a4c, #ffce54);
+    background-image: url("/images/demo/auto-hero.jpg");
 }
 
 .demo-preview.him {
-    background: linear-gradient(135deg, #4cd6ff, #4c7dff);
+    background-image: url("/images/demo/him-hero.jpg");
 }
 
 .demo-preview.agro {
-    background: linear-gradient(135deg, #7ee787, #b6e36b);
+    background-image: url("/images/demo/agro-hero.jpg");
 }
 
 .demo-body {

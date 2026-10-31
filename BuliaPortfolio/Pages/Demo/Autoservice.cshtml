@@ -9,7 +9,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>Автосервис на Урале — демо-пример сайта</title>
+    <meta name="description" content="Демонстрационный сайт автосервиса: услуги, цены, запись на ремонт." />
+    <title>Автосервис и шиномонтаж — демо-пример сайта</title>
+    <script>document.documentElement.classList.add("d-js");</script>
     <link rel="stylesheet" href="~/css/demo.css" asp-append-version="true" />
 </head>
 <body class="d-body auto">
@@ -18,127 +20,210 @@
         <a asp-page="/Index">← вернуться в портфолио</a>
     </div>
 
-    <header class="d-header d-wrap">
-        <div class="d-logo">АвтоУрал<span>.</span></div>
-        <nav class="d-nav">
-            <a href="#services">Услуги и цены</a>
-            <a href="#why">Почему мы</a>
-            <a href="#booking">Запись</a>
-        </nav>
-        <a class="d-phone" href="#booking">+7 900 000-00-00</a>
+    @* ==================== ШАПКА ==================== *@
+    <header class="d-header">
+        <div class="d-wrap d-header-inner">
+            <a class="d-logo" href="#top">
+                <span class="d-logo-mark">М</span>
+                МоторСервис<span>.</span>
+            </a>
+
+            <nav class="d-nav" aria-label="Разделы сайта">
+                <a href="#services">Услуги</a>
+                <a href="#how">Как записаться</a>
+                <a href="#works">Фото</a>
+                <a href="#booking">Контакты</a>
+            </nav>
+
+            <a class="d-btn d-btn-primary" href="#booking">Записаться</a>
+        </div>
     </header>
 
-    <section class="d-hero d-wrap">
-        <div class="d-hero-grid">
+    @* ==================== ПЕРВЫЙ ЭКРАН ==================== *@
+    <section class="d-hero" id="top">
+        <div class="d-wrap d-hero-grid">
             <div>
-                <span class="d-kicker">Уфа · с 2014 года</span>
-                <h1 class="d-h1">Ремонт авто и шиномонтаж за один день</h1>
-                <p class="d-lead">
+                <span class="d-kicker d-fade d-fade-1">ремонт и шиномонтаж · ежедневно с 9:00</span>
+
+                <h1 class="d-h1 d-fade d-fade-2">Ремонт авто и шиномонтаж за один день</h1>
+
+                <p class="d-lead d-fade d-fade-3">
                     Диагностика, замена масла, тормоза, подвеска, сезонная смена шин.
                     Записываетесь на удобное время — машину забираете в тот же день.
                 </p>
-                <div class="d-actions">
-                    <a class="d-btn d-btn-primary" href="#booking">Записаться</a>
+
+                <div class="d-actions d-fade d-fade-4">
+                    <a class="d-btn d-btn-primary d-btn-arrow" href="#booking">Записаться на ремонт</a>
                     <a class="d-btn d-btn-ghost" href="#services">Смотреть цены</a>
                 </div>
-            </div>
 
-            <div class="d-hero-card">
-                <h3>Что входит в любую запись</h3>
-                <ul class="d-check">
-                    <li>Бесплатная диагностика перед работой</li>
-                    <li>Цена фиксируется до начала ремонта</li>
-                    <li>Гарантия на работы 6 месяцев</li>
-                    <li>Запчасти можно привезти свои</li>
+                <ul class="d-hero-points d-fade d-fade-5">
+                    <li>
+                        <strong><span data-count="11" data-suffix=" лет">11 лет</span></strong>
+                        <span>работаем с 2014 года</span>
+                    </li>
+                    <li>
+                        <strong><span data-count="4">4</span> поста</strong>
+                        <span>без очереди на улице</span>
+                    </li>
+                    <li>
+                        <strong><span data-count="6">6</span> мес.</strong>
+                        <span>гарантия на работы</span>
+                    </li>
                 </ul>
             </div>
+
+            <div class="d-hero-media d-fade d-fade-3">
+                <img src="~/images/demo/auto-hero.jpg" alt="Механик осматривает подвеску автомобиля" width="800" height="533" />
+                <div class="d-float-card">
+                    <span class="d-float-dot" aria-hidden="true"></span>
+                    <span>
+                        <b>3 свободных окна</b>
+                        <small>на сегодня, после 15:00</small>
+                    </span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="d-section soft" id="services">
-        <div class="d-wrap">
-            <h2 class="d-h2">Услуги и цены</h2>
-            <p class="d-sub">Цены за работу. Запчасти — по согласованию.</p>
-
-            <table class="d-table">
-                <thead>
-                    <tr>
-                        <th>Услуга</th>
-                        <th>Срок</th>
-                        <th>Цена</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Замена масла и фильтров</td>
-                        <td>40 минут</td>
-                        <td>от 800 ₽</td>
-                    </tr>
-                    <tr>
-                        <td>Компьютерная диагностика</td>
-                        <td>30 минут</td>
-                        <td>1 000 ₽</td>
-                    </tr>
-                    <tr>
-                        <td>Замена тормозных колодок</td>
-                        <td>1 час</td>
-                        <td>от 1 500 ₽</td>
-                    </tr>
-                    <tr>
-                        <td>Ремонт подвески</td>
-                        <td>2–4 часа</td>
-                        <td>от 2 500 ₽</td>
-                    </tr>
-                    <tr>
-                        <td>Шиномонтаж, комплект</td>
-                        <td>1 час</td>
-                        <td>2 200 ₽</td>
-                    </tr>
-                </tbody>
-            </table>
+    @* ==================== БЕГУЩАЯ СТРОКА ==================== *@
+    <div class="d-ticker" aria-hidden="true">
+        <div class="d-ticker-track">
+            <span>замена масла</span>
+            <span>компьютерная диагностика</span>
+            <span>тормозные колодки</span>
+            <span>ремонт подвески</span>
+            <span>шиномонтаж</span>
+            <span>развал-схождение</span>
+            <span>замена масла</span>
+            <span>компьютерная диагностика</span>
+            <span>тормозные колодки</span>
+            <span>ремонт подвески</span>
+            <span>шиномонтаж</span>
+            <span>развал-схождение</span>
         </div>
-    </section>
+    </div>
 
-    <section class="d-section" id="why">
+    @* ==================== УСЛУГИ ==================== *@
+    <section class="d-section" id="services">
         <div class="d-wrap">
-            <h2 class="d-h2">Почему к нам</h2>
-            <p class="d-sub">Три вещи, из-за которых возвращаются.</p>
+            <h2 class="d-h2 d-reveal">Услуги и цены</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                Цены за работу. Запчасти — по согласованию, можно привезти свои.
+            </p>
 
             <div class="d-grid">
-                <article class="d-card">
-                    <h3>Не навязываем лишнего</h3>
-                    <p>Показываем изношенную деталь и объясняем, можно ли подождать. Меняем только то, что действительно пора.</p>
+                <article class="d-card d-reveal">
+                    <div class="d-card-icon" aria-hidden="true">₽</div>
+                    <h3>Замена масла и фильтров</h3>
+                    <p>Подбираем масло под двигатель, меняем фильтр. Занимает около 40 минут.</p>
+                    <span class="d-price">от 800 ₽</span>
                 </article>
 
-                <article class="d-card">
-                    <h3>Своя запись онлайн</h3>
-                    <p>Не нужно звонить и ждать ответа. Оставляете заявку — перезваниваем в течение 15 минут.</p>
+                <article class="d-card d-reveal" style="--d-delay: .08s">
+                    <div class="d-card-icon" aria-hidden="true">⌁</div>
+                    <h3>Компьютерная диагностика</h3>
+                    <p>Считываем ошибки, объясняем причину простыми словами и что будет, если подождать.</p>
+                    <span class="d-price">1 000 ₽</span>
                 </article>
 
-                <article class="d-card">
-                    <h3>Работаем в день обращения</h3>
-                    <p>Держим свободные окна под срочный ремонт. Приехали утром — забрали вечером.</p>
+                <article class="d-card d-reveal" style="--d-delay: .16s">
+                    <div class="d-card-icon" aria-hidden="true">◎</div>
+                    <h3>Тормозные колодки</h3>
+                    <p>Показываем износ на старых колодках. Меняем комплектом на ось.</p>
+                    <span class="d-price">от 1 500 ₽</span>
+                </article>
+
+                <article class="d-card d-reveal">
+                    <div class="d-card-icon" aria-hidden="true">≡</div>
+                    <h3>Ремонт подвески</h3>
+                    <p>Стойки, рычаги, шаровые. Начинаем с диагностики, чтобы не менять лишнего.</p>
+                    <span class="d-price">от 2 500 ₽</span>
+                </article>
+
+                <article class="d-card d-reveal" style="--d-delay: .08s">
+                    <div class="d-card-icon" aria-hidden="true">◍</div>
+                    <h3>Шиномонтаж</h3>
+                    <p>Комплект колёс с балансировкой. Хранение сезонных шин — 1 500 ₽ за сезон.</p>
+                    <span class="d-price">2 200 ₽ <small>/ комплект</small></span>
+                </article>
+
+                <article class="d-card d-reveal" style="--d-delay: .16s">
+                    <div class="d-card-icon" aria-hidden="true">↗</div>
+                    <h3>Развал-схождение</h3>
+                    <p>Стенд 3D. Делаем после ремонта подвески и при неравномерном износе шин.</p>
+                    <span class="d-price">1 800 ₽</span>
                 </article>
             </div>
         </div>
     </section>
 
-    <section class="d-cta" id="booking">
+    @* ==================== КАК ЗАПИСАТЬСЯ ==================== *@
+    <section class="d-section soft" id="how">
+        <div class="d-wrap">
+            <h2 class="d-h2 d-reveal">Как проходит запись</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                Три шага. Ничего не нужно выяснять по телефону и ждать ответа.
+            </p>
+
+            <ol class="d-steps">
+                <li class="d-reveal">
+                    <h3>Оставляете заявку</h3>
+                    <p>Марка машины и что нужно. Хватит одной строки, например «Kia Rio, замена масла».</p>
+                </li>
+                <li class="d-reveal" style="--d-delay: .08s">
+                    <h3>Согласуем время и цену</h3>
+                    <p>Перезваниваем в течение 15 минут в рабочее время и называем сумму до ремонта.</p>
+                </li>
+                <li class="d-reveal" style="--d-delay: .16s">
+                    <h3>Приезжаете и забираете</h3>
+                    <p>Работаем при вас. Если нашли что-то ещё — сначала показываем и спрашиваем.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    @* ==================== ФОТО ==================== *@
+    <section class="d-section" id="works">
+        <div class="d-wrap">
+            <h2 class="d-h2 d-reveal">Как это выглядит</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                Чистый бокс, инструмент под рукой. На рабочем сайте здесь
+                фотографии вашего сервиса, а не стоковые.
+            </p>
+
+            <div class="d-gallery">
+                <figure class="d-reveal">
+                    <img src="~/images/demo/auto-hero.jpg" alt="Работа механика под автомобилем" width="800" height="533" loading="lazy" decoding="async" />
+                    <figcaption>ремонт подвески</figcaption>
+                </figure>
+                <figure class="d-reveal" style="--d-delay: .1s">
+                    <img src="~/images/demo/auto-wheel-o.jpg" alt="Колесо автомобиля после шиномонтажа" width="800" height="600" loading="lazy" decoding="async" />
+                    <figcaption>шиномонтаж</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    @* ==================== ЗАЯВКА ==================== *@
+    <section class="d-cta" id="booking" style="--d-cta-image: url('/images/demo/auto-hero.jpg')">
         <div class="d-wrap d-cta-inner">
-            <div>
+            <div class="d-reveal">
                 <h2 class="d-h2">Записаться на ремонт</h2>
                 <p class="d-sub">
-                    Оставьте номер — перезвоним в течение 15 минут, скажем цену и подберём время.
+                    Оставьте номер — перезвоним в течение 15 минут, скажем цену
+                    и подберём удобное время.
                 </p>
 
-                <ul class="d-check">
-                    <li>г. Уфа, ул. Примерная, 1</li>
-                    <li>Пн–Сб с 9:00 до 20:00</li>
-                    <li>Есть парковка и зона ожидания</li>
+                <ul class="d-cta-list">
+                    <li>Москва, ул. Примерная, 14</li>
+                    <li>Пн–Сб с 9:00 до 20:00, Вс — по записи</li>
+                    <li>Есть парковка и зона ожидания с кофе</li>
+                    <li>Можно привезти свои запчасти</li>
                 </ul>
             </div>
 
-            <form class="d-form" onsubmit="return false;">
+            <form class="d-form d-reveal" style="--d-delay: .1s" onsubmit="return false;">
                 <label for="demo-name">Имя</label>
                 <input id="demo-name" type="text" placeholder="Как к вам обращаться" />
 
@@ -151,14 +236,19 @@
                 <button class="d-btn d-btn-primary" type="submit">Записаться</button>
                 <p class="d-form-note">
                     Это демо-форма. На настоящем сайте заявка сразу приходит владельцу
-                    в WhatsApp и на почту.
+                    в мессенджер и на почту.
                 </p>
             </form>
         </div>
     </section>
 
-    <footer class="d-footer d-wrap">
-        АвтоУрал — демонстрационный сайт. Сделан как пример работы.
+    <footer class="d-footer">
+        <div class="d-wrap d-footer-inner">
+            <span>МоторСервис — демонстрационный сайт, сделан как пример работы.</span>
+            <a asp-page="/Index">Вернуться в портфолио</a>
+        </div>
     </footer>
+
+    <script src="~/js/demo.js" asp-append-version="true"></script>
 </body>
 </html>

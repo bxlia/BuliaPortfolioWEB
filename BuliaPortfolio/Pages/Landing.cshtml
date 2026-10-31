@@ -7,6 +7,7 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/landing-extra.css" asp-append-version="true" />
 }
 
 @* ==================== ПЕРВЫЙ ЭКРАН ==================== *@
@@ -27,11 +28,28 @@
             <a class="lp-btn lp-btn-ghost" href="#lp-work">Посмотреть этапы</a>
         </div>
 
-        <ul class="lp-numbers">
-            <li><strong>3</strong><span>дней на лендинг</span></li>
-            <li><strong>19 900 ₽</strong><span>стоимость сайта</span></li>
-            <li><strong>100 %</strong><span>ваши файлы и доступы</span></li>
+        <ul class="lp-numbers reveal">
+            <li><strong><span data-count="7">7</span> дней</strong><span>от старта до запуска</span></li>
+            <li><strong><span data-count="15000" data-suffix=" ₽">15 000 ₽</span></strong><span>сайт-визитка под ключ</span></li>
+            <li><strong><span data-count="100" data-suffix=" %">100 %</span></strong><span>файлы и доступы ваши</span></li>
         </ul>
+
+        @* Живая картинка вместо пустого места под текстом. *@
+        <div class="lp-hero-visual reveal reveal-d2">
+            <img src="~/images/demo/landing-hero.jpg"
+                 alt="Ноутбук на рабочем столе — здесь собираются сайты"
+                 width="1200" height="720" decoding="async" />
+
+            <div class="lp-hero-badge lp-hero-badge-a">
+                Собираю вручную
+                <small>HTML, CSS, C# — без конструкторов</small>
+            </div>
+
+            <div class="lp-hero-badge lp-hero-badge-b">
+                Проверяю на телефоне
+                <small>до того, как отдать сайт</small>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -103,7 +121,7 @@
         <li>
             <span class="lp-step-num">4</span>
             <h3>Запускаю и передаю</h3>
-            <p>Публикую сайт, проверяю на телефоне, отдаю файлы и доступы. Две недели правок бесплатно.</p>
+            <p>Публикую сайт, проверяю на телефоне, отдаю файлы и доступы. Месяц правок бесплатно.</p>
         </li>
     </ol>
 </section>
@@ -116,7 +134,7 @@
     <div class="lp-prices">
         @foreach (var price in Model.Prices)
         {
-            var isMiddle = price.Name == "Оптимальный";
+            var isMiddle = price.Name == "С каталогом";
 
             <article class="lp-price @(isMiddle ? "lp-price-best" : "")">
                 @if (isMiddle)
@@ -229,7 +247,7 @@
             </a>
 
             <p class="calc-result-hint">
-                Работаю по предоплате 50%, две недели правок бесплатно.
+                Работаю по предоплате 50%, месяц правок бесплатно.
                 Не нравится риск — оформляем через фриланс-биржу.
             </p>
         </aside>

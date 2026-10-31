@@ -9,7 +9,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>Химпоставка — демо-пример сайта</title>
+    <meta name="description" content="Демонстрационный сайт поставщика промышленной химии: каталог, условия поставки, заявка на прайс." />
+    <title>Поставщик промышленной химии — демо-пример сайта</title>
+    <script>document.documentElement.classList.add("d-js");</script>
     <link rel="stylesheet" href="~/css/demo.css" asp-append-version="true" />
 </head>
 <body class="d-body him">
@@ -18,111 +20,188 @@
         <a asp-page="/Index">← вернуться в портфолио</a>
     </div>
 
-    <header class="d-header d-wrap">
-        <div class="d-logo">Химпоставка<span>.</span></div>
-        <nav class="d-nav">
-            <a href="#catalog">Продукция</a>
-            <a href="#delivery">Поставка</a>
-            <a href="#request">Заявка</a>
-        </nav>
-        <a class="d-phone" href="#request">+7 900 000-00-00</a>
+    @* ==================== ШАПКА ==================== *@
+    <header class="d-header">
+        <div class="d-wrap d-header-inner">
+            <a class="d-logo" href="#top">
+                <span class="d-logo-mark">Х</span>
+                Химпоставка<span>.</span>
+            </a>
+
+            <nav class="d-nav" aria-label="Разделы сайта">
+                <a href="#catalog">Продукция</a>
+                <a href="#delivery">Поставка</a>
+                <a href="#warehouse">Склад</a>
+                <a href="#request">Заявка</a>
+            </nav>
+
+            <a class="d-btn d-btn-primary" href="#request">Запросить прайс</a>
+        </div>
     </header>
 
-    <section class="d-hero d-wrap">
-        <div class="d-hero-grid">
+    @* ==================== ПЕРВЫЙ ЭКРАН ==================== *@
+    <section class="d-hero" id="top">
+        <div class="d-wrap d-hero-grid">
             <div>
-                <span class="d-kicker">опт · Уфа · доставка по РФ</span>
-                <h1 class="d-h1">Промышленная химия и реагенты со склада</h1>
-                <p class="d-lead">
-                    Работаем с заводами, ЖКХ и производствами. Отгружаем от одной канистры
-                    до фуры, даём паспорт качества на каждую партию.
-                </p>
-                <div class="d-actions">
-                    <a class="d-btn d-btn-primary" href="#request">Запросить прайс</a>
-                    <a class="d-btn d-btn-ghost" href="#catalog">Каталог</a>
-                </div>
-            </div>
+                <span class="d-kicker d-fade d-fade-1">опт · работаем с 2016 года · доставка по России</span>
 
-            <div class="d-hero-card">
-                <h3>Условия работы</h3>
-                <ul class="d-check">
-                    <li>Отгрузка со склада в Уфе за 1 день</li>
-                    <li>Паспорт качества и сертификаты</li>
-                    <li>Работа по договору, отсрочка для постоянных</li>
-                    <li>Доставка по России транспортными компаниями</li>
+                <h1 class="d-h1 d-fade d-fade-2">Промышленная химия и реагенты со склада</h1>
+
+                <p class="d-lead d-fade d-fade-3">
+                    Работаем с заводами, ЖКХ и производствами. Отгружаем от одной канистры
+                    до фуры, на каждую партию даём паспорт качества.
+                </p>
+
+                <div class="d-actions d-fade d-fade-4">
+                    <a class="d-btn d-btn-primary d-btn-arrow" href="#request">Запросить прайс</a>
+                    <a class="d-btn d-btn-ghost" href="#catalog">Смотреть каталог</a>
+                </div>
+
+                <ul class="d-hero-points d-fade d-fade-5">
+                    <li>
+                        <strong><span data-count="420">420</span>+</strong>
+                        <span>позиций на складе</span>
+                    </li>
+                    <li>
+                        <strong><span data-count="1">1</span> день</strong>
+                        <span>срок отгрузки</span>
+                    </li>
+                    <li>
+                        <strong><span data-count="9">9</span> лет</strong>
+                        <span>работаем с юрлицами</span>
+                    </li>
                 </ul>
             </div>
+
+            <div class="d-hero-media d-fade d-fade-3">
+                <img src="~/images/demo/him-hero.jpg" alt="Промышленная установка химического производства" width="1100" height="1043" />
+                <div class="d-float-card">
+                    <span class="d-float-dot" aria-hidden="true"></span>
+                    <span>
+                        <b>Партия от 1 канистры</b>
+                        <small>и до фуры, без минимального заказа</small>
+                    </span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="d-section soft" id="catalog">
+    @* ==================== БЕГУЩАЯ СТРОКА ==================== *@
+    <div class="d-ticker" aria-hidden="true">
+        <div class="d-ticker-track">
+            <span>коагулянты</span>
+            <span>флокулянты</span>
+            <span>антифризы</span>
+            <span>омыватели</span>
+            <span>бытовая химия для ЖКХ</span>
+            <span>паспорт качества</span>
+            <span>коагулянты</span>
+            <span>флокулянты</span>
+            <span>антифризы</span>
+            <span>омыватели</span>
+            <span>бытовая химия для ЖКХ</span>
+            <span>паспорт качества</span>
+        </div>
+    </div>
+
+    @* ==================== ПРОДУКЦИЯ ==================== *@
+    <section class="d-section" id="catalog">
         <div class="d-wrap">
-            <h2 class="d-h2">Продукция</h2>
-            <p class="d-sub">Основные позиции. Полный прайс — по запросу.</p>
+            <h2 class="d-h2 d-reveal">Продукция</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                Основные позиции. Полный прайс — по запросу, с ценами под ваш объём.
+            </p>
 
             <div class="d-grid">
-                <article class="d-card">
+                <article class="d-card d-reveal">
+                    <div class="d-card-icon" aria-hidden="true">◈</div>
                     <h3>Реагенты для водоподготовки</h3>
                     <p>Коагулянты и флокулянты для очистных сооружений. Фасовка 25 кг и биг-бэг.</p>
-                    <p class="d-price">от 1 900 ₽ <small>/ 25 кг</small></p>
+                    <span class="d-price">от 1 900 ₽ <small>/ 25 кг</small></span>
                 </article>
 
-                <article class="d-card">
+                <article class="d-card d-reveal" style="--d-delay: .08s">
+                    <div class="d-card-icon" aria-hidden="true">◐</div>
                     <h3>Автохимия оптом</h3>
                     <p>Омыватели, антифризы, очистители. Собственная фасовка под вашу марку.</p>
-                    <p class="d-price">от 320 ₽ <small>/ канистра</small></p>
+                    <span class="d-price">от 320 ₽ <small>/ канистра</small></span>
                 </article>
 
-                <article class="d-card">
+                <article class="d-card d-reveal" style="--d-delay: .16s">
+                    <div class="d-card-icon" aria-hidden="true">◍</div>
                     <h3>Бытовая химия для ЖКХ</h3>
                     <p>Средства для уборки подъездов и территорий. Концентраты, разводятся водой.</p>
-                    <p class="d-price">от 780 ₽ <small>/ 5 л</small></p>
+                    <span class="d-price">от 780 ₽ <small>/ 5 л</small></span>
                 </article>
             </div>
         </div>
     </section>
 
-    <section class="d-section" id="delivery">
+    @* ==================== ПОСТАВКА ==================== *@
+    <section class="d-section soft" id="delivery">
         <div class="d-wrap">
-            <h2 class="d-h2">Как проходит поставка</h2>
-            <p class="d-sub">От заявки до отгрузки — обычно один рабочий день.</p>
+            <h2 class="d-h2 d-reveal">Как проходит поставка</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                От заявки до отгрузки — обычно один рабочий день.
+            </p>
 
-            <div class="d-grid">
-                <article class="d-card">
-                    <h3>1. Заявка и расчёт</h3>
-                    <p>Присылаете список позиций и объём. Считаем цену и срок, присылаем счёт.</p>
-                </article>
-
-                <article class="d-card">
-                    <h3>2. Оплата</h3>
-                    <p>По счёту для новых клиентов, по договору с отсрочкой — для постоянных.</p>
-                </article>
-
-                <article class="d-card">
-                    <h3>3. Отгрузка</h3>
+            <ol class="d-steps">
+                <li class="d-reveal">
+                    <h3>Заявка и расчёт</h3>
+                    <p>Присылаете список позиций и объём. Считаем цену и срок, отправляем счёт.</p>
+                </li>
+                <li class="d-reveal" style="--d-delay: .08s">
+                    <h3>Оплата</h3>
+                    <p>По счёту для новых клиентов. Постоянным — по договору с отсрочкой.</p>
+                </li>
+                <li class="d-reveal" style="--d-delay: .16s">
+                    <h3>Отгрузка</h3>
                     <p>Самовывоз со склада или доставка. Документы и паспорт качества — в комплекте.</p>
-                </article>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    @* ==================== СКЛАД ==================== *@
+    <section class="d-section" id="warehouse">
+        <div class="d-wrap">
+            <h2 class="d-h2 d-reveal">Склад и отгрузка</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                Держим ходовые позиции в наличии, поэтому не нужно ждать поставку месяц.
+            </p>
+
+            <div class="d-gallery">
+                <figure class="d-reveal">
+                    <img src="~/images/demo/him-warehouse.jpg" alt="Канистры и мешки с химической продукцией на складе" width="900" height="600" loading="lazy" decoding="async" />
+                    <figcaption>склад ходовых позиций</figcaption>
+                </figure>
+                <figure class="d-reveal" style="--d-delay: .1s">
+                    <img src="~/images/demo/him-hero.jpg" alt="Промышленное производство, куда поставляется химия" width="1100" height="1043" loading="lazy" decoding="async" />
+                    <figcaption>поставки на производства</figcaption>
+                </figure>
             </div>
         </div>
     </section>
 
-    <section class="d-cta" id="request">
+    @* ==================== ЗАЯВКА ==================== *@
+    <section class="d-cta" id="request" style="--d-cta-image: url('/images/demo/him-hero.jpg')">
         <div class="d-wrap d-cta-inner">
-            <div>
+            <div class="d-reveal">
                 <h2 class="d-h2">Запросить прайс</h2>
                 <p class="d-sub">
                     Пришлём актуальный прайс и условия по вашему объёму.
                     Обычно отвечаем в течение рабочего дня.
                 </p>
 
-                <ul class="d-check">
-                    <li>г. Уфа, ул. Примерная, 1, офис 208</li>
+                <ul class="d-cta-list">
+                    <li>Москва, ул. Примерная, 8, офис 208</li>
                     <li>Пн–Пт с 9:00 до 18:00</li>
-                    <li>Работаем с юрлицами и ИП</li>
+                    <li>Работаем с юрлицами и ИП, по договору</li>
+                    <li>Доставка транспортными компаниями по России</li>
                 </ul>
             </div>
 
-            <form class="d-form" onsubmit="return false;">
+            <form class="d-form d-reveal" style="--d-delay: .1s" onsubmit="return false;">
                 <label for="demo-company">Компания</label>
                 <input id="demo-company" type="text" placeholder="ООО «Пример»" />
 
@@ -140,8 +219,13 @@
         </div>
     </section>
 
-    <footer class="d-footer d-wrap">
-        Химпоставка — демонстрационный сайт. Сделан как пример работы.
+    <footer class="d-footer">
+        <div class="d-wrap d-footer-inner">
+            <span>Химпоставка — демонстрационный сайт, сделан как пример работы.</span>
+            <a asp-page="/Index">Вернуться в портфолио</a>
+        </div>
     </footer>
+
+    <script src="~/js/demo.js" asp-append-version="true"></script>
 </body>
 </html>

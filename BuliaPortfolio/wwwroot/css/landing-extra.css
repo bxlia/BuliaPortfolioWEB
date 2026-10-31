@@ -1,0 +1,203 @@
+/* Дополнения для страницы-лендинга: картинка в первом экране,
+   живые цифры и аккуратные анимации. Подключается после landing.css. */
+
+/* ---------- Первый экран ---------- */
+.lp-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 18% 0%, rgba(31, 111, 235, 0.12), transparent 46%),
+        radial-gradient(circle at 82% 8%, rgba(31, 111, 235, 0.08), transparent 42%),
+        linear-gradient(180deg, var(--lp-accent-soft) 0%, var(--lp-bg) 100%);
+}
+
+.lp-hero::after {
+    content: "";
+    position: absolute;
+    left: -120px;
+    bottom: -160px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(31, 111, 235, 0.1), transparent 68%);
+    animation: lp-float 16s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.lp-hero-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.lp-numbers strong {
+    display: block;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Картинка под первым экраном */
+.lp-hero-visual {
+    position: relative;
+    max-width: 920px;
+    margin: 52px auto 0;
+    border-radius: 22px;
+    overflow: visible;
+}
+
+.lp-hero-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 40px 70px -46px rgba(22, 32, 46, 0.7);
+}
+
+.lp-hero-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--lp-text);
+    background: #ffffff;
+    border: 1px solid var(--lp-border);
+    border-radius: 12px;
+    box-shadow: 0 18px 34px -24px rgba(22, 32, 46, 0.6);
+    animation: lp-badge 6s ease-in-out infinite;
+}
+
+.lp-hero-badge small {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--lp-muted);
+}
+
+.lp-hero-badge::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--lp-accent);
+    box-shadow: 0 0 0 4px rgba(31, 111, 235, 0.14);
+}
+
+.lp-hero-badge-a {
+    left: -18px;
+    top: 34px;
+}
+
+.lp-hero-badge-b {
+    right: -14px;
+    bottom: 30px;
+    animation-delay: 1.6s;
+}
+
+/* ---------- Карточки и плитки ---------- */
+.lp-tile,
+.lp-review,
+.lp-card,
+.lp-price {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.lp-tile:hover,
+.lp-review:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 44px -34px rgba(22, 32, 46, 0.45);
+}
+
+/* Кнопки чуть живее */
+.lp-btn {
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.lp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px -20px rgba(31, 111, 235, 0.9);
+}
+
+/* ---------- Якоря ---------- */
+.lp-section[id],
+.lp-request[id] {
+    scroll-margin-top: 90px;
+}
+
+/* ---------- Анимации ---------- */
+/* Появление блоков при прокрутке — средствами CSS.
+   Если браузер не умеет scroll-driven анимации, блоки просто видны. */
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .lp-section > *,
+        .lp-request-card > * {
+            animation: lp-in linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 50%;
+        }
+    }
+}
+
+@keyframes lp-in {
+    from {
+        opacity: 0;
+        transform: translateY(26px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes lp-float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(18px, -22px, 0); }
+}
+
+@keyframes lp-badge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+/* ---------- Мобильная версия ---------- */
+@media (max-width: 960px) {
+    .lp-hero-badge-a {
+        left: 12px;
+        top: 12px;
+    }
+
+    .lp-hero-badge-b {
+        right: 12px;
+        bottom: 12px;
+    }
+}
+
+@media (max-width: 640px) {
+    .lp-hero-visual {
+        margin-top: 34px;
+    }
+
+    .lp-hero-badge {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .lp-hero-badge small {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lp-hero::after,
+    .lp-hero-badge {
+        animation: none;
+    }
+
+    .lp-btn:hover,
+    .lp-tile:hover,
+    .lp-review:hover {
+        transform: none;
+    }
+}
