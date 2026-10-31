@@ -1,0 +1,164 @@
+@page
+@{
+    Layout = null;
+    ViewData["Title"] = "Демо: автосервис";
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Автосервис на Урале — демо-пример сайта</title>
+    <link rel="stylesheet" href="~/css/demo.css" asp-append-version="true" />
+</head>
+<body class="d-body auto">
+    <div class="d-demo-bar">
+        Демонстрационный сайт. Сделан как пример — это не заказ клиента.
+        <a asp-page="/Index">← вернуться в портфолио</a>
+    </div>
+
+    <header class="d-header d-wrap">
+        <div class="d-logo">АвтоУрал<span>.</span></div>
+        <nav class="d-nav">
+            <a href="#services">Услуги и цены</a>
+            <a href="#why">Почему мы</a>
+            <a href="#booking">Запись</a>
+        </nav>
+        <a class="d-phone" href="#booking">+7 900 000-00-00</a>
+    </header>
+
+    <section class="d-hero d-wrap">
+        <div class="d-hero-grid">
+            <div>
+                <span class="d-kicker">Уфа · с 2014 года</span>
+                <h1 class="d-h1">Ремонт авто и шиномонтаж за один день</h1>
+                <p class="d-lead">
+                    Диагностика, замена масла, тормоза, подвеска, сезонная смена шин.
+                    Записываетесь на удобное время — машину забираете в тот же день.
+                </p>
+                <div class="d-actions">
+                    <a class="d-btn d-btn-primary" href="#booking">Записаться</a>
+                    <a class="d-btn d-btn-ghost" href="#services">Смотреть цены</a>
+                </div>
+            </div>
+
+            <div class="d-hero-card">
+                <h3>Что входит в любую запись</h3>
+                <ul class="d-check">
+                    <li>Бесплатная диагностика перед работой</li>
+                    <li>Цена фиксируется до начала ремонта</li>
+                    <li>Гарантия на работы 6 месяцев</li>
+                    <li>Запчасти можно привезти свои</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="d-section soft" id="services">
+        <div class="d-wrap">
+            <h2 class="d-h2">Услуги и цены</h2>
+            <p class="d-sub">Цены за работу. Запчасти — по согласованию.</p>
+
+            <table class="d-table">
+                <thead>
+                    <tr>
+                        <th>Услуга</th>
+                        <th>Срок</th>
+                        <th>Цена</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Замена масла и фильтров</td>
+                        <td>40 минут</td>
+                        <td>от 800 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Компьютерная диагностика</td>
+                        <td>30 минут</td>
+                        <td>1 000 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Замена тормозных колодок</td>
+                        <td>1 час</td>
+                        <td>от 1 500 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Ремонт подвески</td>
+                        <td>2–4 часа</td>
+                        <td>от 2 500 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Шиномонтаж, комплект</td>
+                        <td>1 час</td>
+                        <td>2 200 ₽</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="d-section" id="why">
+        <div class="d-wrap">
+            <h2 class="d-h2">Почему к нам</h2>
+            <p class="d-sub">Три вещи, из-за которых возвращаются.</p>
+
+            <div class="d-grid">
+                <article class="d-card">
+                    <h3>Не навязываем лишнего</h3>
+                    <p>Показываем изношенную деталь и объясняем, можно ли подождать. Меняем только то, что действительно пора.</p>
+                </article>
+
+                <article class="d-card">
+                    <h3>Своя запись онлайн</h3>
+                    <p>Не нужно звонить и ждать ответа. Оставляете заявку — перезваниваем в течение 15 минут.</p>
+                </article>
+
+                <article class="d-card">
+                    <h3>Работаем в день обращения</h3>
+                    <p>Держим свободные окна под срочный ремонт. Приехали утром — забрали вечером.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="d-cta" id="booking">
+        <div class="d-wrap d-cta-inner">
+            <div>
+                <h2 class="d-h2">Записаться на ремонт</h2>
+                <p class="d-sub">
+                    Оставьте номер — перезвоним в течение 15 минут, скажем цену и подберём время.
+                </p>
+
+                <ul class="d-check">
+                    <li>г. Уфа, ул. Примерная, 1</li>
+                    <li>Пн–Сб с 9:00 до 20:00</li>
+                    <li>Есть парковка и зона ожидания</li>
+                </ul>
+            </div>
+
+            <form class="d-form" onsubmit="return false;">
+                <label for="demo-name">Имя</label>
+                <input id="demo-name" type="text" placeholder="Как к вам обращаться" />
+
+                <label for="demo-phone">Телефон</label>
+                <input id="demo-phone" type="tel" placeholder="+7 900 000-00-00" />
+
+                <label for="demo-car">Марка и что нужно</label>
+                <textarea id="demo-car" rows="3" placeholder="Например: Kia Rio, замена масла"></textarea>
+
+                <button class="d-btn d-btn-primary" type="submit">Записаться</button>
+                <p class="d-form-note">
+                    Это демо-форма. На настоящем сайте заявка сразу приходит владельцу
+                    в WhatsApp и на почту.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="d-footer d-wrap">
+        АвтоУрал — демонстрационный сайт. Сделан как пример работы.
+    </footer>
+</body>
+</html>

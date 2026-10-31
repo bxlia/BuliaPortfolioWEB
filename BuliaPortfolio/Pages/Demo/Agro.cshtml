@@ -1,0 +1,162 @@
+@page
+@{
+    Layout = null;
+    ViewData["Title"] = "Демо: сельхозтехника";
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>АгроТех — демо-пример сайта</title>
+    <link rel="stylesheet" href="~/css/demo.css" asp-append-version="true" />
+</head>
+<body class="d-body agro">
+    <div class="d-demo-bar">
+        Демонстрационный сайт. Сделан как пример — это не заказ клиента.
+        <a asp-page="/Index">← вернуться в портфолио</a>
+    </div>
+
+    <header class="d-header d-wrap">
+        <div class="d-logo">АгроТех<span>.</span></div>
+        <nav class="d-nav">
+            <a href="#catalog">Техника</a>
+            <a href="#parts">Запчасти</a>
+            <a href="#consult">Консультация</a>
+        </nav>
+        <a class="d-phone" href="#consult">+7 900 000-00-00</a>
+    </header>
+
+    <section class="d-hero d-wrap">
+        <div class="d-hero-grid">
+            <div>
+                <span class="d-kicker">техника и запчасти · Башкортостан</span>
+                <h1 class="d-h1">Сельхозтехника, запчасти и ремонт</h1>
+                <p class="d-lead">
+                    Подбираем технику под хозяйство: от мотоблока до трактора.
+                    Запчасти со склада, доставка по республике, помощь с установкой.
+                </p>
+                <div class="d-actions">
+                    <a class="d-btn d-btn-primary" href="#consult">Подобрать технику</a>
+                    <a class="d-btn d-btn-ghost" href="#catalog">Каталог</a>
+                </div>
+            </div>
+
+            <div class="d-hero-card">
+                <h3>Почему у нас</h3>
+                <ul class="d-check">
+                    <li>Подбираем по площади и задачам хозяйства</li>
+                    <li>Запчасти в наличии, без ожидания месяц</li>
+                    <li>Доставка по Башкортостану</li>
+                    <li>Помогаем с обкаткой и первым обслуживанием</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="d-section soft" id="catalog">
+        <div class="d-wrap">
+            <h2 class="d-h2">Техника</h2>
+            <p class="d-sub">Цены без доставки. Наличие уточняйте по телефону.</p>
+
+            <div class="d-grid">
+                <article class="d-card">
+                    <h3>Мотоблоки</h3>
+                    <p>Для участка до 1 га. Навесное оборудование: плуг, фреза, окучник.</p>
+                    <p class="d-price">от 38 000 ₽</p>
+                </article>
+
+                <article class="d-card">
+                    <h3>Мини-тракторы</h3>
+                    <p>Для хозяйства 5–20 га. С кабиной и без, с фронтальным погрузчиком.</p>
+                    <p class="d-price">от 420 000 ₽</p>
+                </article>
+
+                <article class="d-card">
+                    <h3>Прицепы и навесное</h3>
+                    <p>Прицепы, косилки, грабли, плуги. Подходим под популярные модели.</p>
+                    <p class="d-price">от 52 000 ₽</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="d-section" id="parts">
+        <div class="d-wrap">
+            <h2 class="d-h2">Запчасти</h2>
+            <p class="d-sub">Скажите модель — проверим наличие и цену в течение дня.</p>
+
+            <table class="d-table">
+                <thead>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Срок</th>
+                        <th>Цена</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Фильтры и расходники</td>
+                        <td>в наличии</td>
+                        <td>от 450 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Ремни и цепи</td>
+                        <td>в наличии</td>
+                        <td>от 900 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Гидравлика</td>
+                        <td>1–3 дня</td>
+                        <td>от 2 400 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Шины и камеры</td>
+                        <td>1–3 дня</td>
+                        <td>от 3 100 ₽</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="d-cta" id="consult">
+        <div class="d-wrap d-cta-inner">
+            <div>
+                <h2 class="d-h2">Подобрать технику</h2>
+                <p class="d-sub">
+                    Расскажите, сколько гектаров и что нужно делать — предложим два-три
+                    варианта с ценами, без навязывания.
+                </p>
+
+                <ul class="d-check">
+                    <li>г. Уфа, ул. Центральная, 23, офис 208</li>
+                    <li>Пн–Сб с 9:00 до 19:00</li>
+                    <li>Консультация бесплатная</li>
+                </ul>
+            </div>
+
+            <form class="d-form" onsubmit="return false;">
+                <label for="demo-name">Имя</label>
+                <input id="demo-name" type="text" placeholder="Как к вам обращаться" />
+
+                <label for="demo-phone">Телефон</label>
+                <input id="demo-phone" type="tel" placeholder="+7 900 000-00-00" />
+
+                <label for="demo-task">Что нужно</label>
+                <textarea id="demo-task" rows="3" placeholder="Например: мотоблок для 40 соток"></textarea>
+
+                <button class="d-btn d-btn-primary" type="submit">Отправить</button>
+                <p class="d-form-note">
+                    Это демо-форма. На настоящем сайте заявка приходит на почту и в мессенджер.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="d-footer d-wrap">
+        АгроТех — демонстрационный сайт. Сделан как пример работы.
+    </footer>
+</body>
+</html>

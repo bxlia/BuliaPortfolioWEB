@@ -1,9 +1,14 @@
 ﻿@page
 @model IndexModel
 @using BuliaPortfolio.Models
+@using BuliaPortfolio.Services
 
 @{
     ViewData["Title"] = "Портфолио bulia";
+
+    // Ссылки на мессенджер с готовым первым сообщением.
+    var quizTgUrl = SiteInfo.TelegramUrl("Здравствуйте! Посчитал цену на сайте — подскажите точнее.");
+    var contactTgUrl = SiteInfo.TelegramUrl("Здравствуйте! Пишу с сайта по поводу сайта.");
 
     // Технологии приходят одной строкой через запятую — разбиваем на список.
     var techTags = new Func<Project, List<string>>(project =>
@@ -39,8 +44,9 @@
     </p>
 
     <div class="hero-actions reveal reveal-d3">
-        <a class="main-button" href="#projects">Смотреть проекты</a>
-        <a class="main-button secondary-button" asp-page="/Landing">Пример лендинга</a>
+        <a class="main-button" href="#prices">Цены и сроки</a>
+        <a class="main-button secondary-button" href="#demos">Примеры</a>
+        <a class="main-button secondary-button" href="#quiz">Рассчитать цену</a>
         <a class="main-button secondary-button" href="#contact">Написать</a>
     </div>
 
@@ -232,9 +238,180 @@
     </div>
 </section>
 
+@* ==================== ЦЕНЫ ==================== *@
+<section id="prices" class="prices">
+    <span class="section-kicker">05 / prices</span>
+    <h2 class="section-title">Сколько стоит</h2>
+
+    <p class="section-lead">
+        Цены фиксированные: сумма называется до начала работы и не меняется по ходу.
+        Всё, что ниже, — с разработкой, текстами и запуском.
+    </p>
+
+    <div class="price-grid">
+        <article class="price-card reveal">
+            <h3 class="price-name">Визитка</h3>
+            <p class="price-note">Одна страница для услуги или небольшого дела</p>
+            <p class="price-value">15 000 ₽</p>
+            <p class="price-term">5–7 дней</p>
+
+            <ul class="price-list">
+                <li>Одна страница: услуги, цены, контакты</li>
+                <li>Карта и кнопка мессенджера</li>
+                <li>Заявки приходят на почту и в мессенджер</li>
+                <li>Хорошо открывается с телефона</li>
+                <li>Домен и хостинг оформляю на вас</li>
+            </ul>
+
+            <a class="main-button secondary-button" href="#contact">Обсудить</a>
+        </article>
+
+        <article class="price-card featured reveal reveal-d1">
+            <span class="price-badge">чаще всего</span>
+            <h3 class="price-name">Сайт с каталогом</h3>
+            <p class="price-note">Когда товаров или услуг много</p>
+            <p class="price-value">30 000 ₽</p>
+            <p class="price-term">10–14 дней</p>
+
+            <ul class="price-list">
+                <li>До 5 страниц: главная, каталог, о компании</li>
+                <li>Карточки товаров или услуг с фото и ценами</li>
+                <li>Поиск и фильтры по разделам</li>
+                <li>Форма заявки и уведомления в мессенджер</li>
+                <li>Простая панель, где видно заявки</li>
+            </ul>
+
+            <a class="main-button" href="#contact">Обсудить</a>
+        </article>
+
+        <article class="price-card reveal reveal-d2">
+            <h3 class="price-name">Поддержка</h3>
+            <p class="price-note">Для сайтов, которые уже работают</p>
+            <p class="price-value">3 000 ₽</p>
+            <p class="price-term">в месяц</p>
+
+            <ul class="price-list">
+                <li>Слежу, что сайт открывается</li>
+                <li>Правки текстов и цен</li>
+                <li>Добавление новых блоков</li>
+                <li>Помощь с доменом и почтой</li>
+                <li>Отвечаю в тот же день</li>
+            </ul>
+
+            <a class="main-button secondary-button" href="#contact">Обсудить</a>
+        </article>
+    </div>
+
+    @* Гарантия заменяет отзывы, пока их нет. *@
+    <div class="guarantee">
+        <div class="guarantee-item reveal">
+            <strong>Месяц правок бесплатно</strong>
+            <p>После сдачи месяц правлю тексты, цены и мелочи без доплаты.</p>
+        </div>
+
+        <div class="guarantee-item reveal reveal-d1">
+            <strong>Не понравится — верну деньги</strong>
+            <p>Если результат не тот, о чём договаривались, — возвращаю оплату.</p>
+        </div>
+
+        <div class="guarantee-item reveal reveal-d2">
+            <strong>Сайт остаётся вам</strong>
+            <p>Отдаю все файлы и доступы. Никакой привязки ко мне нет.</p>
+        </div>
+    </div>
+</section>
+
+@* ==================== ДЕМО-САЙТЫ ==================== *@
+<section id="demos" class="demos">
+    <span class="section-kicker">06 / demos</span>
+    <h2 class="section-title">Примеры по отраслям</h2>
+
+    <p class="section-lead">
+        Это демонстрационные сайты, сделанные как образец. Не заказы клиентов —
+        показываю, как будет выглядеть страница для вашей сферы.
+    </p>
+
+    <div class="demo-grid">
+        <a class="demo-card reveal" asp-page="/Demo/Autoservice">
+            <div class="demo-preview auto">автосервис</div>
+            <div class="demo-body">
+                <h3>Автосервис и шиномонтаж</h3>
+                <p>Услуги, цены, запись, карта и телефон в один экран.</p>
+            </div>
+        </a>
+
+        <a class="demo-card reveal reveal-d1" asp-page="/Demo/Him">
+            <div class="demo-preview him">химия</div>
+            <div class="demo-body">
+                <h3>Поставщик химии</h3>
+                <p>Каталог продукции, условия поставки, заявка на прайс.</p>
+            </div>
+        </a>
+
+        <a class="demo-card reveal reveal-d2" asp-page="/Demo/Agro">
+            <div class="demo-preview agro">сельхозтехника</div>
+            <div class="demo-body">
+                <h3>Сельхозтехника</h3>
+                <p>Техника и запчасти, подбор по задаче, заявка на консультацию.</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+@* ==================== КВИЗ ==================== *@
+<section id="quiz" class="quiz-section">
+    <span class="section-kicker">07 / calculator</span>
+    <h2 class="section-title">Сколько будет стоить</h2>
+
+    <p class="section-lead">
+        Три вопроса — и видно цену без переписки.
+    </p>
+
+    <div class="quiz reveal" id="priceQuiz">
+        <div class="quiz-step">
+            <p class="quiz-question">1. Что нужно?</p>
+            <div class="quiz-options" data-question="kind">
+                <button type="button" class="quiz-option" data-price="15000">Одна страница</button>
+                <button type="button" class="quiz-option" data-price="30000">Сайт с каталогом</button>
+                <button type="button" class="quiz-option" data-price="5000">Доработать текущий</button>
+            </div>
+        </div>
+
+        <div class="quiz-step">
+            <p class="quiz-question">2. Нужны тексты и фото?</p>
+            <div class="quiz-options" data-question="content">
+                <button type="button" class="quiz-option" data-price="0">Всё есть</button>
+                <button type="button" class="quiz-option" data-price="3000">Помочь с текстами</button>
+            </div>
+        </div>
+
+        <div class="quiz-step">
+            <p class="quiz-question">3. Как срочно?</p>
+            <div class="quiz-options" data-question="speed">
+                <button type="button" class="quiz-option" data-price="0">Спокойно, 2 недели</button>
+                <button type="button" class="quiz-option" data-price="4000">Нужно за 5 дней</button>
+            </div>
+        </div>
+
+        <div class="quiz-result" id="quizResult" hidden>
+            <p>Примерная стоимость:</p>
+            <p class="quiz-price" id="quizPrice">0 ₽</p>
+            <p id="quizHint">Точную цену скажу после короткого разговора — она может быть ниже.</p>
+
+            <div class="quiz-actions">
+                <a class="main-button" href="#contact">Отправить заявку</a>
+                <a class="main-button secondary-button"
+                   href="@quizTgUrl"
+                   target="_blank"
+                   rel="noopener noreferrer">Написать в Telegram</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 @* ==================== КАК Я РАБОТАЮ ==================== *@
 <section id="process" class="process">
-    <span class="section-kicker">05 / process</span>
+    <span class="section-kicker">08 / process</span>
     <h2 class="section-title">Как я работаю</h2>
 
     <div class="process-list">
@@ -302,7 +479,7 @@
 
 @* ==================== КОНТАКТЫ И ФОРМА ЗАЯВКИ ==================== *@
 <section id="contact" class="contact">
-    <span class="section-kicker">06 / contact</span>
+    <span class="section-kicker">09 / contact</span>
     <h2 class="section-title">Написать мне</h2>
 
     <p class="contact-lead">
@@ -361,8 +538,27 @@
         </form>
 
         <aside class="contact-side reveal reveal-d1">
+            <p class="contact-side-title">написать в мессенджер</p>
+
+            @* Многим проще написать, чем заполнять форму. *@
+            <div class="messenger-row">
+                <a class="messenger-button telegram"
+                   href="@contactTgUrl"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <span class="dot" aria-hidden="true"></span>
+                    <span>
+                        Telegram
+                        <small>@@@SiteInfo.Telegram</small>
+                    </span>
+                </a>
+            </div>
+
             <p class="contact-side-title">связаться</p>
 
+            <a class="contact-link" href="mailto:@SiteInfo.Email">
+                @SiteInfo.Email
+            </a>
             <a class="contact-link" href="https://github.com/bxlia" target="_blank" rel="noopener noreferrer">
                 github.com/bxlia
             </a>
@@ -393,4 +589,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/quiz.js" asp-append-version="true"></script>
 }

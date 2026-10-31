@@ -1,0 +1,376 @@
+﻿/* Общие стили для демонстрационных сайтов.
+   Каждая страница задаёт свою палитру через класс на body. */
+
+.d-body {
+    --d-bg: #ffffff;
+    --d-text: #14181f;
+    --d-muted: #5d6779;
+    --d-accent: #ff7a18;
+    --d-accent-text: #14213d;
+    --d-soft: #f4f6fa;
+    --d-line: #e2e7ef;
+
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--d-text);
+    background: var(--d-bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+.d-body.him {
+    --d-accent: #1f6feb;
+    --d-accent-text: #ffffff;
+    --d-soft: #f1f6ff;
+}
+
+.d-body.agro {
+    --d-accent: #2f8f3f;
+    --d-accent-text: #ffffff;
+    --d-soft: #f2f8f1;
+}
+
+/* Плашка «это пример» */
+.d-demo-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 9px 16px;
+    font-size: 13px;
+    color: #eaf2ff;
+    background: #0b1220;
+    text-align: center;
+}
+
+.d-demo-bar a {
+    color: #7dd3fc;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.4);
+}
+
+.d-wrap {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.d-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--d-line);
+}
+
+.d-logo {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.d-logo span {
+    color: var(--d-accent);
+}
+
+.d-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 15px;
+}
+
+.d-nav a {
+    color: var(--d-muted);
+    text-decoration: none;
+}
+
+.d-nav a:hover {
+    color: var(--d-text);
+}
+
+.d-phone {
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--d-text);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.d-hero {
+    padding-block: 56px 48px;
+}
+
+.d-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.d-kicker {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 5px 12px;
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--d-accent-text);
+    background: var(--d-accent);
+    border-radius: 999px;
+}
+
+.d-h1 {
+    margin: 0 0 16px;
+    font-size: 42px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+}
+
+.d-lead {
+    margin: 0 0 26px;
+    font-size: 17px;
+    color: var(--d-muted);
+    max-width: 46ch;
+}
+
+.d-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.d-btn {
+    display: inline-block;
+    padding: 13px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.d-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.94;
+}
+
+.d-btn-primary {
+    color: var(--d-accent-text);
+    background: var(--d-accent);
+}
+
+.d-btn-ghost {
+    color: var(--d-text);
+    background: transparent;
+    border-color: var(--d-line);
+}
+
+.d-hero-card {
+    padding: 26px;
+    background: var(--d-soft);
+    border-radius: 16px;
+    border: 1px solid var(--d-line);
+}
+
+.d-hero-card h3 {
+    margin: 0 0 14px;
+    font-size: 16px;
+}
+
+.d-check {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--d-muted);
+}
+
+.d-check li {
+    position: relative;
+    padding-left: 26px;
+}
+
+.d-check li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+    color: var(--d-accent);
+}
+
+.d-section {
+    padding-block: 48px;
+    border-top: 1px solid var(--d-line);
+}
+
+.d-section.soft {
+    background: var(--d-soft);
+}
+
+.d-h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+}
+
+.d-sub {
+    margin: 0 0 28px;
+    color: var(--d-muted);
+    font-size: 16px;
+}
+
+.d-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.d-card {
+    padding: 22px;
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 14px;
+}
+
+.d-body .d-section.soft .d-card {
+    background: #fff;
+}
+
+.d-card h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+
+.d-card p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: var(--d-muted);
+}
+
+.d-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--d-text);
+}
+
+.d-price small {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--d-muted);
+}
+
+.d-cta {
+    padding-block: 44px;
+    background: var(--d-soft);
+    border-top: 1px solid var(--d-line);
+}
+
+.d-cta-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: start;
+}
+
+.d-form {
+    display: grid;
+    gap: 12px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 14px;
+}
+
+.d-form label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--d-muted);
+}
+
+.d-form input,
+.d-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 13px;
+    font: inherit;
+    font-size: 15px;
+    color: var(--d-text);
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 9px;
+}
+
+.d-form input:focus,
+.d-form textarea:focus {
+    outline: 2px solid var(--d-accent);
+    outline-offset: 1px;
+}
+
+.d-form-note {
+    margin: 0;
+    font-size: 12px;
+    color: var(--d-muted);
+}
+
+.d-footer {
+    padding-block: 26px;
+    font-size: 14px;
+    color: var(--d-muted);
+    border-top: 1px solid var(--d-line);
+}
+
+.d-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.d-table th,
+.d-table td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--d-line);
+}
+
+.d-table th {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--d-muted);
+}
+
+.d-table td:last-child {
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+@media (max-width: 860px) {
+    .d-hero-grid,
+    .d-cta-inner,
+    .d-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .d-h1 {
+        font-size: 32px;
+    }
+
+    .d-nav {
+        display: none;
+    }
+
+    .d-section {
+        padding-block: 34px;
+    }
+}
