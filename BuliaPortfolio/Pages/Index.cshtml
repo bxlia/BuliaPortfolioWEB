@@ -4,7 +4,8 @@
 @using BuliaPortfolio.Services
 
 @{
-    ViewData["Title"] = "Портфолио bulia";
+    ViewData["Title"] = "Сайты для бизнеса под ключ — визитки, лендинги, каталоги | bulia";
+    ViewData["Description"] = "Делаю сайты вручную на чистом коде: визитки от 15 000 ₽ за 5–7 дней, каталоги от 30 000 ₽. Адаптив, быстрая загрузка, заявки в Telegram и MAX. Примеры и цены на сайте.";
 
     // Ссылки на мессенджер с готовым первым сообщением.
     var quizTgUrl = SiteInfo.TelegramUrl("Здравствуйте! Посчитал цену на сайте — подскажите точнее.");
@@ -24,6 +25,46 @@
         .ToList();
 
     var techCount = Model.Skills.Select(skill => skill.Name).Distinct().Count();
+}
+
+@section Head {
+    @{
+        var siteUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+        var schemaData = new Dictionary<string, object>
+        {
+            ["@context"] = "https://schema.org",
+            ["@type"] = "ProfessionalService",
+            ["name"] = "bulia — сайты для бизнеса",
+            ["description"] = "Разработка сайтов-визиток, лендингов и каталогов на чистом коде. Адаптив, быстрая загрузка, формы заявок.",
+            ["url"] = siteUrl + "/",
+            ["image"] = siteUrl + "/images/og-preview.jpg",
+            ["priceRange"] = "от 15 000 ₽",
+            ["areaServed"] = "RU",
+            ["sameAs"] = new[] { "https://t.me/Bulia4" },
+            ["makesOffer"] = new object[]
+            {
+                new Dictionary<string, object>
+                {
+                    ["@type"] = "Offer",
+                    ["itemOffered"] = new Dictionary<string, object> { ["@type"] = "Service", ["name"] = "Сайт-визитка" },
+                    ["price"] = "15000",
+                    ["priceCurrency"] = "RUB"
+                },
+                new Dictionary<string, object>
+                {
+                    ["@type"] = "Offer",
+                    ["itemOffered"] = new Dictionary<string, object> { ["@type"] = "Service", ["name"] = "Сайт-каталог" },
+                    ["price"] = "30000",
+                    ["priceCurrency"] = "RUB"
+                }
+            }
+        };
+        var schemaJson = System.Text.Json.JsonSerializer.Serialize(schemaData, new System.Text.Json.JsonSerializerOptions
+        {
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        });
+    }
+    @Html.Raw("<script type=\"application/ld+json\">" + schemaJson + "</script>")
 }
 
 @* ==================== ГЛАВНЫЙ ЭКРАН ==================== *@

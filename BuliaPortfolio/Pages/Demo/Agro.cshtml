@@ -2,14 +2,22 @@
 @{
     Layout = null;
     ViewData["Title"] = "Демо: сельхозтехника";
+    var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+    var pageUrl = baseUrl + "/Demo/Agro";
 }
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <meta name="description" content="Демонстрационный сайт магазина сельхозтехники: техника, запчасти, подбор под хозяйство." />
+    <meta name="description" content="Пример сайта магазина сельхозтехники: техника, запчасти, подбор под хозяйство. Демонстрационный проект, не заказ клиента." />
+    <link rel="canonical" href="@pageUrl" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Сельхозтехника и запчасти — пример сайта" />
+    <meta property="og:description" content="Техника, запчасти, подбор под хозяйство. Демонстрационный сайт." />
+    <meta property="og:url" content="@pageUrl" />
+    <meta property="og:image" content="@(baseUrl)/images/demo/agro-hero.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Сельхозтехника и запчасти — демо-пример сайта</title>
     <script>document.documentElement.classList.add("d-js");</script>
     <link rel="stylesheet" href="~/css/demo.css" asp-append-version="true" />
