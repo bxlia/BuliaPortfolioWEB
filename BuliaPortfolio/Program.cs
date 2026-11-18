@@ -125,6 +125,7 @@ app.MapGet("/sitemap.xml", (HttpRequest request) =>
 		"/Demo/Autoservice",
 		"/Demo/Him",
 		"/Demo/Agro",
+		"/Demo/Beauty",
 		"/Privacy"
 	];
 

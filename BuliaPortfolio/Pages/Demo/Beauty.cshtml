@@ -1,0 +1,321 @@
+@page
+@{
+    Layout = null;
+    ViewData["Title"] = "Демо: студия красоты";
+    var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+    var pageUrl = baseUrl + "/Demo/Beauty";
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Пример сайта студии красоты: услуги и цены, мастера, запись онлайн. Демонстрационный проект, не заказ клиента." />
+    <link rel="canonical" href="@pageUrl" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Студия красоты — пример сайта" />
+    <meta property="og:description" content="Услуги, цены и запись онлайн. Демонстрационный сайт." />
+    <meta property="og:url" content="@pageUrl" />
+    <meta property="og:image" content="@(baseUrl)/images/og-preview.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Студия красоты — демо-пример сайта</title>
+    <script>document.documentElement.classList.add("d-js");</script>
+    <link rel="stylesheet" href="~/css/demo.css" asp-append-version="true" />
+    <partial name="_Metrika" />
+</head>
+<body class="d-body salon">
+    <div class="d-demo-bar">
+        Демонстрационный сайт. Сделан как пример — это не заказ клиента.
+        <a asp-page="/Index">← вернуться в портфолио</a>
+    </div>
+
+    @* ==================== ШАПКА ==================== *@
+    <header class="d-header">
+        <div class="d-wrap d-header-inner">
+            <a class="d-logo" href="#top">
+                <span class="d-logo-mark">b</span>
+                bloom<span>.</span>
+            </a>
+
+            <nav class="d-nav" aria-label="Разделы сайта">
+                <a href="#services">Услуги</a>
+                <a href="#mood">Атмосфера</a>
+                <a href="#team">Мастера</a>
+                <a href="#booking">Запись</a>
+            </nav>
+
+            <a class="d-btn d-btn-primary" href="#booking">Записаться</a>
+        </div>
+    </header>
+
+    @* ==================== ПЕРВЫЙ ЭКРАН ==================== *@
+    <section class="d-hero d-salon-hero" id="top">
+        <div class="d-wrap d-hero-grid">
+            <div>
+                <span class="d-kicker d-fade d-fade-1">студия красоты · ежедневно 10:00–21:00</span>
+
+                <h1 class="d-h1 d-fade d-fade-2">Красота<br /><em>без спешки</em></h1>
+
+                <p class="d-lead d-fade d-fade-3">
+                    Стрижём, красим и ухаживаем за волосами. Один мастер ведёт вас
+                    от первого визита до результата, который легко повторить дома.
+                </p>
+
+                <div class="d-actions d-fade d-fade-4">
+                    <a class="d-btn d-btn-primary d-btn-arrow" href="#booking">Записаться</a>
+                    <a class="d-btn d-btn-ghost" href="#services">Услуги и цены</a>
+                </div>
+
+                <ul class="d-hero-points d-fade d-fade-5">
+                    <li>
+                        <strong><span data-count="8">8</span> лет</strong>
+                        <span>студия работает с 2018 года</span>
+                    </li>
+                    <li>
+                        <strong><span data-count="4">4</span> мастера</strong>
+                        <span>каждый по своему направлению</span>
+                    </li>
+                    <li>
+                        <strong><span data-count="2">2</span> часа</strong>
+                        <span>средний визит без гонки</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-hero-media d-fade d-fade-3">
+                <div class="d-arch" aria-hidden="true">
+                    <svg class="d-arch-flower" viewBox="0 0 260 340" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path d="M130 318V150" />
+                        <path d="M130 268c-38-4-62-28-64-66 38 4 62 28 64 66Z" />
+                        <path d="M130 268c38-4 62-28 64-66-38 4-62 28-64 66Z" />
+                        <path d="M130 222c-30-6-48-26-50-58 30 6 48 26 50 58Z" />
+                        <path d="M130 222c30-6 48-26 50-58-30 6-48 26-50 58Z" />
+                        <path d="M130 122c0-26 14-44 34-50 0 24-12 42-34 50Z" />
+                        <path d="M130 122c0-26-14-44-34-50 0 24 12 42 34 50Z" />
+                        <path d="M130 122c-24-10-38-28-38-50 24 8 36 26 38 50Z" />
+                        <path d="M130 122c24-10 38-28 38-50-24 8-36 26-38 50Z" />
+                        <circle cx="130" cy="122" r="15" />
+                    </svg>
+                    <span class="d-arch-word">bloom</span>
+                </div>
+
+                <div class="d-float-card">
+                    <span class="d-float-dot" aria-hidden="true"></span>
+                    <span>
+                        <b>Есть окно сегодня</b>
+                        <small>18:30, мастер Аня</small>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @* ==================== БЕГУЩАЯ СТРОКА ==================== *@
+    <div class="d-ticker" aria-hidden="true">
+        <div class="d-ticker-track">
+            <span>стрижка</span>
+            <span>окрашивание</span>
+            <span>уход за волосами</span>
+            <span>укладка</span>
+            <span>маникюр</span>
+            <span>брови</span>
+            <span>стрижка</span>
+            <span>окрашивание</span>
+            <span>уход за волосами</span>
+            <span>укладка</span>
+            <span>маникюр</span>
+            <span>брови</span>
+        </div>
+    </div>
+
+    @* ==================== УСЛУГИ ==================== *@
+    <section class="d-section" id="services">
+        <div class="d-wrap">
+            <h2 class="d-h2 d-reveal">Услуги и цены</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                Цены за работу мастера, материалы уже включены. Точную сумму
+                называем до начала — после короткого разговора о волосах.
+            </p>
+
+            <div class="d-salon-list">
+                <article class="d-salon-row d-reveal">
+                    <div>
+                        <h3>Стрижка и укладка</h3>
+                        <p>Форма, которая держится без укладки каждый день.</p>
+                    </div>
+                    <span class="d-salon-time">60–90 мин</span>
+                    <span class="d-salon-price">от 3 500 ₽</span>
+                </article>
+
+                <article class="d-salon-row d-reveal">
+                    <div>
+                        <h3>Окрашивание в один тон</h3>
+                        <p>Ровный цвет без пятен, с уходом до и после.</p>
+                    </div>
+                    <span class="d-salon-time">120–180 мин</span>
+                    <span class="d-salon-price">от 7 000 ₽</span>
+                </article>
+
+                <article class="d-salon-row d-reveal">
+                    <div>
+                        <h3>Сложное окрашивание</h3>
+                        <p>Балаяж, растяжка, мягкие переходы. Считаем по длине.</p>
+                    </div>
+                    <span class="d-salon-time">180–240 мин</span>
+                    <span class="d-salon-price">от 12 000 ₽</span>
+                </article>
+
+                <article class="d-salon-row d-reveal">
+                    <div>
+                        <h3>Уход и восстановление</h3>
+                        <p>Подбираем под состояние волос, а не под рекламу.</p>
+                    </div>
+                    <span class="d-salon-time">45–60 мин</span>
+                    <span class="d-salon-price">от 4 000 ₽</span>
+                </article>
+
+                <article class="d-salon-row d-reveal">
+                    <div>
+                        <h3>Маникюр</h3>
+                        <p>Аккуратная форма, покрытие и уход за кутикулой.</p>
+                    </div>
+                    <span class="d-salon-time">60 мин</span>
+                    <span class="d-salon-price">от 2 500 ₽</span>
+                </article>
+
+                <article class="d-salon-row d-reveal">
+                    <div>
+                        <h3>Брови и ресницы</h3>
+                        <p>Коррекция формы, окрашивание, ламинирование.</p>
+                    </div>
+                    <span class="d-salon-time">45 мин</span>
+                    <span class="d-salon-price">от 1 800 ₽</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    @* ==================== АТМОСФЕРА ==================== *@
+    <section class="d-section soft" id="mood">
+        <div class="d-wrap">
+            <h2 class="d-h2 d-reveal">Как у нас внутри</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                Свет, тишина и детали. Никакой очереди в коридоре и разговоров
+                через кресло — только вы и мастер.
+            </p>
+
+            <div class="d-mood">
+                <figure class="d-mood-card light d-reveal">
+                    <span class="d-mood-word">свет</span>
+                    <figcaption>
+                        <b>Большие окна</b>
+                        <small>Видно цвет при дневном свете, а не только под лампой.</small>
+                    </figcaption>
+                </figure>
+
+                <figure class="d-mood-card quiet d-reveal" style="--d-delay: .08s">
+                    <span class="d-mood-word">тишина</span>
+                    <figcaption>
+                        <b>Одно кресло — один гость</b>
+                        <small>Без спешки и без чужих разговоров рядом.</small>
+                    </figcaption>
+                </figure>
+
+                <figure class="d-mood-card detail d-reveal" style="--d-delay: .16s">
+                    <span class="d-mood-word">детали</span>
+                    <figcaption>
+                        <b>Чай и время</b>
+                        <small>Просим прийти за 10 минут, чтобы начать спокойно.</small>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    @* ==================== МАСТЕРА ==================== *@
+    <section class="d-section" id="team">
+        <div class="d-wrap">
+            <h2 class="d-h2 d-reveal">Мастера</h2>
+            <p class="d-sub d-reveal" style="--d-delay: .05s">
+                На рабочем сайте здесь фотографии и настоящие имена. В демо —
+                только роли, чтобы было видно структуру страницы.
+            </p>
+
+            <div class="d-masters">
+                <article class="d-master d-reveal">
+                    <span class="d-master-mark" aria-hidden="true">А</span>
+                    <h3>Аня</h3>
+                    <p>Цвет и сложное окрашивание</p>
+                    <span class="d-master-note">стаж 7 лет</span>
+                </article>
+
+                <article class="d-master d-reveal" style="--d-delay: .08s">
+                    <span class="d-master-mark" aria-hidden="true">М</span>
+                    <h3>Мира</h3>
+                    <p>Стрижки и укладки</p>
+                    <span class="d-master-note">стаж 5 лет</span>
+                </article>
+
+                <article class="d-master d-reveal" style="--d-delay: .16s">
+                    <span class="d-master-mark" aria-hidden="true">К</span>
+                    <h3>Костя</h3>
+                    <p>Уход и восстановление волос</p>
+                    <span class="d-master-note">стаж 4 года</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    @* ==================== ЗАПИСЬ ==================== *@
+    <section class="d-cta" id="booking">
+        <div class="d-wrap d-cta-inner">
+            <div class="d-reveal">
+                <h2 class="d-h2">Записаться</h2>
+                <p class="d-sub">
+                    Оставьте имя и телефон — перезвоним в течение 15 минут,
+                    уточним услугу и подберём время.
+                </p>
+
+                <ul class="d-cta-list">
+                    <li>Москва, ул. Примерная, 14</li>
+                    <li>Ежедневно с 10:00 до 21:00</li>
+                    <li>5 минут пешком от метро</li>
+                    <li>Оплата картой или переводом</li>
+                </ul>
+            </div>
+
+            <form class="d-form d-reveal" style="--d-delay: .1s" onsubmit="return false;">
+                <label for="beauty-name">Имя</label>
+                <input id="beauty-name" type="text" placeholder="Как к вам обращаться" />
+
+                <label for="beauty-phone">Телефон</label>
+                <input id="beauty-phone" type="tel" placeholder="+7 900 000-00-00" />
+
+                <label for="beauty-service">Что нужно</label>
+                <textarea id="beauty-service" rows="3" placeholder="Например: стрижка и уход"></textarea>
+
+                <button class="d-btn d-btn-primary" type="submit">Записаться</button>
+                <p class="d-form-note">
+                    Это демо-форма. На настоящем сайте заявка сразу приходит владельцу
+                    в мессенджер и на почту.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="d-footer">
+        <div class="d-wrap d-footer-inner">
+            <span>bloom — демонстрационный сайт, сделан как пример работы.</span>
+            <a asp-page="/Index">Вернуться в портфолио</a>
+        </div>
+    </footer>
+
+    @* Быстрые действия на телефоне *@
+    <div class="d-mobile-cta">
+        <a class="d-btn d-btn-primary" href="#booking">Записаться</a>
+        <a class="d-btn d-btn-ghost" href="#services">Цены</a>
+    </div>
+
+    <script src="~/js/demo.js" asp-append-version="true"></script>
+</body>
+</html>

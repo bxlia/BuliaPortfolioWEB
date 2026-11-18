@@ -1,4 +1,4 @@
-﻿/* ==========================================================
+/* ==========================================================
    BuliaPortfolio — визуальная система
    Тёмная тема, крупная типографика, тонкие линии, сетки.
    Все цвета и размеры — в :root.
@@ -1021,7 +1021,7 @@ code,
 .project-title {
     margin: 0 0 7px;
     font-size: clamp(18px, 2vw, 23px);
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.025em;
     transition: color 0.2s ease;
 }
@@ -1140,7 +1140,7 @@ code,
     position: relative;
     margin: 0 0 9px;
     font-size: 19px;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.02em;
 }
 
@@ -1202,7 +1202,7 @@ code,
 .process-card h3 {
     margin: 0 0 8px;
     font-size: 18px;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.02em;
 }
 

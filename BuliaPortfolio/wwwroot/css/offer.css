@@ -1,7 +1,7 @@
-﻿/* Р‘Р»РѕРєРё РґР»СЏ РїСЂРѕРґР°Р¶Рё: С†РµРЅС‹, РіР°СЂР°РЅС‚РёСЏ, РґРµРјРѕ, РєРІРёР·, РјРµСЃСЃРµРЅРґР¶РµСЂС‹, РєРµР№СЃ.
-   РћС‚РґРµР»СЊРЅС‹Р№ С„Р°Р№Р», С‡С‚РѕР±С‹ РЅРµ СЂР°Р·РґСѓРІР°С‚СЊ site.css. */
+/* Блоки для продажи: цены, гарантия, демо, квиз, мессенджеры, кейс.
+   Отдельный файл, чтобы не раздувать site.css. */
 
-/* ---------- РћР±С‰РёРµ РѕС‚СЃС‚СѓРїС‹ ---------- */
+/* ---------- Общие отступы ---------- */
 .prices,
 .demos,
 .quiz-section {
@@ -18,7 +18,7 @@
     }
 }
 
-/* ---------- Р¦РµРЅС‹ ---------- */
+/* ---------- Цены ---------- */
 .price-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -83,7 +83,7 @@
     position: relative;
     margin: 0 0 6px;
     font-size: 19px;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.025em;
 }
 
@@ -133,7 +133,7 @@
 }
 
 .price-list li::before {
-    content: "вњ“";
+    content: "✓";
     position: absolute;
     left: 0;
     top: -1px;
@@ -148,7 +148,7 @@
     text-align: center;
 }
 
-/* ---------- Р“Р°СЂР°РЅС‚РёСЏ ---------- */
+/* ---------- Гарантия ---------- */
 .guarantee {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -174,7 +174,7 @@
 }
 
 .guarantee-item strong::before {
-    content: "вњ“";
+    content: "✓";
     margin-right: 8px;
     color: var(--green);
 }
@@ -186,7 +186,7 @@
     line-height: 1.6;
 }
 
-/* ---------- Р”РµРјРѕ-СЃР°Р№С‚С‹ ---------- */
+/* ---------- Демо-сайты ---------- */
 .demo-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -217,7 +217,11 @@
     grid-column: span 2;
 }
 
-/* РћРєРЅРѕ Р±СЂР°СѓР·РµСЂР° РІРЅСѓС‚СЂРё РєР°СЂС‚РѕС‡РєРё */
+.demo-card.wide {
+    grid-column: span 2;
+}
+
+/* Окно браузера внутри карточки */
 .demo-browser {
     border-bottom: 1px solid var(--line);
     background: var(--bg-soft);
@@ -268,12 +272,18 @@
     align-items: flex-end;
     height: 190px;
     padding: 18px;
+    overflow: hidden;
     background-size: cover;
     background-position: center;
     transition: background-size 0.6s var(--ease);
 }
 
 .demo-card:first-child .demo-shot {
+    height: 250px;
+    padding: 22px;
+}
+
+.demo-card.wide .demo-shot {
     height: 250px;
     padding: 22px;
 }
@@ -299,6 +309,39 @@
 
 .demo-shot.agro {
     background-image: url("/images/demo/agro-hero.jpg");
+}
+
+.demo-shot.beauty {
+    background:
+        radial-gradient(75% 90% at 82% 8%, rgba(240, 195, 172, 0.92) 0%, transparent 58%),
+        radial-gradient(60% 80% at 12% 92%, rgba(105, 54, 63, 0.95) 0%, transparent 62%),
+        linear-gradient(140deg, #c88374 0%, #8f5149 48%, #33222a 100%);
+}
+
+.demo-shot.beauty::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 340px;
+    height: 430px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 170px 170px 20px 20px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.demo-shot-mark {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    color: rgba(255, 255, 255, 0.16);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 62px;
+    font-style: italic;
+    line-height: 1;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .demo-shot-ui {
@@ -337,6 +380,10 @@
     font-size: 24px;
 }
 
+.demo-card.wide .demo-shot-ui b {
+    font-size: 24px;
+}
+
 .demo-shot-line {
     display: block;
     width: 62%;
@@ -365,7 +412,7 @@
 .demo-body h3 {
     margin: 0;
     font-size: 18px;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.025em;
 }
 
@@ -384,7 +431,7 @@
 }
 
 .demo-open::after {
-    content: " в†’";
+    content: " →";
     display: inline-block;
     transition: transform 0.2s ease;
 }
@@ -393,7 +440,7 @@
     transform: translateX(4px);
 }
 
-/* ---------- РњРµСЃСЃРµРЅРґР¶РµСЂС‹ ---------- */
+/* ---------- Мессенджеры ---------- */
 .messenger-row {
     display: grid;
     gap: 10px;
@@ -446,7 +493,7 @@
     font-weight: 400;
 }
 
-/* ---------- РљРІРёР· ---------- */
+/* ---------- Квиз ---------- */
 .quiz {
     margin-top: 38px;
     padding: clamp(20px, 3vw, 34px);
@@ -540,7 +587,7 @@
     margin-top: 18px;
 }
 
-/* ---------- РљРµР№СЃ ---------- */
+/* ---------- Кейс ---------- */
 .case-page {
     max-width: 820px;
     margin: 0 auto;
@@ -628,7 +675,12 @@
         grid-column: span 1;
     }
 
-    .demo-card:first-child .demo-shot {
+    .demo-card.wide {
+        grid-column: span 1;
+    }
+
+    .demo-card:first-child .demo-shot,
+    .demo-card.wide .demo-shot {
         height: 210px;
     }
 

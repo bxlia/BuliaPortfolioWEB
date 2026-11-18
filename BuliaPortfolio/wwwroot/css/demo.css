@@ -1,4 +1,4 @@
-﻿/* Общие стили для демонстрационных сайтов.
+/* Общие стили для демонстрационных сайтов.
    Каждая страница задаёт свою палитру классом на body.
    Всё на чистом CSS: без библиотек, без внешних шрифтов. */
 
@@ -943,7 +943,7 @@
     margin-bottom: 22px;
     font-size: clamp(34px, 5vw, 56px);
     font-weight: 800;
-    line-height: 0.98;
+    line-height: 1.02;
     letter-spacing: -0.045em;
 }
 
@@ -988,7 +988,7 @@
 
 .d-hero-points strong {
     font-size: clamp(22px, 2.4vw, 28px);
-    font-weight: 750;
+    font-weight: 700;
     letter-spacing: -0.04em;
 }
 
@@ -1033,7 +1033,7 @@
     padding-left: 18px;
     margin-bottom: 12px;
     font-size: clamp(26px, 3.4vw, 36px);
-    font-weight: 750;
+    font-weight: 700;
     letter-spacing: -0.035em;
 }
 
@@ -1257,6 +1257,7 @@
     }
 
     .d-hero-grid {
+        grid-template-columns: 1fr;
         gap: 30px;
     }
 
@@ -1374,3 +1375,428 @@
 }
 
 
+
+/* ==========================================================
+   ДЕМО: СТУДИЯ КРАСОТЫ
+   Тёплая светлая палитра, крупная антиква в заголовках,
+   редакционный список услуг вместо сетки карточек.
+   ========================================================== */
+
+.d-body.salon {
+    --d-bg: #fbf7f3;
+    --d-text: #211922;
+    --d-muted: #746470;
+    --d-accent: #b5675a;
+    --d-accent-dark: #9c5145;
+    --d-accent-text: #ffffff;
+    --d-soft: #f3e9e2;
+    --d-line: #e7dbd2;
+    --d-shadow: 0 30px 60px -40px rgba(60, 36, 42, 0.55);
+    --d-radius: 18px;
+}
+
+.d-body.salon ::selection {
+    color: #ffffff;
+    background: var(--d-accent);
+}
+
+.d-salon-hero {
+    background:
+        radial-gradient(760px 460px at 84% -10%, rgba(181, 103, 90, 0.15), transparent 68%),
+        radial-gradient(520px 360px at 8% 8%, rgba(217, 178, 138, 0.16), transparent 72%),
+        linear-gradient(180deg, #fdf9f5 0%, var(--d-bg) 100%);
+}
+
+.d-salon-hero::before {
+    background-image:
+        linear-gradient(rgba(80, 52, 60, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(80, 52, 60, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at 25% 20%, #000, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at 25% 20%, #000, transparent 70%);
+}
+
+.d-body.salon .d-logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.d-body.salon .d-logo-mark {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.d-body.salon .d-kicker {
+    color: var(--d-accent-dark);
+    background: rgba(181, 103, 90, 0.1);
+    border-color: rgba(181, 103, 90, 0.26);
+}
+
+.d-body.salon .d-h1,
+.d-body.salon .d-h2,
+.d-body.salon .d-salon-row h3,
+.d-body.salon .d-master h3,
+.d-body.salon .d-mood-card b {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+}
+
+.d-body.salon .d-h1 {
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+}
+
+.d-body.salon .d-h1 em {
+    color: var(--d-accent);
+    font-style: italic;
+    letter-spacing: -0.045em;
+}
+
+.d-body.salon .d-h2 {
+    font-size: clamp(30px, 4vw, 44px);
+    letter-spacing: -0.025em;
+}
+
+.d-body.salon .d-lead {
+    max-width: 44ch;
+    font-size: 17px;
+}
+
+.d-body.salon .d-btn {
+    border-radius: 999px;
+}
+
+.d-body.salon .d-btn-primary {
+    box-shadow: 0 18px 30px -20px rgba(156, 81, 69, 0.9);
+}
+
+.d-body.salon .d-hero-points strong {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+/* Арка с линейной графикой вместо стокового фото */
+.d-arch {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 0.82;
+    max-height: 560px;
+    overflow: hidden;
+    border-radius: 280px 280px 26px 26px;
+    color: rgba(255, 255, 255, 0.72);
+    background:
+        radial-gradient(120% 70% at 20% 0%, #e7b7a4 0%, transparent 58%),
+        radial-gradient(90% 80% at 90% 12%, #cf8879 0%, transparent 62%),
+        linear-gradient(165deg, #c88374 0%, #9c5a51 52%, #55323a 100%);
+    box-shadow:
+        0 60px 90px -60px rgba(73, 36, 43, 0.9),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.d-arch::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 270px 270px 18px 18px;
+    pointer-events: none;
+}
+
+.d-arch::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -28%;
+    width: 120%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.d-arch-flower {
+    position: relative;
+    z-index: 1;
+    width: 58%;
+    max-width: 280px;
+    filter: drop-shadow(0 18px 24px rgba(60, 30, 36, 0.25));
+}
+
+.d-arch-word {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    color: rgba(255, 255, 255, 0.2);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(54px, 8vw, 96px);
+    font-style: italic;
+    line-height: 1;
+    text-align: center;
+    pointer-events: none;
+}
+
+.d-body.salon .d-float-card {
+    border-color: rgba(231, 219, 210, 0.9);
+}
+
+/* Список услуг */
+.d-salon-list {
+    display: grid;
+    border-top: 1px solid var(--d-line);
+}
+
+.d-salon-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px 150px;
+    gap: 20px;
+    align-items: center;
+    padding: 24px 14px;
+    border-bottom: 1px solid var(--d-line);
+    transition: background 0.25s ease, padding-inline 0.25s ease;
+}
+
+.d-salon-row:hover {
+    padding-inline: 24px;
+    background: var(--d-soft);
+}
+
+.d-salon-row h3 {
+    margin: 0 0 5px;
+    font-size: 23px;
+    letter-spacing: -0.02em;
+}
+
+.d-salon-row p {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 14px;
+    color: var(--d-muted);
+}
+
+.d-salon-time {
+    color: var(--d-muted);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+}
+
+.d-salon-price {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Атмосфера */
+.d-mood {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.d-mood-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 360px;
+    margin: 0;
+    padding: 22px;
+    overflow: hidden;
+    border-radius: 20px;
+    color: #ffffff;
+    isolation: isolate;
+}
+
+.d-mood-card::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(24, 15, 21, 0.72));
+}
+
+.d-mood-card::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    left: 50%;
+    top: 18%;
+    width: 68%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.6s ease;
+}
+
+.d-mood-card:hover::after {
+    transform: translateX(-50%) scale(1.12);
+}
+
+.d-mood-card.light {
+    background: linear-gradient(165deg, #f4dccd 0%, #dda58f 48%, #9a6254 100%);
+}
+
+.d-mood-card.quiet {
+    background: linear-gradient(165deg, #4f3a43 0%, #33252c 55%, #1e171c 100%);
+}
+
+.d-mood-card.detail {
+    background: linear-gradient(165deg, #e3c9a8 0%, #bd9468 52%, #7c5738 100%);
+}
+
+.d-mood-word {
+    position: absolute;
+    left: 20px;
+    top: 18px;
+    color: rgba(255, 255, 255, 0.34);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 40px;
+    font-style: italic;
+    line-height: 1;
+}
+
+.d-mood-card figcaption {
+    position: relative;
+    display: grid;
+    gap: 6px;
+}
+
+.d-mood-card b {
+    font-size: 24px;
+    line-height: 1.1;
+}
+
+.d-mood-card small {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* Мастера */
+.d-masters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.d-master {
+    padding: 28px 24px 24px;
+    border: 1px solid var(--d-line);
+    border-radius: 20px;
+    background: #ffffff;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.d-master:hover {
+    transform: translateY(-4px);
+    border-color: rgba(181, 103, 90, 0.5);
+    box-shadow: 0 26px 44px -36px rgba(60, 36, 42, 0.6);
+}
+
+.d-master-mark {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+    color: var(--d-accent-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-style: italic;
+    line-height: 1;
+    background: var(--d-soft);
+    border-radius: 50%;
+}
+
+.d-master h3 {
+    margin: 0 0 4px;
+    font-size: 26px;
+}
+
+.d-master p {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: var(--d-muted);
+}
+
+.d-master-note {
+    display: inline-block;
+    padding-top: 12px;
+    border-top: 1px solid var(--d-line);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--d-muted);
+}
+
+@media (max-width: 900px) {
+    .d-mood {
+        grid-template-columns: 1fr;
+    }
+
+    .d-mood-card {
+        min-height: 260px;
+    }
+
+    .d-masters {
+        grid-template-columns: 1fr;
+    }
+
+    .d-arch {
+        max-height: 460px;
+        margin-inline: auto;
+        width: min(100%, 420px);
+    }
+}
+
+@media (max-width: 700px) {
+    .d-salon-row {
+        grid-template-columns: 1fr auto;
+        gap: 6px 16px;
+        padding: 20px 0;
+    }
+
+    .d-salon-row:hover {
+        padding-inline: 0;
+        background: transparent;
+    }
+
+    .d-salon-row > div {
+        grid-column: 1 / -1;
+    }
+
+    .d-salon-time {
+        grid-column: 1;
+    }
+
+    .d-salon-price {
+        grid-column: 2;
+        text-align: right;
+    }
+
+    .d-salon-row h3 {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 520px) {
+    .d-body.salon .d-h1 {
+        font-size: clamp(38px, 12vw, 52px);
+    }
+
+    .d-arch {
+        max-height: 400px;
+    }
+}

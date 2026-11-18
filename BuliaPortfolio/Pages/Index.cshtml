@@ -1,11 +1,11 @@
-﻿@page
+@page
 @model IndexModel
 @using BuliaPortfolio.Models
 @using BuliaPortfolio.Services
 
 @{
     ViewData["Title"] = "Сайты для бизнеса под ключ — визитки, лендинги, каталоги | bulia";
-    ViewData["Description"] = "Делаю сайты вручную на чистом коде: визитки от 15 000 ₽ за 5–7 дней, каталоги от 30 000 ₽. Адаптив, быстрая загрузка, заявки в Telegram и MAX. Примеры и цены на сайте.";
+    ViewData["Description"] = "Делаю сайты вручную на чистом коде: визитки от 15 000 ₽ за 5–7 дней, каталоги от 30 000 ₽. Адаптив, быстрая загрузка, заявки в MAX. Примеры и цены на сайте.";
 
     // Ссылки на мессенджер с готовым первым сообщением.
     var quizTgUrl = SiteInfo.TelegramUrl("Здравствуйте! Посчитал цену на сайте — подскажите точнее.");
@@ -139,7 +139,7 @@
             </div>
 
             <div class="hv-chip hv-chip-2">
-                <b>заявки в Telegram</b>
+                <b>заявки в MAX</b>
                 <small>форма + панель</small>
             </div>
         </div>
@@ -156,7 +156,7 @@
             <span>адаптив под телефон</span>
             <span>форма заявок</span>
             <span>панель администратора</span>
-            <span>уведомления в Telegram</span>
+            <span>уведомления в MAX</span>
             <span>быстрая загрузка</span>
         </div>
         <div class="marquee-group">
@@ -166,7 +166,7 @@
             <span>адаптив под телефон</span>
             <span>форма заявок</span>
             <span>панель администратора</span>
-            <span>уведомления в Telegram</span>
+            <span>уведомления в MAX</span>
             <span>быстрая загрузка</span>
         </div>
     </div>
@@ -180,8 +180,9 @@
     <div class="about-grid">
         <div class="about-text reveal">
             <p>
-                Программирую четвёртый год. С eight класса — академия, Visual Studio 2022,
-                C# и C++. Основная работа сейчас — веб на ASP.NET Core и базы данных.
+                Программирую четвёртый год. Начинал с C# и C++ в Visual Studio,
+                сейчас основная работа — веб на ASP.NET Core и базы данных.
+                Учусь на практике: делаю проекты, показываю их и разбираю ошибки.
             </p>
             <p>
                 Делаю то, что можно показать и потрогать: сайт, программу, отчёт.
@@ -510,6 +511,29 @@
             <div class="demo-body">
                 <h3>Сельхозтехника</h3>
                 <p>Техника и запчасти, подбор по задаче, заявка на консультацию.</p>
+                <span class="demo-open">Открыть демо</span>
+            </div>
+        </a>
+
+        <a class="demo-card wide reveal" asp-page="/Demo/Beauty">
+            <div class="demo-browser">
+                <div class="demo-browser-bar">
+                    <i></i><i></i><i></i>
+                    <em>demo — студия красоты</em>
+                </div>
+                <div class="demo-shot beauty">
+                    <span class="demo-shot-mark" aria-hidden="true">bloom</span>
+                    <div class="demo-shot-ui">
+                        <span class="demo-tag">студия красоты</span>
+                        <b>Красота<br />без спешки</b>
+                        <span class="demo-shot-line"></span>
+                        <span class="demo-shot-line short"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-body">
+                <h3>Студия красоты</h3>
+                <p>Услуги и цены, мастера, атмосфера и запись онлайн — в одном спокойном экране.</p>
                 <span class="demo-open">Открыть демо</span>
             </div>
         </a>
