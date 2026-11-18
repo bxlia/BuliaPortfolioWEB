@@ -69,43 +69,108 @@
 
 @* ==================== ГЛАВНЫЙ ЭКРАН ==================== *@
 <section id="home" class="hero">
-    <p class="hero-label reveal">доступен для заказов</p>
+    <div class="hero-grid">
+        <div class="hero-copy">
+            <p class="hero-label reveal">открыт для новых проектов</p>
 
-    <div class="hero-terminal reveal">
-        <span class="prompt">$</span> whoami
-        <div>bulia — C# / .NET / Web<span class="cursor" aria-hidden="true"></span></div>
+            <h1 class="reveal reveal-d1">Делаю <em>сайты</em><br />и программы,<br />которые работают</h1>
+
+            <p class="hero-text reveal reveal-d2">
+                Сайты с формой заявок и панелью администратора, программы для Windows
+                и базы данных SQL Server. Показываю страницу до того, как она готова,
+                чтобы правки вносились на каждом шаге.
+            </p>
+
+            <div class="hero-actions reveal reveal-d3">
+                <a class="main-button" href="#prices">Цены и сроки</a>
+                <a class="main-button secondary-button" href="#demos">Примеры</a>
+                <a class="main-button secondary-button" href="#quiz">Рассчитать цену</a>
+            </div>
+
+            <dl class="hero-stats">
+                <div class="hero-stat reveal">
+                    <dt>проектов</dt>
+                    <dd>@Model.Projects.Count</dd>
+                </div>
+                <div class="hero-stat reveal reveal-d1">
+                    <dt>технологий</dt>
+                    <dd>@techCount</dd>
+                </div>
+                <div class="hero-stat reveal reveal-d2">
+                    <dt>лет в коде</dt>
+                    <dd>3+</dd>
+                </div>
+            </dl>
+        </div>
+
+        @* Макет окна с «сайтом»: показывает, что именно я делаю *@
+        <div class="hero-visual reveal reveal-d2" aria-hidden="true">
+            <div class="hv-glow"></div>
+
+            <div class="hv-window">
+                <div class="hv-bar">
+                    <i></i><i></i><i></i>
+                    <em>bulia — новый проект</em>
+                </div>
+
+                <div class="hv-screen">
+                    <div class="hv-eyebrow"></div>
+                    <div class="hv-title"></div>
+                    <div class="hv-title sm"></div>
+                    <div class="hv-copy"></div>
+                    <div class="hv-copy sm"></div>
+
+                    <div class="hv-btns">
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="hv-grid">
+                        <div class="hv-card"></div>
+                        <div class="hv-card"></div>
+                        <div class="hv-card"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hv-chip hv-chip-1">
+                <b>15 000 ₽</b>
+                <small>визитка за 5–7 дней</small>
+            </div>
+
+            <div class="hv-chip hv-chip-2">
+                <b>заявки в Telegram</b>
+                <small>форма + панель</small>
+            </div>
+        </div>
     </div>
-
-    <h1 class="reveal reveal-d1">Делаю сайты и программы, которые работают</h1>
-
-    <p class="hero-text reveal reveal-d2">
-        Сайты с формой заявок и панелью администратора, программы для Windows
-        и базы данных SQL Server. Показываю страницу до того, как она готова,
-        чтобы правки вносились на каждом шаге.
-    </p>
-
-    <div class="hero-actions reveal reveal-d3">
-        <a class="main-button" href="#prices">Цены и сроки</a>
-        <a class="main-button secondary-button" href="#demos">Примеры</a>
-        <a class="main-button secondary-button" href="#quiz">Рассчитать цену</a>
-        <a class="main-button secondary-button" href="#contact">Написать</a>
-    </div>
-
-    <dl class="hero-stats">
-        <div class="hero-stat reveal">
-            <dt>проектов</dt>
-            <dd>@Model.Projects.Count</dd>
-        </div>
-        <div class="hero-stat reveal reveal-d1">
-            <dt>технологий</dt>
-            <dd>@techCount</dd>
-        </div>
-        <div class="hero-stat reveal reveal-d2">
-            <dt>лет в коде</dt>
-            <dd>3+</dd>
-        </div>
-    </dl>
 </section>
+
+@* Бегущая строка: технологии и то, что входит в работу *@
+<div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+        <div class="marquee-group">
+            <span>ASP.NET Core</span>
+            <span>C#</span>
+            <span>SQL Server</span>
+            <span>адаптив под телефон</span>
+            <span>форма заявок</span>
+            <span>панель администратора</span>
+            <span>уведомления в Telegram</span>
+            <span>быстрая загрузка</span>
+        </div>
+        <div class="marquee-group">
+            <span>ASP.NET Core</span>
+            <span>C#</span>
+            <span>SQL Server</span>
+            <span>адаптив под телефон</span>
+            <span>форма заявок</span>
+            <span>панель администратора</span>
+            <span>уведомления в Telegram</span>
+            <span>быстрая загрузка</span>
+        </div>
+    </div>
+</div>
 
 @* ==================== О МНЕ ==================== *@
 <section id="about" class="about">
@@ -174,15 +239,24 @@
     <span class="section-kicker">03 / projects</span>
     <h2 class="section-title">Проекты</h2>
 
+    <p class="section-lead">
+        Личные, учебные и демонстрационные работы. Каждая — рабочий код,
+        который можно открыть и потрогать. Похожее оформлю под вашу задачу.
+    </p>
+
     <div class="project-list">
+        @{ var projectIndex = 0; }
         @foreach (var project in Model.Projects)
         {
+            projectIndex++;
             var tags = techTags(project);
             var firstLetter = string.IsNullOrWhiteSpace(project.Title)
                 ? "?"
                 : project.Title.Trim().Substring(0, 1);
 
             <article class="project-card reveal">
+                <span class="project-index">@projectIndex.ToString("00")</span>
+
                 <div class="project-media">
                     @if (!string.IsNullOrWhiteSpace(project.ImageUrl))
                     {
@@ -374,26 +448,69 @@
 
     <div class="demo-grid">
         <a class="demo-card reveal" asp-page="/Demo/Autoservice">
-            <div class="demo-preview auto"><span>автосервис</span></div>
+            <div class="demo-browser">
+                <div class="demo-browser-bar">
+                    <i></i><i></i><i></i>
+                    <em>demo — автосервис</em>
+                </div>
+                <div class="demo-shot auto">
+                    <div class="demo-shot-ui">
+                        <span class="demo-tag">автосервис</span>
+                        <b>Ремонт авто<br />без очереди</b>
+                        <span class="demo-shot-line"></span>
+                        <span class="demo-shot-line short"></span>
+                        <span class="demo-shot-line btn"></span>
+                    </div>
+                </div>
+            </div>
             <div class="demo-body">
                 <h3>Автосервис и шиномонтаж</h3>
                 <p>Услуги, цены, запись, карта и телефон в один экран.</p>
+                <span class="demo-open">Открыть демо</span>
             </div>
         </a>
 
         <a class="demo-card reveal reveal-d1" asp-page="/Demo/Him">
-            <div class="demo-preview him"><span>химия</span></div>
+            <div class="demo-browser">
+                <div class="demo-browser-bar">
+                    <i></i><i></i><i></i>
+                    <em>demo — химия</em>
+                </div>
+                <div class="demo-shot him">
+                    <div class="demo-shot-ui">
+                        <span class="demo-tag">химия</span>
+                        <b>Поставки химии<br />для производства</b>
+                        <span class="demo-shot-line"></span>
+                        <span class="demo-shot-line short"></span>
+                    </div>
+                </div>
+            </div>
             <div class="demo-body">
                 <h3>Поставщик химии</h3>
                 <p>Каталог продукции, условия поставки, заявка на прайс.</p>
+                <span class="demo-open">Открыть демо</span>
             </div>
         </a>
 
         <a class="demo-card reveal reveal-d2" asp-page="/Demo/Agro">
-            <div class="demo-preview agro"><span>сельхозтехника</span></div>
+            <div class="demo-browser">
+                <div class="demo-browser-bar">
+                    <i></i><i></i><i></i>
+                    <em>demo — сельхозтехника</em>
+                </div>
+                <div class="demo-shot agro">
+                    <div class="demo-shot-ui">
+                        <span class="demo-tag">сельхозтехника</span>
+                        <b>Техника<br />и запчасти</b>
+                        <span class="demo-shot-line"></span>
+                        <span class="demo-shot-line short"></span>
+                    </div>
+                </div>
+            </div>
             <div class="demo-body">
                 <h3>Сельхозтехника</h3>
                 <p>Техника и запчасти, подбор по задаче, заявка на консультацию.</p>
+                <span class="demo-open">Открыть демо</span>
             </div>
         </a>
     </div>

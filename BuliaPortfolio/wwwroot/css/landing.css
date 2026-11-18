@@ -777,3 +777,39 @@ body {
         gap: 2px;
     }
 }
+
+/* ---------- Светлая шапка: кнопки под тему лендинга ---------- */
+.site-header .menu-toggle {
+    border-color: var(--lp-border);
+    background: #ffffff;
+}
+
+.site-header .menu-toggle span,
+.site-header .menu-toggle span::before,
+.site-header .menu-toggle span::after {
+    background: var(--lp-text);
+}
+
+.site-header .menu-toggle[aria-expanded="true"] span {
+    background: transparent;
+}
+
+.site-header .header-cta {
+    border-color: var(--lp-accent);
+    background: var(--lp-accent);
+    color: #ffffff;
+}
+
+.site-header .header-cta:hover {
+    background: var(--lp-accent-dark, var(--lp-accent));
+    color: #ffffff;
+}
+
+.site-header .site-menu {
+    border-color: var(--lp-border);
+}
+
+/* На лендинге своя кнопка заявки — общая мобильная панель не нужна */
+.mobile-cta {
+    display: none !important;
+}

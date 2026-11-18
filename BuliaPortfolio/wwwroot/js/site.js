@@ -30,6 +30,35 @@
 		});
 	}
 
+	// ---------- Мобильное меню ----------
+	var menuToggle = document.querySelector(".menu-toggle");
+	var siteMenu = document.getElementById("siteNav");
+
+	if (menuToggle && siteMenu) {
+		var setMenu = function (open) {
+			siteMenu.classList.toggle("is-open", open);
+			menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+		};
+
+		menuToggle.addEventListener("click", function () {
+			setMenu(!siteMenu.classList.contains("is-open"));
+		});
+
+		// Закрываем меню после перехода по ссылке.
+		siteMenu.querySelectorAll("a").forEach(function (link) {
+			link.addEventListener("click", function () {
+				setMenu(false);
+			});
+		});
+
+		// На широком экране меню всегда открыто — сбрасываем состояние.
+		window.addEventListener("resize", function () {
+			if (window.innerWidth > 900) {
+				setMenu(false);
+			}
+		});
+	}
+
 	// ---------- Полоса прогресса чтения ----------
 	var progress = document.querySelector(".scroll-progress");
 

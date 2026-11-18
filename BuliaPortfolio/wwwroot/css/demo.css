@@ -160,6 +160,12 @@
 }
 
 /* ---------- Первый экран ---------- */
+.d-body *,
+.d-body *::before,
+.d-body *::after {
+    box-sizing: border-box;
+}
+
 .d-hero {
     position: relative;
     overflow: hidden;
@@ -867,3 +873,504 @@
         transition: none;
     }
 }
+
+/* ==========================================================
+   ВИЗУАЛЬНОЕ УСИЛЕНИЕ ДЕМО
+   Крупнее типографика, глубже фон, заметнее карточки.
+   ========================================================== */
+
+/* ---------- Шапка демо ---------- */
+.d-wrap {
+    max-width: 1140px;
+}
+
+.d-header-inner {
+    padding-block: 18px;
+}
+
+.d-logo {
+    font-size: 20px;
+    letter-spacing: -0.03em;
+}
+
+.d-logo-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px -10px var(--d-accent);
+}
+
+.d-nav {
+    gap: 24px;
+    font-size: 14.5px;
+}
+
+/* ---------- Первый экран ---------- */
+.d-body *,
+.d-body *::before,
+.d-body *::after {
+    box-sizing: border-box;
+}
+
+.d-hero {
+    padding-block: 78px 86px;
+    background:
+        radial-gradient(720px 420px at 88% -6%, color-mix(in srgb, var(--d-accent) 20%, transparent), transparent 68%),
+        radial-gradient(560px 380px at 6% 4%, color-mix(in srgb, var(--d-accent) 8%, transparent), transparent 70%),
+        linear-gradient(180deg, var(--d-soft) 0%, var(--d-bg) 100%);
+}
+
+.d-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--d-text) 6%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--d-text) 6%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(circle at 70% 20%, #000, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle at 70% 20%, #000, transparent 72%);
+    pointer-events: none;
+}
+
+.d-hero-grid {
+    position: relative;
+    grid-template-columns: 1.06fr 0.94fr;
+    gap: 56px;
+}
+
+.d-h1 {
+    margin-bottom: 22px;
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+}
+
+.d-lead {
+    max-width: 46ch;
+    margin-bottom: 30px;
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+.d-kicker {
+    margin-bottom: 20px;
+    padding: 7px 15px;
+    font-size: 11px;
+    letter-spacing: 0.13em;
+}
+
+.d-btn {
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+.d-hero-points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 6px;
+    padding-top: 22px;
+    border-top: 1px solid var(--d-line);
+}
+
+.d-hero-points li {
+    flex: none;
+    padding-right: 18px;
+}
+
+.d-hero-points li + li {
+    padding-left: 20px;
+    border-left: 1px solid var(--d-line);
+}
+
+.d-hero-points strong {
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 750;
+    letter-spacing: -0.04em;
+}
+
+.d-hero-points span {
+    font-size: 12.5px;
+}
+
+.d-hero-media img {
+    border-radius: 22px;
+    box-shadow:
+        0 50px 80px -50px rgba(20, 24, 31, 0.85),
+        0 0 0 1px color-mix(in srgb, var(--d-accent) 18%, transparent);
+}
+
+.d-float-card {
+    left: -14px;
+    bottom: -18px;
+    padding: 14px 18px;
+    border-radius: 15px;
+    box-shadow: 0 30px 50px -34px rgba(20, 24, 31, 0.8);
+}
+
+/* ---------- Бегущая строка ---------- */
+.d-ticker {
+    padding-block: 15px;
+    background: var(--d-text);
+}
+
+.d-ticker-track span {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    opacity: 0.9;
+}
+
+/* ---------- Секции ---------- */
+.d-section {
+    padding-block: 78px;
+}
+
+.d-h2 {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 12px;
+    font-size: clamp(26px, 3.4vw, 36px);
+    font-weight: 750;
+    letter-spacing: -0.035em;
+}
+
+.d-h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.18em;
+    bottom: 0.18em;
+    width: 4px;
+    border-radius: 999px;
+    background: var(--d-accent);
+}
+
+.d-sub {
+    padding-left: 18px;
+    margin-bottom: 38px;
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+/* ---------- Карточки услуг ---------- */
+.d-grid {
+    gap: 16px;
+}
+
+.d-card {
+    padding: 26px 24px;
+    border-radius: 18px;
+    background: linear-gradient(170deg, #ffffff, color-mix(in srgb, var(--d-soft) 55%, #ffffff));
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.d-card::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    top: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--d-accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.d-card:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--d-accent) 50%, var(--d-line));
+    box-shadow: 0 28px 46px -34px rgba(20, 24, 31, 0.6);
+}
+
+.d-card:hover::before {
+    opacity: 1;
+}
+
+.d-card-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    font-size: 20px;
+    background: color-mix(in srgb, var(--d-accent) 14%, #ffffff);
+}
+
+.d-card h3 {
+    font-size: 18px;
+    letter-spacing: -0.02em;
+}
+
+.d-price {
+    margin-top: 18px;
+    font-size: 22px;
+    letter-spacing: -0.03em;
+}
+
+/* ---------- Таблица ---------- */
+.d-table-wrap {
+    border-radius: 18px;
+    box-shadow: 0 26px 44px -42px rgba(20, 24, 31, 0.7);
+}
+
+.d-table th {
+    padding: 15px 18px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+}
+
+.d-table td {
+    padding: 16px 18px;
+}
+
+/* ---------- Шаги ---------- */
+.d-steps li {
+    padding: 26px 24px 26px 74px;
+    border-radius: 18px;
+    background: linear-gradient(170deg, #ffffff, color-mix(in srgb, var(--d-soft) 55%, #ffffff));
+}
+
+.d-steps li::before {
+    left: 24px;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: color-mix(in srgb, var(--d-accent) 75%, var(--d-text));
+}
+
+/* ---------- Галерея ---------- */
+.d-gallery {
+    gap: 16px;
+}
+
+.d-gallery figure {
+    border-radius: 18px;
+}
+
+.d-gallery figure::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(8, 12, 20, 0.55));
+    pointer-events: none;
+}
+
+.d-gallery figcaption {
+    z-index: 1;
+    left: 16px;
+    bottom: 16px;
+    padding: 8px 14px;
+    font-size: 12.5px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+/* ---------- Блок заявки ---------- */
+.d-cta {
+    padding-block: 84px;
+    background:
+        radial-gradient(620px 360px at 82% 10%, color-mix(in srgb, var(--d-accent) 30%, transparent), transparent 70%),
+        var(--d-text);
+}
+
+.d-cta-inner {
+    grid-template-columns: 1fr 0.92fr;
+    gap: 48px;
+}
+
+.d-cta .d-h2 {
+    padding-left: 0;
+    color: #ffffff;
+    font-size: clamp(26px, 3.4vw, 38px);
+}
+
+.d-cta .d-h2::before {
+    display: none;
+}
+
+.d-cta .d-sub {
+    padding-left: 0;
+    font-size: 16.5px;
+}
+
+.d-form {
+    gap: 14px;
+    padding: 30px;
+    border-radius: 18px;
+}
+
+.d-form input,
+.d-form textarea {
+    padding: 13px 14px;
+    border-radius: 10px;
+}
+
+/* ---------- Подвал ---------- */
+.d-footer {
+    padding-block: 34px;
+}
+
+/* ---------- Нижняя панель на телефоне ---------- */
+.d-mobile-cta {
+    display: none;
+}
+
+/* ---------- Планшет и телефон ---------- */
+@media (max-width: 900px) {
+    .d-header-inner {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-block: 13px;
+    }
+
+    .d-header .d-btn {
+        padding: 10px 16px;
+        font-size: 13.5px;
+    }
+
+    .d-nav {
+        display: flex;
+        order: 3;
+        flex-basis: 100%;
+        gap: 18px;
+        margin: 0 -20px;
+        padding: 4px 20px 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .d-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .d-nav a {
+        padding-bottom: 6px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .d-hero {
+        padding-block: 46px 60px;
+    }
+
+    .d-hero-grid {
+        gap: 30px;
+    }
+
+    .d-hero-media {
+        order: 0;
+    }
+
+    .d-h1 {
+        font-size: clamp(30px, 8vw, 42px);
+    }
+
+    .d-hero-points {
+        grid-template-columns: 1fr;
+    }
+
+    .d-hero-points li {
+        padding: 12px 0;
+    }
+
+    .d-hero-points li + li {
+        padding-left: 0;
+        border-left: 0;
+        border-top: 1px solid var(--d-line);
+    }
+
+    .d-section {
+        padding-block: 56px;
+    }
+
+    .d-cta {
+        padding-block: 60px;
+    }
+
+    .d-cta-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .d-mobile-cta {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        z-index: 60;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+        padding: 8px;
+        border: 1px solid var(--d-line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: 0 24px 44px -22px rgba(20, 24, 31, 0.6);
+        backdrop-filter: blur(10px);
+    }
+
+    .d-mobile-cta a {
+        padding: 12px 18px;
+        font-size: 14px;
+        border-radius: 11px;
+    }
+
+    .d-mobile-cta a.d-btn-ghost {
+        background: var(--d-soft);
+    }
+
+    .d-body {
+        padding-bottom: 78px;
+    }
+}
+
+@media (max-width: 520px) {
+    .d-wrap {
+        padding-inline: 18px;
+    }
+
+    .d-hero-media img {
+        border-radius: 16px;
+    }
+
+    .d-float-card {
+        left: 10px;
+        bottom: -14px;
+        padding: 11px 14px;
+    }
+
+    .d-float-card b {
+        font-size: 16px;
+    }
+
+    .d-h2 {
+        font-size: 24px;
+    }
+
+    .d-card,
+    .d-steps li {
+        padding: 22px 20px;
+    }
+
+    .d-steps li {
+        padding-left: 62px;
+    }
+
+    .d-steps li::before {
+        left: 20px;
+        font-size: 20px;
+    }
+
+    .d-form {
+        padding: 22px;
+    }
+
+    .d-actions .d-btn {
+        flex: 1 1 100%;
+    }
+}
+
+

@@ -42,10 +42,8 @@
     <script>document.documentElement.classList.add("js");</script>
     <title>@pageTitle</title>
     @await RenderSectionAsync("Head", required: false)
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/offer.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BuliaPortfolio.styles.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
 
     <partial name="_Metrika" />
@@ -56,35 +54,32 @@
     <a class="skip-link" href="#main">Перейти к содержимому</a>
 
     <header class="site-header">
-        <nav class="navbar navbar-expand-md">
-            <div class="container site-header-inner">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">bulia<span class="brand-dot">.</span></a>
+        <div class="container site-header-inner">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">bulia<span class="brand-dot">.</span></a>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#siteNav"
-                        aria-controls="siteNav"
-                        aria-expanded="false"
-                        aria-label="Меню">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <button class="menu-toggle"
+                    type="button"
+                    aria-controls="siteNav"
+                    aria-expanded="false"
+                    aria-label="Меню">
+                <span></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="siteNav">
-                    <ul class="navbar-nav site-nav">
-                        <li class="nav-item"><a class="nav-link" href="/#about">Обо мне</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#skills">Навыки</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#projects">Проекты</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#services">Услуги</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#prices">Цены</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#demos">Демо</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-page="/Case">Кейс</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#process">Как я работаю</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#contact">Контакты</a></li>
-                    </ul>
-                </div>
+            <div class="site-menu" id="siteNav">
+                <ul class="site-nav">
+                    <li><a class="nav-link" href="/#about">Обо мне</a></li>
+                    <li><a class="nav-link" href="/#skills">Навыки</a></li>
+                    <li><a class="nav-link" href="/#projects">Проекты</a></li>
+                    <li><a class="nav-link" href="/#services">Услуги</a></li>
+                    <li><a class="nav-link" href="/#prices">Цены</a></li>
+                    <li><a class="nav-link" href="/#demos">Демо</a></li>
+                    <li><a class="nav-link" asp-page="/Case">Кейс</a></li>
+                    <li><a class="nav-link" href="/#contact">Контакты</a></li>
+                </ul>
+
+                <a class="header-cta" href="/#contact">Обсудить проект</a>
             </div>
-        </nav>
+        </div>
     </header>
 
     <main id="main" role="main">
@@ -92,22 +87,53 @@
     </main>
 
     <footer class="site-footer">
-        <div class="container site-footer-inner">
-            <p class="site-footer-text">© 2026 bulia. C# / C++ / Web-разработка.</p>
-            <p class="site-footer-links">
-                <a asp-page="/SaitDlyaAvtoservisa">Сайт для автосервиса</a>
-                <a asp-page="/SaitDlyaHimii">Сайт для поставщика химии</a>
-                <a asp-page="/SaitDlyaSelhoztehniki">Сайт для сельхозтехники</a>
-            </p>
-            <p class="site-footer-links">
-                <a href="https://github.com/bxlia" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://www.fl.ru/users/bxlia82/portfolio/" target="_blank" rel="noopener noreferrer">FL.ru</a>
-            </p>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">bulia<span class="brand-dot">.</span></a>
+                    <p>
+                        Сайты и программы под задачу: ASP.NET Core, C#, SQL Server.
+                        Делаю вручную, показываю по этапам, отдаю все файлы.
+                    </p>
+                </div>
+
+                <nav class="footer-col" aria-label="Разделы сайта">
+                    <p class="footer-title">разделы</p>
+                    <a href="/#projects">Проекты</a>
+                    <a href="/#prices">Цены</a>
+                    <a href="/#demos">Демо</a>
+                    <a asp-page="/Case">Кейс</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Отраслевые страницы">
+                    <p class="footer-title">отрасли</p>
+                    <a asp-page="/SaitDlyaAvtoservisa">Автосервис</a>
+                    <a asp-page="/SaitDlyaHimii">Поставщик химии</a>
+                    <a asp-page="/SaitDlyaSelhoztehniki">Сельхозтехника</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Связь">
+                    <p class="footer-title">связь</p>
+                    <a href="https://t.me/Bulia4" target="_blank" rel="noopener noreferrer">Telegram</a>
+                    <a href="https://github.com/bxlia" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.fl.ru/users/bxlia82/portfolio/" target="_blank" rel="noopener noreferrer">FL.ru</a>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 bulia. Сайты и программы.</p>
+                <p>Сделано вручную на ASP.NET Core</p>
+            </div>
         </div>
     </footer>
 
+    @* Панель быстрых действий на телефоне *@
+    <div class="mobile-cta">
+        <a href="/#prices">Цены</a>
+        <a class="primary" href="/#contact">Написать</a>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/counters.js" asp-append-version="true"></script>
 
