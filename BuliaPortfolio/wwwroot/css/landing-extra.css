@@ -31,7 +31,8 @@
 
 .lp-numbers strong {
     display: block;
-    font-variant-numeric: tabular-nums;
+    font-variant-numeric: normal;
+    letter-spacing: -0.01em;
 }
 
 /* Картинка под первым экраном */

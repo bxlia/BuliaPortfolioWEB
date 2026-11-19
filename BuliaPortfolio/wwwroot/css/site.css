@@ -568,7 +568,6 @@ code,
 .hero-stat dd {
     margin: 4px 0 0;
     color: var(--text);
-    font-family: var(--mono);
     font-size: clamp(24px, 3vw, 32px);
     font-weight: 700;
     letter-spacing: -0.03em;

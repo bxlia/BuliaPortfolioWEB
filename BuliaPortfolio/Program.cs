@@ -122,6 +122,7 @@ app.MapGet("/sitemap.xml", (HttpRequest request) =>
 		"/SaitDlyaAvtoservisa",
 		"/SaitDlyaHimii",
 		"/SaitDlyaSelhoztehniki",
+		"/SaitDlyaKrasoty",
 		"/Demo/Autoservice",
 		"/Demo/Him",
 		"/Demo/Agro",

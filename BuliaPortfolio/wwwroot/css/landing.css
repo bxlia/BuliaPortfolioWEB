@@ -26,6 +26,41 @@
     border-bottom: 1px solid var(--lp-border);
 }
 
+/* Подвал портфолио на светлом фоне: возвращаем тёмный текст */
+.site-footer {
+    margin-top: 0;
+    border-top: 1px solid var(--lp-border);
+    border-bottom: 0;
+}
+
+.site-footer .navbar-brand,
+.site-footer .footer-brand p,
+.site-footer .footer-title,
+.site-footer .footer-col a,
+.site-footer .footer-bottom,
+.site-footer .footer-bottom p,
+.site-footer .site-footer-text,
+.site-footer .site-footer-links a {
+    color: var(--lp-muted);
+}
+
+.site-footer .navbar-brand {
+    color: var(--lp-text);
+}
+
+.site-footer .brand-dot {
+    color: var(--lp-accent);
+}
+
+.site-footer .footer-col a:hover,
+.site-footer .site-footer-links a:hover {
+    color: var(--lp-accent);
+}
+
+.site-footer .footer-bottom {
+    border-top: 1px solid var(--lp-border);
+}
+
 .site-header .navbar-brand,
 .site-header .nav-link {
     color: var(--lp-text);
@@ -334,17 +369,21 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 20px;
     margin-top: 30px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .lp-price {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 26px;
+    padding: 30px 26px 26px;
     border: 1px solid var(--lp-border);
     border-radius: var(--lp-radius);
     background: var(--lp-bg);
+}
+
+.lp-price .lp-btn {
+    margin-top: auto;
 }
 
 .lp-price-best {
@@ -379,20 +418,49 @@ body {
 }
 
 .lp-price-desc {
+    margin-bottom: 18px;
     color: var(--lp-muted);
     font-size: 15px;
+    line-height: 1.55;
+    text-wrap: pretty;
 }
 
 .lp-price-list {
     flex: 1;
-    margin: 0 0 20px;
-    padding-left: 20px;
-    color: var(--lp-muted);
+    margin: 0 0 24px;
+    padding: 18px 0 0;
+    border-top: 1px solid var(--lp-border);
+    list-style: none;
+    color: var(--lp-text);
     font-size: 15px;
+    line-height: 1.5;
 }
 
 .lp-price-list li {
-    margin-bottom: 6px;
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 24px;
+    text-wrap: pretty;
+}
+
+.lp-price-list li:last-child {
+    margin-bottom: 0;
+}
+
+.lp-price-list li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 0.5em;
+    width: 10px;
+    height: 5px;
+    border-left: 2px solid var(--lp-accent);
+    border-bottom: 2px solid var(--lp-accent);
+    transform: rotate(-45deg);
+}
+
+.lp-price h3 {
+    text-wrap: balance;
 }
 
 /* ---------- ОТЗЫВЫ ---------- */
@@ -739,7 +807,8 @@ body {
     font-size: 38px;
     font-weight: 700;
     line-height: 1.1;
-    color: var(--lp-good);
+    color: #63e39b;
+    letter-spacing: -0.02em;
 }
 
 .calc-result-note {
@@ -759,7 +828,7 @@ body {
     margin: 16px 0 0;
     font-size: 13px;
     line-height: 1.5;
-    color: #8c9bb0;
+    color: #aebccd;
 }
 
 @media (max-width: 900px) {

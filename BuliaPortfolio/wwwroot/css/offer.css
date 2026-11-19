@@ -98,7 +98,6 @@
     position: relative;
     margin: 0;
     color: var(--text);
-    font-family: var(--mono);
     font-size: clamp(30px, 3.4vw, 40px);
     font-weight: 700;
     letter-spacing: -0.04em;
@@ -568,7 +567,6 @@
 .quiz-price {
     margin: 4px 0 8px;
     color: var(--text);
-    font-family: var(--mono);
     font-size: clamp(30px, 4vw, 42px);
     font-weight: 700;
     letter-spacing: -0.04em;
@@ -618,9 +616,10 @@
 
 .case-day-num {
     color: var(--cyan);
-    font-family: var(--mono);
     font-size: 12px;
+    font-weight: 600;
     letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
 .case-day h2 {
